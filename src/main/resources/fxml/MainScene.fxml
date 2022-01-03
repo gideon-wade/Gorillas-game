@@ -20,5 +20,4 @@
    <TextField layoutX="611.0" layoutY="294.0" />
    <Label layoutX="560.0" layoutY="245.0" text="Bredde" />
    <Label layoutX="565.0" layoutY="298.0" text="Højde" />
-
 </AnchorPane>
