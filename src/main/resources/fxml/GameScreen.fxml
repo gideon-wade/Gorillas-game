@@ -7,17 +7,17 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameScreen">
     <Button fx:id="btnBack" onAction="#goToMainScene" text="Let's go back to Main Screen" AnchorPane.rightAnchor="0">Let's go back to scene 1</Button>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="40.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="86.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/morten.jpg" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="551.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="585.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/oscar.jpg" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="920.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1083.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/rasmus.jpg" />
       </image>
