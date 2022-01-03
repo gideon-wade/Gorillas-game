@@ -12,14 +12,7 @@ public banana(int velocity, double gravity, int angle){
 
 }
 
-public trajectory(){
-
-
-    return;
-
-
-}
-
-
-
+public int trajectory(){
+    return 2;
+    }
 }
