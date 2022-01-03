@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameScreen">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameScreen">
     <Button fx:id="btnBack" onAction="#goToMainScene" text="Let's go back to Main Screen" AnchorPane.rightAnchor="0">Let's go back to scene 1</Button>
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="209.0" layoutY="603.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="387.0" layoutX="169.0" layoutY="425.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="295.0" layoutX="330.0" layoutY="517.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="184.0" layoutX="169.0" layoutY="628.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="380.0" layoutX="330.0" layoutY="432.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="473.0" layoutX="491.0" layoutY="339.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="276.0" layoutX="652.0" layoutY="536.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="417.0" layoutX="813.0" layoutY="395.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="247.0" layoutX="1126.0" layoutY="565.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="229.0" layoutX="974.0" layoutY="583.0" stroke="BLACK" strokeType="INSIDE" width="152.0" />
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="335.0" layoutX="974.0" layoutY="477.0" stroke="BLACK" strokeType="INSIDE" width="152.0" />
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="40.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/morten.jpg" />
@@ -29,6 +29,11 @@
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="920.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/rasmus.jpg" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="150.0" fitWidth="169.0" layoutX="-18.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/Donkey-Kong.jpg" />
       </image>
    </ImageView>
 </AnchorPane>
