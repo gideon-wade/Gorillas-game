@@ -8,7 +8,7 @@ public class Player {
     }
 
     public void throw(int velocity, int angle) {
-        Banana banan = new Banana();
+        banana banan = new banana();
         banan.trajectory(velocity, angle);
     }
 }

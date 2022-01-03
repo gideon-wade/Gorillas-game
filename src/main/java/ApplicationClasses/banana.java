@@ -1,4 +1,5 @@
 package ApplicationClasses;
+import java.lang.*;
 
 public class banana {
     private int velocity;
@@ -12,11 +13,9 @@ public banana(int velocity, double gravity, int angle){
 
 }
 
-public trajectory(){
+public int trajectory(int i){
 
-
-    return;
-
+    return (int) (gravity/(2*velocity^2)*(Math.cos(angle)))*i^2+ (int) Math.tan(angle)*i;
 
 }
 
