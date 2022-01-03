@@ -9,6 +9,7 @@
         <module name="MineSweeper-master" />
         <module name="Gorillas-game" />
         <module name="MineSweeper" />
+        <module name="SoftEng" />
       </profile>
     </annotationProcessing>
   </component>
