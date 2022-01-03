@@ -7,8 +7,8 @@ public class Player {
         starting_position[0] = position;
     }
 
-    public void throwing(int velocity, int gravity, int angle) {
+    public void throwing(int velocity, double gravity, int angle) {
         Banana banan = new Banana(velocity, gravity, angle);
-        banan.trajectory(velocity, angle);
+        banan.trajectory();
     }
 }
