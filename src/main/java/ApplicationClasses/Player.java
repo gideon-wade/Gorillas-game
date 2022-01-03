@@ -12,6 +12,6 @@ public class Player {
 
     public void throwing(int velocity, double gravity, int angle) {
         Banana banan = new Banana(velocity, gravity, angle);
-        banan.trajectory();
+        banan.trajectory(5);
     }
 }
