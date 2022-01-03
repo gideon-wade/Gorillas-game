@@ -1,12 +1,10 @@
 package ApplicationClasses;
 
 public class Player {
-    final int[] starting_position = new int[2];
-    final String name;
+    int[] starting_position = new int[2];
 
-    public Player(int position, String name) {
+    public Player(int position) {
         starting_position[0] = position;
-        this.name = name;
     }
 
     public void throwing(int velocity, double gravity, int angle) {
