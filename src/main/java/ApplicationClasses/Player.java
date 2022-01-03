@@ -13,6 +13,6 @@ public class Player {
 
     public void throwing(int velocity, double gravity, int angle) {
         Banana banana = new Banana(velocity, gravity, angle);
-        banana.trajectory(5);
+        banana.trajectory(0);
     }
 }
