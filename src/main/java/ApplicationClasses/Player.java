@@ -18,4 +18,5 @@ public class Player {
     public void setTurn(Boolean turn){
         this.theirTurn = turn;
     }
+    public Boolean getTurn() {return theirTurn;}
 }
