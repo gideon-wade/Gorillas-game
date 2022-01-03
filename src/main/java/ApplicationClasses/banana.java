@@ -5,6 +5,20 @@ public class banana {
     private double gravity;
     private int angle;
 
+public banana(int velocity, double gravity, int angle){
+    this.velocity = velocity;
+    this.gravity = gravity;
+    this.angle = angle;
+
+}
+
+public trajectory(){
+
+
+    return;
+
+
+}
 
 
 
