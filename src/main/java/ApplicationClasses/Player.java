@@ -11,7 +11,7 @@ public class Player {
     }
 
     public void throwing(int velocity, double gravity, int angle) {
-        Banana banan = new Banana(velocity, gravity, angle);
-        banan.trajectory(5);
+        Banana banana = new Banana(velocity, gravity, angle);
+        banana.trajectory(5);
     }
 }
