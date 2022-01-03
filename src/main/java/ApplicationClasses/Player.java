@@ -15,4 +15,7 @@ public class Player {
         Banana banana = new Banana(velocity, gravity, angle);
         banana.trajectory(0);
     }
+    public void setTurn(Boolean turn){
+        this.theirTurn = turn;
+    }
 }
