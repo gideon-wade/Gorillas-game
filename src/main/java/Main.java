@@ -19,7 +19,7 @@ public class Main extends Application {
         SceneManager.setMainScene(container);
         primaryStage.setScene(container);
         SceneManager.changeScene("fxml/MainScene.fxml");
-        primaryStage.setTitle("MineSweeper");
+        primaryStage.setTitle("Gorillas");
         primaryStage.show();
     }
 }
