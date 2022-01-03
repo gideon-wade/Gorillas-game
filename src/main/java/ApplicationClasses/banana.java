@@ -18,7 +18,4 @@ public class Banana {
         return (int) (gravity/(2*velocity^2)*(Math.cos(angle)))*x^2+ (int) Math.tan(angle)*x;
 
     }
-
-
-
 }
