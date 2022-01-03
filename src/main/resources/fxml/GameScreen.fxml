@@ -15,7 +15,7 @@
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="276.0" layoutX="652.0" layoutY="536.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="417.0" layoutX="813.0" layoutY="395.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="247.0" layoutX="1126.0" layoutY="565.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="335.0" layoutX="974.0" layoutY="477.0" stroke="BLACK" strokeType="INSIDE" width="152.0" />
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="293.0" layoutX="974.0" layoutY="519.0" stroke="BLACK" strokeType="INSIDE" width="152.0" />
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="40.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/morten.jpg" />
@@ -32,6 +32,11 @@
       </image>
    </ImageView>
    <ImageView fitHeight="150.0" fitWidth="169.0" layoutX="-18.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/Donkey-Kong.jpg" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="150.0" fitWidth="169.0" layoutX="1161.0" layoutY="426.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/Donkey-Kong.jpg" />
       </image>
