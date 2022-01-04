@@ -46,7 +46,7 @@ public class GameScreen<playerOneAngle> {
     }
 
 
-    public void pathOfBanana(){
+
 
 
 
@@ -58,4 +58,3 @@ public class GameScreen<playerOneAngle> {
 
 
 
-}

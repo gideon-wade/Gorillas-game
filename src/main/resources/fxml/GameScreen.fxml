@@ -29,7 +29,7 @@
          <Image url="@images/Donkey-Kong.jpg" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="169.0" layoutX="1158.0" layoutY="650.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="169.0" layoutX= "100" layoutY="650.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/Donkey-Kong.jpg" />
       </image>
