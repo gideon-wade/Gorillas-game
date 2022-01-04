@@ -4,13 +4,11 @@ package Controllers;
 import ApplicationClasses.Banana;
 import ApplicationClasses.Game;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import Controllers.MainScene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 
@@ -36,13 +34,16 @@ public class GameScreen<playerOneAngle> {
     public static void setGame(Game game){
 
     }
+        private int playerOneAngle;
+        private int playerOneVelocity;
 
-    public void pl1SetAngle(ActionEvent actionEvent) {
-        int playerOneAngle = Integer.parseInt(pl1ang.getText());
+    public void pl1SetAngle(ActionEvent event) throws IOException {
+        this.playerOneAngle = Integer.parseInt(pl1ang.getText());
     }
 
-    public void pl1SetVelocity(ActionEvent actionEvent) {
-        int playerOneVelocity = Integer.parseInt(pl1vec.getText());
+
+    public void pl1SetVelocity(ActionEvent event) throws IOException {
+        this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
     }
 
     public void pl2SetAngle(ActionEvent actionEvent) {
@@ -75,7 +76,7 @@ public class GameScreen<playerOneAngle> {
         banana.setX(1);
         banana.setY(100);
 
-        Banana banan = new Banana(90, 9.82, 45);
+        Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
         int x = 1;
 
         while (banana.getY() <= 100) {
@@ -88,9 +89,9 @@ public class GameScreen<playerOneAngle> {
         }
     }
 
-    private void simulateSlow() {
+    public void simulateSlow() {
         try {
-            Thread.sleep(10);
+            Thread.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
