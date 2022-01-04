@@ -21,6 +21,8 @@ public class MainScene {
     @FXML
     public TextField height;
 
+    @FXML
+    public Image banana;
 
     private int length_i;
     private int height_i;
@@ -31,6 +33,8 @@ public class MainScene {
         GameScreen.setGame(game);
         SceneManager.changeScene("fxml/GameScreen.fxml");
         SceneManager.changeSize(height_i,length_i);
+        ImageView iv1 = new ImageView(banana);
+        iv1.setX(400);
     }
 
     public void saveLength(ActionEvent event) throws IOException {

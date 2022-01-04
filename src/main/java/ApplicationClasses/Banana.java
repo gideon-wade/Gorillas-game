@@ -12,20 +12,12 @@ public class Banana {
         this.angle = angle;
     }
 
-    public int[] trajectory() {
-
-        int[] pos = new int[2];
-        int x = 1;
+    public int trajectory(int x) {
         int y = 1;
-
-        while (y > 0){
+        while (y >= 0){
             y = (int) (gravity / (2 * velocity ^ 2) * (Math.cos(angle))) * x ^ 2 + (int) Math.tan(angle) * x;
             x++;
-
-            pos[0] = x;
-            pos[1] = y;
-
         }
-        return pos;
+        return x;
     }
 }
