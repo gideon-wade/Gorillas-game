@@ -1,6 +1,7 @@
 package Controllers;
 
 
+import ApplicationClasses.Banana;
 import ApplicationClasses.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -65,9 +66,21 @@ public class GameScreen<playerOneAngle> {
     }
 
     public void touchMe(ActionEvent event) throws IOException {
-        banana.setX(60);
-        banana.setY(70);
-        banana.isSmooth();
+
+        banana.setX(1);
+        banana.setY(1);
+
+      Banana banan = new Banana(30,9.82,45);
+      int x = 1;
+
+        while(banana.getY() > 0) {
+            banana.setX(x);
+            banana.setY(banan.trajectory(x));
+            banana.isSmooth();
+            System.out.println(banana.getY());
+            x++;
+        }
+
     }
 }
 
