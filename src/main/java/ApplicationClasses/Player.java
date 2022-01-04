@@ -11,12 +11,14 @@ public class Player {
         this.name = name;
     }
     /*
-    public void throwing(int velocity, double gravity, int angle) {
+    public int[] throwing(int velocity, double gravity, int angle) {
         Banana banana = new Banana(velocity, gravity, angle);
-        int[]pos = banana.trajectory();
+        int[]pos = banana.trajectory(400);
 
-        var x = pos[0];
-        var y = pos[1];
+        int x = pos[0];
+        int y = pos[1];
+
+        return pos;
     }*/
     public void setTurn(Boolean turn){
         this.theirTurn = turn;
