@@ -65,6 +65,9 @@ public class GameScreen<playerOneAngle> {
     }
 
     public void touchMe(ActionEvent event) throws IOException {
+
+
+
         banana.setX(60);
         banana.setY(70);
         banana.isSmooth();
