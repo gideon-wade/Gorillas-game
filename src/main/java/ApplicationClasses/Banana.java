@@ -14,10 +14,11 @@ public class Banana {
 
 
     public int trajectory(int x) {
-    int y = 1;
+        int y = 1;
 
-        y = (int)(-(9.82 * Math.pow(x, 2)) / (2 * Math.pow(30, 2) * Math.pow(Math.cos(45), 2)) + Math.tan(45) * x);
-
+        y = (int)(-(gravity * Math.pow(x, 2)) /
+                (2 * Math.pow(velocity, 2) * Math.pow(Math.cos(angle), 2)) + Math.tan(angle) * x);
         return y;
+
     }
 }
