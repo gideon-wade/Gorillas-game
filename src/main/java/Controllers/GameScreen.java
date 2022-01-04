@@ -53,7 +53,7 @@ public class GameScreen<playerOneAngle> {
         int playerTwoVelocity = Integer.parseInt(pl2vec.getText());
     }
 
-
+// A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
     public void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
 
