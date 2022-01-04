@@ -26,13 +26,12 @@ public class MainScene {
         Game game = new Game("Søren",
                 "Paul Fischer", 800, 1300);
         GameScreen.setGame(game);
-        System.out.println(length_i);
         SceneManager.changeScene("fxml/GameScreen.fxml");
         SceneManager.changeSize(height_i,length_i);
     }
 
     public void saveLength(ActionEvent event) throws IOException {
-            this.length_i = Integer.parseInt(length.getText());
+        this.length_i = Integer.parseInt(length.getText());
     }
 
     public void saveHeight(ActionEvent event) throws IOException {
