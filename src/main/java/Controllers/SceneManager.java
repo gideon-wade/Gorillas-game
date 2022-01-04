@@ -2,6 +2,8 @@ package Controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
@@ -16,6 +18,9 @@ public class SceneManager {
 
     public static void changeScene(String fxml) throws IOException {
         mainScene.setRoot(FXMLLoader.load(SceneManager.class.getResource("/" + fxml)));
+        /*Image image = new Image("banana.png");
+        ImageView iv1 = new ImageView();
+        iv1.setImage(image);*/
     }
 
     public static void changeSize(int height, int width) {
