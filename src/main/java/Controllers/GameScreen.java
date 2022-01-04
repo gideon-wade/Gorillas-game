@@ -33,7 +33,7 @@ public class GameScreen<playerOneAngle> {
     }
 
 
-    public static void setGame(Game game){
+    public static void setGame(Game game) {
 
     }
 
@@ -53,12 +53,12 @@ public class GameScreen<playerOneAngle> {
         int playerTwoVelocity = Integer.parseInt(pl2vec.getText());
     }
 
-// A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
+    // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
     public void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
 
         for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++){
+            for (int j = 0; j < arr[i].length; j++) {
                 arr[i][j] = false;
             }
         }
@@ -66,21 +66,34 @@ public class GameScreen<playerOneAngle> {
     }
 
     public void touchMe(ActionEvent event) throws IOException {
+        Thread thread = new Thread(this::runThread);
+        thread.start();
 
+    }
+
+    public void runThread() {
         banana.setX(1);
         banana.setY(1);
 
-      Banana banan = new Banana(30,9.82,45);
-      int x = 1;
+        Banana banan = new Banana(30, 9.82, 45);
+        int x = 1;
 
-        while(banana.getY() > 0) {
+        while (banana.getY() > 0) {
             banana.setX(x);
             banana.setY(banan.trajectory(x));
             banana.isSmooth();
+            simulateSlow();
             System.out.println(banana.getY());
             x++;
         }
+    }
 
+    private void simulateSlow() {
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
 
