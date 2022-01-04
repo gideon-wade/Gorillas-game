@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
+import Controllers.MainScene;
 import java.io.IOException;
 
 public class GameScreen {
@@ -18,12 +18,14 @@ public class GameScreen {
     public TextField pl2ang;
     public TextField pl2vec;
 
-    public GameScreen(Game game){
-        this.game = game;
-    }
+
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
+    }
+
+    public static void setGame(Game game){
+
     }
 
     public void pl1SetAngle(ActionEvent actionEvent) {
