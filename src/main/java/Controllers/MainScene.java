@@ -17,16 +17,22 @@ public class MainScene {
     public TextField length;
     public TextField height;
 
+    int length_i;
+    int height_i;
+
     public void goToGameScreen() throws IOException {
         Game game = new Game("Søren",
                 "Paul Fischer", 800, 1300);
         GameScreen.setGame(game);
         SceneManager.changeScene("fxml/GameScreen.fxml");
+        SceneManager.changeSize(height_i,length_i);
     }
 
-    public void saveLength(ActionEvent event) {
+    public void saveLength() throws IOException {
+        int length_1 = Integer.parseInt(length.getText());
     }
 
-    public void saveHeight(ActionEvent event) {
+    public void saveHeight() throws IOException {
+        int height_1 = Integer.parseInt(height.getText());
     }
 }

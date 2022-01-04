@@ -18,6 +18,11 @@ public class SceneManager {
         mainScene.setRoot(FXMLLoader.load(SceneManager.class.getResource("/" + fxml)));
     }
 
+    public static void changeSize(int height, int width) {
+        mainScene.getWindow().setHeight(height);
+        mainScene.getWindow().setWidth(width);
+    }
+
     public static void setMainScene(Scene mainScene) {
         SceneManager.mainScene = mainScene;
     }
