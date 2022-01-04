@@ -26,8 +26,6 @@ public class GameScreen<playerOneAngle> {
 
 
     public void goToMainScene() throws IOException {
-        banana.setX(400);
-        banana.setY(400);
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
@@ -65,7 +63,7 @@ public class GameScreen<playerOneAngle> {
     }
 
     public void touchMe(ActionEvent event) throws IOException {
-        banana.setX(400);
+        banana.setX(60);
         banana.setY(700);
         banana.isSmooth();
     }
