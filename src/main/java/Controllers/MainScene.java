@@ -14,25 +14,28 @@ public class MainScene {
 
     @FXML
     public Button btnChange;
+    @FXML
     public TextField length;
+    @FXML
     public TextField height;
 
-    int length_i;
-    int height_i;
+    private int length_i;
+    private int height_i;
 
     public void goToGameScreen() throws IOException {
         Game game = new Game("Søren",
                 "Paul Fischer", 800, 1300);
         GameScreen.setGame(game);
+        System.out.println(length_i);
         SceneManager.changeScene("fxml/GameScreen.fxml");
         SceneManager.changeSize(height_i,length_i);
     }
 
-    public void saveLength() throws IOException {
-        int length_1 = Integer.parseInt(length.getText());
+    public void saveLength(ActionEvent event) throws IOException {
+            this.length_i = Integer.parseInt(length.getText());
     }
 
-    public void saveHeight() throws IOException {
-        int height_1 = Integer.parseInt(height.getText());
+    public void saveHeight(ActionEvent event) throws IOException {
+        this.height_i = Integer.parseInt(height.getText());
     }
 }
