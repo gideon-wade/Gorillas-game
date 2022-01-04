@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import Controllers.MainScene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import ApplicationClasses.Banana;
 
 import java.io.IOException;
 
@@ -26,8 +27,6 @@ public class GameScreen<playerOneAngle> {
 
 
     public void goToMainScene() throws IOException {
-        banana.setX(400);
-        banana.setY(400);
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
@@ -64,9 +63,15 @@ public class GameScreen<playerOneAngle> {
 
     }
 
+
     public void touchMe(ActionEvent event) throws IOException {
+        Banana banana = new Banana(velocity, gravity, angle);
+        while() {
+
+        }
+
         banana.setX(60);
-        banana.setY(70);
+        banana.setY(700);
         banana.isSmooth();
     }
 }
