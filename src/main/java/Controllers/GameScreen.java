@@ -73,14 +73,14 @@ public class GameScreen<playerOneAngle> {
 
     public void runThread() {
         banana.setX(1);
-        banana.setY(1);
+        banana.setY(100);
 
-        Banana banan = new Banana(30, 9.82, 45);
+        Banana banan = new Banana(90, 9.82, 45);
         int x = 1;
 
-        while (banana.getY() > 0) {
+        while (banana.getY() <= 100) {
             banana.setX(x);
-            banana.setY(banan.trajectory(x));
+            banana.setY(100 - banan.trajectory(x));
             banana.isSmooth();
             simulateSlow();
             System.out.println(banana.getY());
@@ -90,7 +90,7 @@ public class GameScreen<playerOneAngle> {
 
     private void simulateSlow() {
         try {
-            Thread.sleep(250);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
