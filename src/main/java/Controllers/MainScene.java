@@ -14,11 +14,19 @@ public class MainScene {
 
     @FXML
     public Button btnChange;
+    public TextField length;
+    public TextField height;
 
     public void goToGameScreen() throws IOException {
         Game game = new Game("Søren",
                 "Paul Fischer", 800, 1300);
         GameScreen.setGame(game);
         SceneManager.changeScene("fxml/GameScreen.fxml");
+    }
+
+    public void saveLength(ActionEvent event) {
+    }
+
+    public void saveHeight(ActionEvent event) {
     }
 }
