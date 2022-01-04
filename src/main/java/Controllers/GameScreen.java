@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class GameScreen<playerOneAngle> {
     public Game game;
@@ -33,9 +34,6 @@ public class GameScreen<playerOneAngle> {
     }
 
 
-    public static void setGame(Game game){
-
-    }
 
     public void pl1SetAngle(ActionEvent actionEvent) {
         int playerOneAngle = Integer.parseInt(pl1ang.getText());
@@ -65,20 +63,20 @@ public class GameScreen<playerOneAngle> {
 
     }
 
-    public void touchMe(ActionEvent event) throws IOException {
-
+    public void touchMe(ActionEvent event) throws IOException, InterruptedException {
         banana.setX(1);
         banana.setY(1);
 
-      Banana banan = new Banana(30,9.82,45);
-      int x = 1;
-
+        Banana banan = new Banana(30, 9.82, 45);
+        int x = 1;
         while(banana.getY() > 0) {
+            Thread.sleep(100);
             banana.setX(x);
             banana.setY(banan.trajectory(x));
             banana.isSmooth();
             System.out.println(banana.getY());
             x++;
+
         }
 
     }

@@ -30,7 +30,6 @@ public class MainScene {
     public void goToGameScreen() throws IOException {
         Game game = new Game("Søren",
                 "Paul Fischer", 800, 1300);
-        GameScreen.setGame(game);
         SceneManager.changeScene("fxml/GameScreen.fxml");
         SceneManager.changeSize(height_i,length_i);
     }
