@@ -6,7 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import Controllers.MainScene;
+
+import java.awt.*;
 import java.io.IOException;
 
 public class GameScreen {
@@ -43,4 +44,18 @@ public class GameScreen {
     public void pl2SetVelocity(ActionEvent actionEvent) {
 
     }
+
+
+    public void grid(int rows, int columns) {
+        boolean arr[][] = new boolean[rows][columns];
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++){
+                arr[i][j] = false;
+            }
+        }
+
+
+    }
+
 }
