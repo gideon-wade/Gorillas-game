@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -18,6 +19,9 @@ public class MainScene {
     public TextField length;
     @FXML
     public TextField height;
+
+    @FXML
+    public Image banana;
 
     private int length_i;
     private int height_i;

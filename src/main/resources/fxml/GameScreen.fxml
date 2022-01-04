@@ -34,7 +34,7 @@
          <Image url="@images/Donkey-Kong.jpg" />
       </image>
    </ImageView>
-   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="28.0" layoutY="640.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="banana" fitHeight="50.0" fitWidth="50.0" layoutX="28.0" layoutY="640.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.png" />
       </image>

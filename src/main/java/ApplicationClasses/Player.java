@@ -13,10 +13,10 @@ public class Player {
 
     public void throwing(int velocity, double gravity, int angle) {
         Banana banana = new Banana(velocity, gravity, angle);
-       int[]pos = banana.trajectory();
+        int[]pos = banana.trajectory();
 
-       var x = pos[0];
-       var y = pos[1];
+        var x = pos[0];
+        var y = pos[1];
     }
     public void setTurn(Boolean turn){
         this.theirTurn = turn;
