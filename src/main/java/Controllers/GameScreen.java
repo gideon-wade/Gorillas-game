@@ -22,6 +22,7 @@ public class GameScreen<playerOneAngle> {
     public TextField pl2ang;
     public TextField pl2vec;
     public ImageView banana;
+    public Button Button;
 
 
     public void goToMainScene() throws IOException {
@@ -29,6 +30,7 @@ public class GameScreen<playerOneAngle> {
         banana.setY(400);
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
+
 
     public static void setGame(Game game){
 
@@ -62,6 +64,11 @@ public class GameScreen<playerOneAngle> {
 
     }
 
+    public void touchMe(ActionEvent event) throws IOException {
+        banana.setX(400);
+        banana.setY(700);
+        banana.isSmooth();
+    }
 }
 
 
