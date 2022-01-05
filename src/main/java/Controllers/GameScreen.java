@@ -34,8 +34,9 @@ public class GameScreen<playerOneAngle> {
     public static void setGame(Game game){
 
     }
-        private int playerOneAngle;
-        private int playerOneVelocity;
+
+    private int playerOneAngle;
+    private int playerOneVelocity;
 
     public void pl1SetAngle(ActionEvent event) throws IOException {
         this.playerOneAngle = Integer.parseInt(pl1ang.getText());
@@ -69,29 +70,31 @@ public class GameScreen<playerOneAngle> {
     public void touchMe(ActionEvent event) throws IOException {
         Thread thread = new Thread(this::runThread);
         thread.start();
-
     }
 
     public void runThread() {
         banana.setX(1);
         banana.setY(100);
 
-        Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
+        Banana banan = new Banana(this.playerOneVelocity, 9.82, this.playerOneAngle);
         int x = 1;
 
         while (banana.getY() <= 100) {
             banana.setX(x);
             banana.setY(100 - banan.trajectory(x));
             banana.isSmooth();
-            simulateSlow();
+            simulateSlow(5);
             System.out.println(banana.getY());
             x++;
         }
+
+        simulateSlow(1000);
+        banana.setVisible(false);
     }
 
-    public void simulateSlow() {
+    public void simulateSlow(int t) {
         try {
-            Thread.sleep(5);
+            Thread.sleep(t);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
