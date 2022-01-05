@@ -97,19 +97,12 @@ public class GameScreen {
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
 
-            String s = "";
-            for (int i = 0; i < list.size(); i++) {
-                s += list.get(i) + " ";
-            }
-            System.out.println(s);
-
 
             int x = 0;
 
             for (int i = 0; i < list.size(); i++) {
                 banana.setX(i);
                 banana.setY(list.get(i));
-                System.out.println(banana.getY());
                 banana.isSmooth();
                 simulateSlow();
             }
@@ -137,7 +130,6 @@ public class GameScreen {
             for (int i = 0; i < list.size(); i++) {
                 banana.setX(1200 - i);
                 banana.setY(list.get(list.size() - 1 - i));
-                System.out.println(banana.getY());
                 banana.isSmooth();
                 simulateSlow();
             }
@@ -168,14 +160,14 @@ public class GameScreen {
         int x = 1;
 
         while (banan.trajectory(x) > 0) {
-            //banana.setX(x);
-            //banana.setY(100 - banan.trajectory(x));
-            //banana.isSmooth();
             this.list.add(100 - banan.trajectory(x));
             banana.isSmooth();
             x++;
         }
         return this.list;
+    }
+    public void switchVisibility() {
+
     }
 }
 
