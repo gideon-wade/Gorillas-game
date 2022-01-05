@@ -32,8 +32,8 @@ public class GameScreen {
     public static void setGame(Game game){
 
     }
-        private int playerOneAngle;
-        private int playerOneVelocity;
+    private int playerOneAngle;
+    private int playerOneVelocity;
 
     public void pl1SetAngle(ActionEvent event) throws IOException {
         this.playerOneAngle = Integer.parseInt(pl1ang.getText());
@@ -85,11 +85,15 @@ public class GameScreen {
             System.out.println(banana.getY());
             x++;
         }
+        simulateSlow();
+        banana.setVisible(false);
+
+
     }
 
     public void simulateSlow() {
         try {
-            Thread.sleep(playerOneVelocity/30);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
