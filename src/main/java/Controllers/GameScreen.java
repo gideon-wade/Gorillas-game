@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +28,8 @@ public class GameScreen {
     public Label pl2vellabel;
     public Label pl1anglabel;
     public Label pl1vellabel;
+    public Label nameLabel1;
+    public Label nameLabel2;
 
     private int playerOneAngle;
     private int playerOneVelocity;
@@ -73,6 +74,7 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
+        setName();
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -170,6 +172,9 @@ public class GameScreen {
             pl2vellabel.setVisible(false);
         }
     }
+
+    public void setName() {
+        nameLabel1.setText(MainScene.playerOneName);
+        nameLabel2.setText(MainScene.playerTwoName);
+    }
 }
-
-

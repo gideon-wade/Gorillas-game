@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class MainScene {
@@ -20,10 +21,14 @@ public class MainScene {
     public TextField length;
     @FXML
     public TextField height;
+    public TextField playerID1;
+    public TextField playerID2;
 
 
     private int length_i;
     private int height_i;
+    public static String playerOneName;
+    public static String playerTwoName;
 
     public void goToGameScreen() throws IOException {
         SceneManager.changeScene("fxml/GameScreen.fxml");
@@ -39,8 +44,11 @@ public class MainScene {
     }
 
     public void saveName2(ActionEvent actionEvent) {
+
+        this.playerOneName = playerID1.getText();
     }
 
     public void saveName1(ActionEvent actionEvent) {
+        this.playerTwoName = playerID2.getText();
     }
 }

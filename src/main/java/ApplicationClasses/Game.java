@@ -14,4 +14,10 @@ public class Game {
         player1.setTurn(true);
         player2.setTurn(false);
     }
+
+
+
+
+
+
 }
