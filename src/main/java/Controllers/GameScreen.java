@@ -74,8 +74,12 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
-        Thread thread = new Thread(this::runThread);
-        thread.start();
+        this.playerOneAngle = Integer.parseInt(pl1ang.getText());
+        this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
+            Thread thread = new Thread(this::runThread);
+            thread.start();
+                this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
+                this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
 
     }
 
@@ -170,9 +174,5 @@ public class GameScreen {
         return this.list;
     }
 }
-
-
-
-
 
 
