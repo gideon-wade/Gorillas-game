@@ -85,6 +85,9 @@ public class GameScreen {
             System.out.println(banana.getY());
             x++;
         }
+        pl2ang.setVisible(true);
+        pl2vec.setVisible(true);
+
     }
 
     public void simulateSlow() {
