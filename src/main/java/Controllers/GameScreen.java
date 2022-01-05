@@ -43,6 +43,21 @@ public class GameScreen {
 
     Game gamer = new Game("Søren","Gucci",800,1300);
 
+    public void pl1SetAngle(ActionEvent event) throws IOException {
+        this.playerOneAngle = Integer.parseInt(pl1ang.getText());
+    }
+
+    public void pl1SetVelocity(ActionEvent event) throws IOException {
+        this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
+    }
+
+    public void pl2SetAngle(ActionEvent actionEvent) throws IOException{
+        this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
+    }
+
+    public void pl2SetVelocity(ActionEvent actionEvent) throws IOException{
+        this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
+    }
 
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
     public void grid(int rows, int columns) {
@@ -80,7 +95,6 @@ public class GameScreen {
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
 
-
             int x = 0;
 
             for (int i = 0; i < list.size(); i++) {
@@ -89,7 +103,6 @@ public class GameScreen {
                 banana.isSmooth();
                 simulateSlow();
             }
-
             gamer.player1.setTurn(false);
 
             pl2ang.setVisible(true);

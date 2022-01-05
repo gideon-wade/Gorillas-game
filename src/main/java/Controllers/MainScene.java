@@ -44,7 +44,6 @@ public class MainScene {
     }
 
     public void saveName2(ActionEvent actionEvent) {
-
         this.playerOneName = playerID1.getText();
     }
 
