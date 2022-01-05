@@ -91,7 +91,11 @@ public class GameScreen<playerOneAngle> {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(5);
+            if (playerOneVelocity < 45) {
+                Thread.sleep(10);
+            } else {
+                Thread.sleep(5);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
