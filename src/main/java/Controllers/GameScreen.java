@@ -28,10 +28,8 @@ public class GameScreen {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
+    Game gamer = new Game("Søren","Gucci",800,1300);
 
-    public static void setGame(Game game){
-
-    }
     private int playerOneAngle;
     private int playerOneVelocity;
 
@@ -73,11 +71,12 @@ public class GameScreen {
         banana.setX(1);
         banana.setY(100);
         banana.setVisible(true);
+        gamer.player1.setTurn(false);
 
         Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
         int x = 1;
 
-        while (banana.getY() <= 100) {
+        while (banana.getY() <= 100 && gamer.player1.getTurn()) {
             banana.setX(x);
             banana.setY(100 - banan.trajectory(x));
             banana.isSmooth();
