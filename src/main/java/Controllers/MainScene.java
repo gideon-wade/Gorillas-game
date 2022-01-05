@@ -27,7 +27,7 @@ public class MainScene {
 
     public void goToGameScreen() throws IOException {
         SceneManager.changeScene("fxml/GameScreen.fxml");
-        SceneManager.changeSize(height_i,length_i);
+        SceneManager.changeSize(height_i, length_i);
     }
 
     public void saveLength(ActionEvent event) throws IOException {

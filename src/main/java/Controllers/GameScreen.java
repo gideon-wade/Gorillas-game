@@ -6,6 +6,7 @@ import ApplicationClasses.Game;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import org.w3c.dom.ls.LSOutput;
@@ -22,6 +23,8 @@ public class GameScreen {
     public TextField pl2vec;
     public ImageView banana;
     public Button Button;
+    public Label pl2anglabel;
+    public Label pl2vellabel;
 
 
     public void goToMainScene() throws IOException {
@@ -69,6 +72,7 @@ public class GameScreen {
         thread.start();
 
 
+
     }
 
     public void runThread() {
@@ -89,6 +93,10 @@ public class GameScreen {
                 x++;
             }
             gamer.player1.setTurn(false);
+            pl2ang.setVisible(true);
+            pl2vec.setVisible(true);
+            pl2anglabel.setVisible(true);
+            pl2vellabel.setVisible(true);
 
         } else {
             banana.setX(1200);
@@ -96,7 +104,7 @@ public class GameScreen {
             banana.setVisible(true);
 
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
-            int x = 1;
+            int x = 1200;
 
             while (banana.getY() <= 100) {
                 banana.setX(x);
@@ -104,10 +112,10 @@ public class GameScreen {
                 banana.isSmooth();
                 simulateSlow();
                 System.out.println(banana.getY());
-                x++;
+                x--;
             }
-
             gamer.player1.setTurn(true);
+
         }
         simulateSlow();
         banana.setVisible(false);
