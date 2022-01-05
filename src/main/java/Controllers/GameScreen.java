@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,8 +29,6 @@ public class GameScreen {
     public Label pl2vellabel;
     public Label pl1anglabel;
     public Label pl1vellabel;
-    public Label nameLabel1;
-    public Label nameLabel2;
 
     private int playerOneAngle;
     private int playerOneVelocity;
@@ -45,7 +44,6 @@ public class GameScreen {
     Game gamer = new Game("Søren","Gucci",800,1300);
 
 
-
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
     public void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
@@ -55,19 +53,21 @@ public class GameScreen {
                 arr[i][j] = false;
             }
         }
+
     }
 
     public void doThrow(ActionEvent event) throws IOException {
-        setName();
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
+            Thread thread = new Thread(this::runThread);
+            thread.start();
         } else {
             this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
             this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
+            Thread thread = new Thread(this::runThread);
+            thread.start();
         }
-        Thread thread = new Thread(this::runThread);
-        thread.start();
     }
 
     public void runThread() {
@@ -80,6 +80,9 @@ public class GameScreen {
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
 
+
+            int x = 0;
+
             for (int i = 0; i < list.size(); i++) {
                 banana.setX(i);
                 banana.setY(list.get(i));
@@ -87,9 +90,17 @@ public class GameScreen {
                 simulateSlow();
             }
 
-            switchVisibility();
-
             gamer.player1.setTurn(false);
+
+            pl2ang.setVisible(true);
+            pl2vec.setVisible(true);
+            pl2anglabel.setVisible(true);
+            pl2vellabel.setVisible(true);
+
+            pl1ang.setVisible(false);
+            pl1vec.setVisible(false);
+            pl1anglabel.setVisible(false);
+            pl1vellabel.setVisible(false);
 
         } else {
             banana.setX(1200);
@@ -105,12 +116,17 @@ public class GameScreen {
                 banana.isSmooth();
                 simulateSlow();
             }
-
-            switchVisibility();
-
             gamer.player1.setTurn(true);
 
+            pl1ang.setVisible(true);
+            pl1vec.setVisible(true);
+            pl1anglabel.setVisible(true);
+            pl1vellabel.setVisible(true);
 
+            pl2ang.setVisible(false);
+            pl2vec.setVisible(false);
+            pl2anglabel.setVisible(false);
+            pl2vellabel.setVisible(false);
         }
         simulateSlow();
         banana.setVisible(false);
@@ -134,31 +150,6 @@ public class GameScreen {
         return this.list;
     }
     public void switchVisibility() {
-        if (gamer.player1.getTurn()){
-            pl2ang.setVisible(true);
-            pl2vec.setVisible(true);
-            pl2anglabel.setVisible(true);
-            pl2vellabel.setVisible(true);
 
-            pl1ang.setVisible(false);
-            pl1vec.setVisible(false);
-            pl1anglabel.setVisible(false);
-            pl1vellabel.setVisible(false);
-        } else {
-            pl1ang.setVisible(true);
-            pl1vec.setVisible(true);
-            pl1anglabel.setVisible(true);
-            pl1vellabel.setVisible(true);
-
-            pl2ang.setVisible(false);
-            pl2vec.setVisible(false);
-            pl2anglabel.setVisible(false);
-            pl2vellabel.setVisible(false);
-        }
-    }
-
-    public void setName() {
-        nameLabel1.setText(MainScene.playerOneName);
-        nameLabel2.setText(MainScene.playerTwoName);
     }
 }
