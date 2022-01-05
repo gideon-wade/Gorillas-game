@@ -43,11 +43,11 @@ public class MainScene {
         this.height_i = Integer.parseInt(height.getText());
     }
 
-    public void saveName2(ActionEvent actionEvent) {
+    public void saveName1(ActionEvent actionEvent) {
         this.playerOneName = playerID1.getText();
     }
 
-    public void saveName1(ActionEvent actionEvent) {
+    public void saveName2(ActionEvent actionEvent) {
         this.playerTwoName = playerID2.getText();
     }
 }
