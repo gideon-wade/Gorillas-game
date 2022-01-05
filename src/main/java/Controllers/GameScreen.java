@@ -32,8 +32,8 @@ public class GameScreen {
     public static void setGame(Game game){
 
     }
-        private int playerOneAngle;
-        private int playerOneVelocity;
+    private int playerOneAngle;
+    private int playerOneVelocity;
 
     public void pl1SetAngle(ActionEvent event) throws IOException {
         this.playerOneAngle = Integer.parseInt(pl1ang.getText());
@@ -67,12 +67,12 @@ public class GameScreen {
     public void touchMe(ActionEvent event) throws IOException {
         Thread thread = new Thread(this::runThread);
         thread.start();
-
     }
 
     public void runThread() {
         banana.setX(1);
         banana.setY(100);
+        banana.setVisible(true);
 
         Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
         int x = 1;
@@ -85,14 +85,13 @@ public class GameScreen {
             System.out.println(banana.getY());
             x++;
         }
-        pl2ang.setVisible(true);
-        pl2vec.setVisible(true);
-
+        simulateSlow();
+        banana.setVisible(false);
     }
 
     public void simulateSlow() {
         try {
-            Thread.sleep(playerOneVelocity/30);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

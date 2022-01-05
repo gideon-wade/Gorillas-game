@@ -39,7 +39,7 @@
          <Image url="@images/monkey.jpg" />
       </image>
    </ImageView>
-   <ImageView fx:id="banana" fitHeight="50.0" fitWidth="50.0" layoutX="57.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="banana" fitHeight="50.0" fitWidth="50.0" layoutX="57.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
          <Image url="@images/banana_animation.gif" />
       </image>

@@ -1,8 +1,8 @@
 package ApplicationClasses;
 
 public class Game {
-    private Player player1;
-    private Player player2;
+    public Player player1;
+    public Player player2;
     private int height;
     private int length;
 
