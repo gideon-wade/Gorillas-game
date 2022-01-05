@@ -8,8 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="MineSweeper-master" />
         <module name="Gorillas-game" />
+        <module name="Gorillas_Game" />
         <module name="MineSweeper" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SoftEng" target="15" />
+    </bytecodeTargetLevel>
   </component>
 </project>
