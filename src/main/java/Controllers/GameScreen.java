@@ -26,6 +26,11 @@ public class GameScreen {
     public Label pl2anglabel;
     public Label pl2vellabel;
 
+    private int playerOneAngle;
+    private int playerOneVelocity;
+    private int playerTwoAngle;
+    private int playerTwoVelocity;
+
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -33,26 +38,22 @@ public class GameScreen {
 
     Game gamer = new Game("Søren","Gucci",800,1300);
 
-    private int playerOneAngle;
-    private int playerOneVelocity;
-    private int playerTwoAngle;
-    private int playerTwoVelocity;
+
 
     public void pl1SetAngle(ActionEvent event) throws IOException {
         this.playerOneAngle = Integer.parseInt(pl1ang.getText());
     }
-
 
     public void pl1SetVelocity(ActionEvent event) throws IOException {
         this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
     }
 
     public void pl2SetAngle(ActionEvent actionEvent) throws IOException{
-        int playerTwoAngle = Integer.parseInt(pl2ang.getText());
+        this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
     }
 
     public void pl2SetVelocity(ActionEvent actionEvent) throws IOException{
-        int playerTwoVelocity = Integer.parseInt(pl2vec.getText());
+        this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
     }
 
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
