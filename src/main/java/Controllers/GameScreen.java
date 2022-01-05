@@ -46,22 +46,6 @@ public class GameScreen {
 
 
 
-    public void pl1SetAngle(ActionEvent event) throws IOException {
-        this.playerOneAngle = Integer.parseInt(pl1ang.getText());
-    }
-
-    public void pl1SetVelocity(ActionEvent event) throws IOException {
-        this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
-    }
-
-    public void pl2SetAngle(ActionEvent actionEvent) throws IOException{
-        this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
-    }
-
-    public void pl2SetVelocity(ActionEvent actionEvent) throws IOException{
-        this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
-    }
-
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
     public void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
