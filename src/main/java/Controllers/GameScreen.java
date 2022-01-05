@@ -32,6 +32,8 @@ public class GameScreen {
 
     private int playerOneAngle;
     private int playerOneVelocity;
+    private int playerTwoAngle;
+    private int playerTwoVelocity;
 
     public void pl1SetAngle(ActionEvent event) throws IOException {
         this.playerOneAngle = Integer.parseInt(pl1ang.getText());
@@ -42,11 +44,11 @@ public class GameScreen {
         this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
     }
 
-    public void pl2SetAngle(ActionEvent actionEvent) {
+    public void pl2SetAngle(ActionEvent actionEvent) throws IOException{
         int playerTwoAngle = Integer.parseInt(pl2ang.getText());
     }
 
-    public void pl2SetVelocity(ActionEvent actionEvent) {
+    public void pl2SetVelocity(ActionEvent actionEvent) throws IOException{
         int playerTwoVelocity = Integer.parseInt(pl2vec.getText());
     }
 
@@ -70,21 +72,42 @@ public class GameScreen {
     }
 
     public void runThread() {
-        banana.setX(1);
-        banana.setY(100);
-        banana.setVisible(true);
-        gamer.player1.setTurn(false);
+        if (gamer.player1.getTurn()) {
+            banana.setX(1);
+            banana.setY(100);
+            banana.setVisible(true);
 
-        Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
-        int x = 1;
+            Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
+            int x = 1;
 
-        while (banana.getY() <= 100 && gamer.player1.getTurn()) {
-            banana.setX(x);
-            banana.setY(100 - banan.trajectory(x));
-            banana.isSmooth();
-            simulateSlow();
-            System.out.println(banana.getY());
-            x++;
+            while (banana.getY() <= 100) {
+                banana.setX(x);
+                banana.setY(100 - banan.trajectory(x));
+                banana.isSmooth();
+                simulateSlow();
+                System.out.println(banana.getY());
+                x++;
+            }
+            gamer.player1.setTurn(false);
+
+        } else {
+            banana.setX(1200);
+            banana.setY(100);
+            banana.setVisible(true);
+
+            Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
+            int x = 1;
+
+            while (banana.getY() <= 100) {
+                banana.setX(x);
+                banana.setY(100 - banan.trajectory(x));
+                banana.isSmooth();
+                simulateSlow();
+                System.out.println(banana.getY());
+                x++;
+            }
+
+            gamer.player1.setTurn(true);
         }
         simulateSlow();
         banana.setVisible(false);
