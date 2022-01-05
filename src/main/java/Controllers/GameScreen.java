@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen {
     public Game game;
@@ -25,11 +27,14 @@ public class GameScreen {
     public Button Button;
     public Label pl2anglabel;
     public Label pl2vellabel;
+    public Label pl1anglabel;
+    public Label pl1vellabel;
 
     private int playerOneAngle;
     private int playerOneVelocity;
     private int playerTwoAngle;
     private int playerTwoVelocity;
+    private List<Integer> list = new ArrayList<>();
 
 
     public void goToMainScene() throws IOException {
@@ -68,36 +73,50 @@ public class GameScreen {
 
     }
 
-    public void touchMe(ActionEvent event) throws IOException {
+    public void doThrow(ActionEvent event) throws IOException {
         Thread thread = new Thread(this::runThread);
         thread.start();
-
-
 
     }
 
     public void runThread() {
+        list = new ArrayList<>();
         if (gamer.player1.getTurn()) {
             banana.setX(1);
             banana.setY(100);
             banana.setVisible(true);
 
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
-            int x = 1;
+            list = makeCurve(banan);
 
-            while (banana.getY() <= 100) {
-                banana.setX(x);
-                banana.setY(100 - banan.trajectory(x));
+            String s = "";
+            for (int i = 0; i < list.size(); i++) {
+                s += list.get(i) + " ";
+            }
+            System.out.println(s);
+
+
+            int x = 0;
+
+            for (int i = 0; i < list.size(); i++) {
+                banana.setX(i);
+                banana.setY(list.get(i));
+                System.out.println(banana.getY());
                 banana.isSmooth();
                 simulateSlow();
-                System.out.println(banana.getY());
-                x++;
             }
+
             gamer.player1.setTurn(false);
+
             pl2ang.setVisible(true);
             pl2vec.setVisible(true);
             pl2anglabel.setVisible(true);
             pl2vellabel.setVisible(true);
+
+            pl1ang.setVisible(false);
+            pl1vec.setVisible(false);
+            pl1anglabel.setVisible(false);
+            pl1vellabel.setVisible(false);
 
         } else {
             banana.setX(1200);
@@ -105,18 +124,26 @@ public class GameScreen {
             banana.setVisible(true);
 
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
-            int x = 1200;
+            list = makeCurve(banan);
 
-            while (banana.getY() <= 100) {
-                banana.setX(x);
-                banana.setY(100 - banan.trajectory(x));
+            for (int i = 0; i < list.size(); i++) {
+                banana.setX(1200 - i);
+                banana.setY(list.get(list.size() - 1 - i));
+                System.out.println(banana.getY());
                 banana.isSmooth();
                 simulateSlow();
-                System.out.println(banana.getY());
-                x--;
             }
             gamer.player1.setTurn(true);
 
+            pl1ang.setVisible(true);
+            pl1vec.setVisible(true);
+            pl1anglabel.setVisible(true);
+            pl1vellabel.setVisible(true);
+
+            pl2ang.setVisible(false);
+            pl2vec.setVisible(false);
+            pl2anglabel.setVisible(false);
+            pl2vellabel.setVisible(false);
         }
         simulateSlow();
         banana.setVisible(false);
@@ -124,10 +151,23 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(10);
+            Thread.sleep(3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public List<Integer> makeCurve(Banana banan){
+        int x = 1;
+
+        while (banan.trajectory(x) > 0) {
+            //banana.setX(x);
+            //banana.setY(100 - banan.trajectory(x));
+            //banana.isSmooth();
+            this.list.add(100 - banan.trajectory(x));
+            banana.isSmooth();
+            x++;
+        }
+        return this.list;
     }
 }
 
