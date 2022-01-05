@@ -12,7 +12,7 @@ import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 
-public class GameScreen<playerOneAngle> {
+public class GameScreen {
     public Game game;
     @FXML
     public Button btnBack;
@@ -25,8 +25,6 @@ public class GameScreen<playerOneAngle> {
 
 
     public void goToMainScene() throws IOException {
-        banana.setX(400);
-        banana.setY(400);
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
@@ -91,7 +89,7 @@ public class GameScreen<playerOneAngle> {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(5);
+            Thread.sleep(playerOneVelocity/30);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
