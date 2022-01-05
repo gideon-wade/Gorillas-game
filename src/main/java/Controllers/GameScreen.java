@@ -62,9 +62,11 @@ public class GameScreen {
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
+            System.out.println(playerOneAngle);
         } else {
             this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
             this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
+            System.out.println(playerTwoAngle);
         }
         Thread thread = new Thread(this::runThread);
         thread.start();
@@ -79,6 +81,12 @@ public class GameScreen {
 
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
+            String s = "";
+            for (int i = 0; i < list.size(); i++) {
+                s += " " + list.get(i);
+            }
+            System.out.println(s);
+
 
             for (int i = 0; i < list.size(); i++) {
                 banana.setX(i);
@@ -98,6 +106,12 @@ public class GameScreen {
 
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
             list = makeCurve(banan);
+
+            String s = "";
+            for (int i = 0; i < list.size(); i++) {
+                s += " " + list.get(i);
+            }
+            System.out.println(s);
 
             for (int i = 0; i < list.size(); i++) {
                 banana.setX(1200 - i);

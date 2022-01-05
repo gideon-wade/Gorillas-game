@@ -13,7 +13,7 @@
          <Image url="@images/lightblue_background.jpg" />
       </image>
    </ImageView>
-    <Button fx:id="btnBack" onAction="#goToMainScene" text="Let's go back to Main Screen" AnchorPane.rightAnchor="0">Let's go back to scene 1</Button>
+   <Button fx:id="btnBack" onAction="#goToMainScene" text="Let's go back to Main Screen" AnchorPane.rightAnchor="0">Let's go back to scene 1</Button>
    <ImageView fitHeight="108.0" fitWidth="118.0" layoutX="8.0" layoutY="707.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/monkey.jpg" />
@@ -30,8 +30,8 @@
       </image>
    </ImageView>
    <Label layoutX="15.0" layoutY="60.0" text="Name :" />
-   <Label layoutX="15.0" layoutY="96.0" text="Angle :" />
-   <Label layoutX="14.0" layoutY="135.0" text="Velocity :" />
+   <Label fx:id ="pl1anglabel" layoutX="15.0" layoutY="96.0" text="Angle :" />
+   <Label fx:id="pl1vellabel" layoutX="14.0" layoutY="135.0" text="Velocity :" />
    <Label fx:id="nameLabel1" layoutX="62.0" layoutY="61.0" text="Player1" />
    <Label layoutX="1151.0" layoutY="60.0" text="Name :" />
    <Label fx:id="nameLabel2" layoutX="1196.0" layoutY="61.0" text="Player2" />
