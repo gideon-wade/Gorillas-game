@@ -50,7 +50,7 @@ public class GameScreen {
         int playerTwoVelocity = Integer.parseInt(pl2vec.getText());
     }
 
-// A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
+    // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
     public void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
 
@@ -65,6 +65,8 @@ public class GameScreen {
     public void touchMe(ActionEvent event) throws IOException {
         Thread thread = new Thread(this::runThread);
         thread.start();
+
+
     }
 
     public void runThread() {
@@ -96,9 +98,6 @@ public class GameScreen {
         }
     }
 }
-
-
-
 
 
 

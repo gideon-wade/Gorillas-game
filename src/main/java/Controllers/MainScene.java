@@ -37,4 +37,10 @@ public class MainScene {
     public void saveHeight(ActionEvent event) throws IOException {
         this.height_i = Integer.parseInt(height.getText());
     }
+
+    public void saveName2(ActionEvent actionEvent) {
+    }
+
+    public void saveName1(ActionEvent actionEvent) {
+    }
 }
