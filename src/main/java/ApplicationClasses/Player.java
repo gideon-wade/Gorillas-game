@@ -5,6 +5,7 @@ public class Player {
     private String name;
     private Boolean theirTurn;
 
+
     public Player(int positionX, int positionY, String name) {
         starting_position[0] = positionX;
         starting_position[1] = positionY;
