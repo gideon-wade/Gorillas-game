@@ -67,7 +67,6 @@ public class GameScreen {
     public void touchMe(ActionEvent event) throws IOException {
         Thread thread = new Thread(this::runThread);
         thread.start();
-
     }
 
     public void runThread() {
