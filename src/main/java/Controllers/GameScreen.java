@@ -14,6 +14,7 @@ import java.io.IOException;
 
 public class GameScreen {
     public Game game;
+    //All the variables, buttons and textfields used in this section of the programming
     @FXML
     public Button btnBack;
     public TextField pl1ang;
@@ -30,7 +31,7 @@ public class GameScreen {
     private int playerTwoAngle;
     private int playerTwoVelocity;
 
-
+//If u wanna go back to the Main Scene.
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
@@ -38,7 +39,7 @@ public class GameScreen {
     Game gamer = new Game("Søren","Gucci",800,1300);
 
 
-
+//All the textfields made to integers:
     public void pl1SetAngle(ActionEvent event) throws IOException {
         this.playerOneAngle = Integer.parseInt(pl1ang.getText());
     }
@@ -55,6 +56,7 @@ public class GameScreen {
         this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
     }
 
+
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
     public void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
@@ -64,20 +66,18 @@ public class GameScreen {
                 arr[i][j] = false;
             }
         }
-
     }
 
+    //The action that happens if u press the throw button
     public void touchMe(ActionEvent event) throws IOException {
         this.playerOneAngle = Integer.parseInt(pl1ang.getText());
         this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
-
-        Thread thread = new Thread(this::runThread);
-        thread.start();
-
-
-
+            Thread thread = new Thread(this::runThread);
+            thread.start();
     }
 
+
+    //The bananas action when the button is pressed
     public void runThread() {
         if (gamer.player1.getTurn()) {
             banana.setX(1);
@@ -124,6 +124,7 @@ public class GameScreen {
         banana.setVisible(false);
     }
 
+    //Making sure the banana moves in the right way we want.
     public void simulateSlow() {
         try {
             Thread.sleep(10);
