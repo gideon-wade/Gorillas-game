@@ -87,8 +87,6 @@ public class GameScreen {
         }
         simulateSlow();
         banana.setVisible(false);
-
-
     }
 
     public void simulateSlow() {
