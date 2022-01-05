@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScene">
-    <Button fx:id="btnChange" layoutX="589.0" layoutY="378.0" onAction="#goToGameScreen" prefHeight="43.0" prefWidth="122.0" text="Start">
+    <Button fx:id="btnChange" layoutX="589.0" layoutY="544.0" onAction="#goToGameScreen" prefHeight="43.0" prefWidth="122.0" text="Start">
       <font>
          <Font size="20.0" />
       </font></Button>
@@ -18,10 +18,10 @@
          <Font name="Franklin Gothic Heavy" size="64.0" />
       </font>
    </Label>
-   <TextField fx:id="length" layoutX="611.0" layoutY="241.0" onAction="#saveLength" />
-   <TextField fx:id="height" layoutX="611.0" layoutY="294.0" onAction="#saveHeight" />
-   <Label layoutX="560.0" layoutY="245.0" text="Bredde" />
-   <Label layoutX="565.0" layoutY="298.0" text="Højde" />
+   <TextField fx:id="length" layoutX="718.0" layoutY="467.0" onAction="#saveLength" />
+   <TextField fx:id="height" layoutX="484.0" layoutY="467.0" onAction="#saveHeight" />
+   <Label layoutX="664.0" layoutY="471.0" text="Bredde:" />
+   <Label layoutX="433.0" layoutY="471.0" text="Højde:" />
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="221.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
@@ -42,5 +42,9 @@
          <Image url="@images/banana.gif" />
       </image>
    </ImageView>
+   <TextField fx:id="playerID2" layoutX="576.0" layoutY="242.0" onAction="#saveName2" />
+   <TextField fx:id="playerID1" layoutX="576.0" layoutY="193.0" onAction="#saveName1" />
+   <Label layoutX="506.0" layoutY="197.0" prefHeight="17.0" prefWidth="63.0" text="Player 1" />
+   <Label layoutX="506.0" layoutY="246.0" prefHeight="17.0" prefWidth="63.0" text="Player 2" />
 
 </AnchorPane>

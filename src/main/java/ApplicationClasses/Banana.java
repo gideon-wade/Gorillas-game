@@ -17,8 +17,22 @@ public class Banana {
         int y = 1;
 
         y = (int)(-(gravity * Math.pow(x, 2)) /
-                (2 * Math.pow(velocity, 2) * Math.pow(Math.cos(angle), 2)) + Math.tan(angle) * x) + 60;
+                (2 * Math.pow(velocity, 2) * Math.pow(Math.cos(angle), 2)) + Math.tan(angle) * x);
         return y;
+
+    }
+
+    public int getXvalue(){
+        int y = 1;
+        int x = 1;
+        while (y > 0) {
+            y = (int) (-(gravity * Math.pow(x, 2)) /
+                    (2 * Math.pow(velocity, 2) * Math.pow(Math.cos(angle), 2)) + Math.tan(angle) * x);
+            x++;
+
+        }
+
+        return x;
 
     }
 }
