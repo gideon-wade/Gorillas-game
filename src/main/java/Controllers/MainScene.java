@@ -21,8 +21,6 @@ public class MainScene {
     @FXML
     public TextField height;
 
-    @FXML
-    public Image banana;
 
     private int length_i;
     private int height_i;

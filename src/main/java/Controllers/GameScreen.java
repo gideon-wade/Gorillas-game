@@ -73,6 +73,7 @@ public class GameScreen {
     public void runThread() {
         banana.setX(1);
         banana.setY(100);
+        banana.setVisible(true);
 
         Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
         int x = 1;
