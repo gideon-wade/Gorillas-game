@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 
@@ -22,7 +21,7 @@ public class GameScreen {
     public TextField pl2ang;
     public TextField pl2vec;
     public ImageView banana;
-    public Button Button;
+    public Button Throw;
     public Label pl2anglabel;
     public Label pl2vellabel;
 
@@ -69,6 +68,9 @@ public class GameScreen {
     }
 
     public void touchMe(ActionEvent event) throws IOException {
+        this.playerOneAngle = Integer.parseInt(pl1ang.getText());
+        this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
+
         Thread thread = new Thread(this::runThread);
         thread.start();
 
