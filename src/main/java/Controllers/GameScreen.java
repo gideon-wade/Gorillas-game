@@ -56,6 +56,7 @@ public class GameScreen {
     int monkeyTwo_slut_x;
     int monkeyTwo_start_y;
     int monkeyTwo_slut_y;
+    int[] bananaArr;
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -85,7 +86,7 @@ public class GameScreen {
                 }
             }
         }
-        }
+    }
 
 
 
@@ -130,8 +131,19 @@ public class GameScreen {
         this.monkeyTwo_slut_y = monkeyTwoArr[3] + (monkeyTwoArr[0]/2);
     }
 
+    public void makeBanana() {
+        bananaArr = new int[4];
+
+        bananaArr[0] = (int) banana.getFitHeight();
+        bananaArr[1] = (int) banana.getFitWidth();
+        bananaArr[2] = (int) banana.getLayoutX();
+        bananaArr[3] = (int) banana.getLayoutY();
+    }
+
     public void runThread() {
         makeMonkeys();
+        makeBanana();
+
         hitbox();
 
         list = new ArrayList<>();
@@ -208,9 +220,6 @@ public class GameScreen {
             banana.isSmooth();
             x++;
         }
-
-
-
         return this.list;
     }
 
