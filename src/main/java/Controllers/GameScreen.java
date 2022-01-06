@@ -36,7 +36,7 @@ public class GameScreen {
     private int playerTwoAngle;
     private int playerTwoVelocity;
     private List<Integer> list = new ArrayList<>();
-
+    private boolean arr[][];
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -45,9 +45,8 @@ public class GameScreen {
     Game gamer = new Game("Søren","Gucci",800,1300);
 
 
-
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
-    public void grid(int rows, int columns) {
+    public static void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
 
         for (int i = 0; i < arr.length; i++) {
@@ -55,9 +54,16 @@ public class GameScreen {
                 arr[i][j] = false;
             }
         }
+        for(int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++){
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     public void doThrow(ActionEvent event) throws IOException {
+
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -94,16 +100,12 @@ public class GameScreen {
             gamer.player1.setTurn(false);
 
         } else {
-            System.out.println("Passed else");
             banana.setX(1200);
             banana.setY(100);
             banana.setVisible(true);
-            System.out.println("pl2vel: " + playerTwoVelocity);
-            System.out.println("pl2ang: " + playerTwoAngle);
+
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
-
             list = makeCurve(banan);
-
 
 
             for (int i = 0; i < list.size(); i++) {
@@ -112,9 +114,7 @@ public class GameScreen {
                 banana.isSmooth();
                 simulateSlow();
             }
-
             switchVisibility();
-
             gamer.player1.setTurn(true);
         }
         simulateSlow();
@@ -123,34 +123,50 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(2);
+            Thread.sleep(3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
     public List<Integer> makeCurve(Banana banan){
         int x = 1;
-        while (banan.trajectory(x) > -1) {
+
+        while (banan.trajectory(x) >= 0) {
             this.list.add(100 - banan.trajectory(x));
             banana.isSmooth();
             x++;
         }
         return this.list;
     }
-
     public void switchVisibility() {
-        pl1ang.setVisible(!pl1ang.isVisible());
-        pl1vec.setVisible(!pl1vec.isVisible());
-        pl1anglabel.setVisible(!pl1anglabel.isVisible());
-        pl1vellabel.setVisible(!pl1vellabel.isVisible());
+        if (gamer.player1.getTurn()){
+            pl2ang.setVisible(true);
+            pl2vec.setVisible(true);
+            pl2anglabel.setVisible(true);
+            pl2vellabel.setVisible(true);
 
-        pl2ang.setVisible(!pl2ang.isVisible());
-        pl2vec.setVisible(!pl2vec.isVisible());
-        pl2anglabel.setVisible(!pl2anglabel.isVisible());
-        pl2vellabel.setVisible(!pl2vellabel.isVisible());
+            pl1ang.setVisible(false);
+            pl1vec.setVisible(false);
+            pl1anglabel.setVisible(false);
+            pl1vellabel.setVisible(false);
+            pl1ang.clear();
+            pl1vec.clear();
+        } else {
+            pl1ang.setVisible(true);
+            pl1vec.setVisible(true);
+            pl1anglabel.setVisible(true);
+            pl1vellabel.setVisible(true);
+
+            pl2ang.setVisible(false);
+            pl2vec.setVisible(false);
+            pl2anglabel.setVisible(false);
+            pl2vellabel.setVisible(false);
+            pl2ang.clear();
+            pl2vec.clear();
+        }
     }
-
-    /*public void setName() {
+    /*
+    public void setName() {
         nameLabel1.setText(MainScene.playerOneName);
         nameLabel2.setText(MainScene.playerTwoName);
     }*/
