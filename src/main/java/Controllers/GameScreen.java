@@ -64,14 +64,14 @@ public class GameScreen {
    }
 
    public void hitbox() {
-        for(int i = start_x; i < slut_x; i++) {
-            for(int k = start_y; k < slut_y; k++) {
+        for(int i = start_y; i < slut_y; i++) {
+            for(int k = start_x; k < slut_x; k++) {
                 if(i >= 0 && k >= 0) {
                     arr[i][k] = true;
                 }
             }
         }
-   }
+    }
 
     public void doThrow(ActionEvent event) throws IOException {
         if (gamer.player1.getTurn()) {
@@ -112,6 +112,12 @@ public class GameScreen {
         makeMonkeys();
         hitbox();
         list = new ArrayList<>();
+        for(int i = 0; i < 1300; i++) {
+            for(int k = 0; k < 800; k++) {
+                System.out.print(arr[i][k]);
+                }
+            System.out.println();
+            }
         if (gamer.player1.getTurn()) {
             banana.setX(1);
             banana.setY(100);
