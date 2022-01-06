@@ -37,7 +37,7 @@ public class MainScene {
 
     public void goToGameScreen() throws IOException {
         SceneManager.changeScene("fxml/GameScreen.fxml");
-        this.game = new Game(playerOneName, playerTwoName,
+        Game game = new Game(playerOneName, playerTwoName,
                 height_i, length_i);
         GameScreen.setGame(game);
         Game.grid(length_i,height_i);

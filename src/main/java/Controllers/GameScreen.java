@@ -30,6 +30,13 @@ public class GameScreen {
     public Label pl1vellabel;
     public Label nameLabel1;
     public Label nameLabel2;
+    public Button pl1start;
+    public Button pl2start;
+    public Label pl2NameLabel;
+    public Label pl1NameLabel;
+    public Label whoWantsLabel;
+    public ImageView pafiImg;
+    public Button throwButton;
 
     private int playerOneAngle;
     private int playerOneVelocity;
@@ -49,7 +56,6 @@ public class GameScreen {
 
 
     public void doThrow(ActionEvent event) throws IOException {
-        System.out.println(gamer.player1.getName());
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -153,9 +159,9 @@ public class GameScreen {
         pl2vellabel.setVisible(!pl2vellabel.isVisible());
     }
     /*
-    public void setName() {
-        nameLabel1.setText(MainScene.playerOneName);
-        nameLabel2.setText(MainScene.playerTwoName);
+    public void setName(String playerOneName, String playerTwoName) {
+        nameLabel1.setText(playerOneName);
+        nameLabel2.setText(playerTwoName);
     }*/
 
     public void showCurve(List list){ // Not needed for final project, but helps to get an insight
@@ -168,5 +174,41 @@ public class GameScreen {
     }
     public static void setGame(Game game){
         gamer = game;
+    }
+
+    public void pl1Start(ActionEvent actionEvent) {
+        nameLabel1.setText(gamer.player1.getName());
+        nameLabel2.setText(gamer.player2.getName());
+        gamer.player1.setTurn(true);
+        gamer.player2.setTurn(false);
+        makeBoardVisible();
+    }
+
+    public void pl2Start(ActionEvent actionEvent) {
+        nameLabel1.setText(gamer.player1.getName());
+        nameLabel2.setText(gamer.player2.getName());
+        gamer.player1.setTurn(false);
+        gamer.player2.setTurn(true);
+
+        makeBoardVisible();
+    }
+
+    public void makeBoardVisible() {
+        whoWantsLabel.setVisible(false);
+        pl1start.setVisible(false);
+        pl2start.setVisible(false);
+        pafiImg.setVisible(true);
+        throwButton.setVisible(true);
+        if (gamer.player1.getTurn()){
+            pl1NameLabel.setVisible(true);
+            pl1anglabel.setVisible(true);
+            pl1vellabel.setVisible(true);
+            nameLabel1.setVisible(true);
+        } else {
+            pl2NameLabel.setVisible(true);
+            pl2anglabel.setVisible(true);
+            pl2vellabel.setVisible(true);
+            nameLabel2.setVisible(true);
+        }
     }
 }

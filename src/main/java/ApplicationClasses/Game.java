@@ -18,14 +18,9 @@ public class Game {
 
     }
 
-
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
     public static void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
 
-
     }
-
-
-
 }
