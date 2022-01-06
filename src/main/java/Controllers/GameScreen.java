@@ -40,6 +40,7 @@ public class GameScreen {
     public ImageView monkeyOne;
     public ImageView monkeyTwo;
 
+
     private int playerOneAngle;
     private int playerOneVelocity;
     private int playerTwoAngle;
@@ -53,8 +54,6 @@ public class GameScreen {
     }
 
    // Game gamer = new Game("Søren","Gucci",800,1300);
-
-
 
 
 
@@ -75,16 +74,22 @@ public class GameScreen {
     }
 
     public void makeMonkeys() {
-        monkeyOneArr = new int[2];
-        monkeyTwoArr = new int[2];
+        monkeyOneArr = new int[4];
+        monkeyTwoArr = new int[4];
 
         monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
         monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
+        monkeyOneArr[2] = (int) monkeyOne.getX();
+        monkeyOneArr[3] = (int) monkeyOne.getY();
+
         monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
         monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
+        monkeyTwoArr[2] = (int) monkeyTwo.getX();
+        monkeyTwoArr[3] = (int) monkeyTwo.getY();
     }
 
     public void runThread() {
+        makeMonkeys();
         list = new ArrayList<>();
         if (gamer.player1.getTurn()) {
             banana.setX(1);
@@ -94,9 +99,6 @@ public class GameScreen {
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
 
-
-
-        
             for (int i = 0; i < list.size(); i++) {
 
                     banana.setX(i);
