@@ -80,11 +80,6 @@ public class GameScreen {
 
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
-            String s = "";
-            for (int i = 0; i < list.size(); i++) {
-                s += " " + list.get(i);
-            }
-            System.out.println(s);
 
 
             for (int i = 0; i < list.size(); i++) {
@@ -109,13 +104,7 @@ public class GameScreen {
 
             list = makeCurve(banan);
 
-            String s = "";
 
-            for (int i = 0; i < list.size(); i++) {
-                s += " " + list.get(i);
-            }
-
-            System.out.println(s);
 
             for (int i = 0; i < list.size(); i++) {
                 banana.setX(1200 - i);
@@ -165,4 +154,13 @@ public class GameScreen {
         nameLabel1.setText(MainScene.playerOneName);
         nameLabel2.setText(MainScene.playerTwoName);
     }*/
+
+    public void showCurve(List list){
+        String s = "";
+
+        for (int i = 0; i < list.size(); i++) {
+            s += " " + list.get(i);
+        }
+        System.out.println(s);
+    }
 }
