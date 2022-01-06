@@ -71,7 +71,9 @@ public class GameScreen {
     }
 
     public void runThread() {
-        monkeyOneArr = monkeyTwoArr = new int[2];
+        monkeyOneArr = new int[2];
+        monkeyTwoArr = new int[2];
+
 
         monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
         monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
