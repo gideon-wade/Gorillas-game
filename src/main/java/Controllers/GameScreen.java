@@ -47,7 +47,7 @@ public class GameScreen {
     private int playerTwoVelocity;
     private List<Integer> list = new ArrayList<>();
     private boolean arr[][];
-    private int[] monkeyOneArr, monkeyTwoArr;
+    public int[] monkeyOneArr, monkeyTwoArr;
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -55,7 +55,16 @@ public class GameScreen {
 
    // Game gamer = new Game("Søren","Gucci",800,1300);
 
+   public static void grid(int rows, int columns) {
+       boolean arr[][] = new boolean[rows][columns];
+   }
 
+   public void hitbox() {
+        int start_x = monkeyOneArr[2] - (monkeyOneArr[1]/2);
+        int start_y = monkeyOneArr[2] - (monkeyOneArr[1]/2)
+
+
+   }
 
     public void doThrow(ActionEvent event) throws IOException {
         if (gamer.player1.getTurn()) {
@@ -67,7 +76,6 @@ public class GameScreen {
             this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
             System.out.println(playerTwoAngle);
         }
-        boolean arr[][] = new boolean[10][10];
 
         Thread thread = new Thread(this::runThread);
         thread.start();

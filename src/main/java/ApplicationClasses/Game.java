@@ -1,5 +1,6 @@
 package ApplicationClasses;
 
+import Controllers.GameScreen;
 import Controllers.MainScene;
 
 public class Game {
@@ -7,6 +8,7 @@ public class Game {
     public Player player2;
     private int height;
     private int length;
+
 
 
     public Game(String player1Name, String player2Name, int height, int length){
@@ -20,18 +22,6 @@ public class Game {
 
 
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
-    public static void grid(int rows, int columns) {
-        boolean arr[][] = new boolean[rows][columns];
-    }
-
-
-
-
-
-
-
-
-
 
 
 
