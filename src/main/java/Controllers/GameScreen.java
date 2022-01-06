@@ -56,6 +56,7 @@ public class GameScreen {
     int monkeyTwo_slut_x;
     int monkeyTwo_start_y;
     int monkeyTwo_slut_y;
+    int[] bananaArr;
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -68,21 +69,27 @@ public class GameScreen {
    }
 
    public void hitbox() {
-        for(int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
-            for(int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
-                if(i >= 0 && k >= 0) {
-                    arr[i][k] = true;
+        if (gamer.player2.getTurn()) {
+            for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
+                for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
+                    if (i >= 0 && k >= 0) {
+                        arr[i][k] = true;
+                    }
+                }
+            }
+        } else{
+            for(int i = monkeyTwo_start_y; i < monkeyTwo_slut_y; i++) {
+                for(int k = monkeyTwo_start_x; k < monkeyTwo_slut_x; k++) {
+                    if(i >= 0 && k >= 0) {
+                        arr[i][k] = true;
+                    }
                 }
             }
         }
-       for(int i = monkeyTwo_start_y; i < monkeyTwo_slut_y; i++) {
-           for(int k = monkeyTwo_start_x; k < monkeyTwo_slut_x; k++) {
-               if(i >= 0 && k >= 0) {
-                   arr[i][k] = true;
-               }
-           }
-       }
     }
+
+
+
 
     public void doThrow(ActionEvent event) throws IOException {
         if (gamer.player1.getTurn()) {
@@ -124,9 +131,21 @@ public class GameScreen {
         this.monkeyTwo_slut_y = monkeyTwoArr[3] + (monkeyTwoArr[0]/2);
     }
 
+    public void makeBanana() {
+        bananaArr = new int[4];
+
+        bananaArr[0] = (int) banana.getFitHeight();
+        bananaArr[1] = (int) banana.getFitWidth();
+        bananaArr[2] = (int) banana.getLayoutX();
+        bananaArr[3] = (int) banana.getLayoutY();
+    }
+
     public void runThread() {
         makeMonkeys();
+        makeBanana();
+
         hitbox();
+
         list = new ArrayList<>();
         /*for(int i = 0; i < 1300; i++) {
             for(int k = 0; k < 800; k++) {
@@ -201,9 +220,6 @@ public class GameScreen {
             banana.isSmooth();
             x++;
         }
-
-
-
         return this.list;
     }
 
