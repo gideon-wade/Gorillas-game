@@ -46,8 +46,12 @@ public class GameScreen {
     private int playerTwoAngle;
     private int playerTwoVelocity;
     private List<Integer> list = new ArrayList<>();
-    private boolean arr[][];
+    public boolean arr[][];
     public int[] monkeyOneArr, monkeyTwoArr;
+    int start_x;
+    int slut_x;
+    int start_y;
+    int slut_y;
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -55,15 +59,18 @@ public class GameScreen {
 
    // Game gamer = new Game("Søren","Gucci",800,1300);
 
-   public static void grid(int rows, int columns) {
-       boolean arr[][] = new boolean[rows][columns];
+   public void grid(int rows, int columns) {
+       this.arr = new boolean[rows][columns];
    }
 
    public void hitbox() {
-        int start_x = monkeyOneArr[2] - (monkeyOneArr[1]/2);
-        int start_y = monkeyOneArr[2] - (monkeyOneArr[1]/2)
-
-
+        for(int i = start_x; i < slut_x; i++) {
+            for(int k = start_y; k < slut_y; k++) {
+                if(i >= 0 && k >= 0) {
+                    arr[i][k] = true;
+                }
+            }
+        }
    }
 
     public void doThrow(ActionEvent event) throws IOException {
@@ -94,10 +101,16 @@ public class GameScreen {
         monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
         monkeyTwoArr[2] = (int) monkeyTwo.getX();
         monkeyTwoArr[3] = (int) monkeyTwo.getY();
+
+        this.start_x = monkeyOneArr[2] - (monkeyOneArr[1]/2);
+        this.slut_x = monkeyOneArr[2] + (monkeyOneArr[1]/2);
+        this.start_y = monkeyOneArr[3] - (monkeyOneArr[0]/2);
+        this.slut_y = monkeyOneArr[3] + (monkeyOneArr[0]/2);
     }
 
     public void runThread() {
         makeMonkeys();
+        hitbox();
         list = new ArrayList<>();
         if (gamer.player1.getTurn()) {
             banana.setX(1);
@@ -202,6 +215,7 @@ public class GameScreen {
     }
 
     public void pl1Start(ActionEvent actionEvent) {
+        grid(gamer.getLength(), gamer.getHeight());
         nameLabel1.setText(gamer.player1.getName());
         nameLabel2.setText(gamer.player2.getName());
         gamer.player1.setTurn(true);
@@ -210,6 +224,7 @@ public class GameScreen {
     }
 
     public void pl2Start(ActionEvent actionEvent) {
+        grid(gamer.getLength(), gamer.getHeight());
         nameLabel1.setText(gamer.player1.getName());
         nameLabel2.setText(gamer.player2.getName());
         gamer.player1.setTurn(false);

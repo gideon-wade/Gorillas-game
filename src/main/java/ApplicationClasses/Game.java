@@ -20,6 +20,14 @@ public class Game {
         player2.setTurn(false);
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
 
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
 

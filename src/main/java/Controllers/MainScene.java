@@ -43,7 +43,6 @@ public class MainScene {
         Game game = new Game(playerOneName, playerTwoName,
                 height_i, length_i);
         GameScreen.setGame(game);
-        GameScreen.grid(length_i,height_i);
         SceneManager.changeScene("fxml/GameScreen.fxml");
     }
 
