@@ -38,6 +38,7 @@ public class GameScreen {
     private int playerTwoAngle;
     private int playerTwoVelocity;
     private List<Integer> list = new ArrayList<>();
+    int[] monkeyOneArr, monkeyTwoArr;
 
 
     public void goToMainScene() throws IOException {
@@ -47,6 +48,8 @@ public class GameScreen {
     //Game gamer = new Game("Søren","Gucci",800,1300);
 
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
+
+
 
 
 
@@ -68,6 +71,19 @@ public class GameScreen {
     }
 
     public void runThread() {
+        monkeyOneArr = monkeyTwoArr = new int[2];
+
+        monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
+        monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
+        monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
+        monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
+
+
+        System.out.println(monkeyOneArr[0] + " højde");
+        System.out.println(monkeyOneArr[1] + " bredde");
+        System.out.println(monkeyTwoArr[0] + " højde");
+        System.out.println(monkeyTwoArr[1] + " bredde");
+
         list = new ArrayList<>();
         if (gamer.player1.getTurn()) {
             banana.setX(1);
