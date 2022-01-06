@@ -14,12 +14,12 @@
       </image>
    </ImageView>
    <Button fx:id="btnBack" onAction="#goToMainScene" text="Let's go back to Main Screen" AnchorPane.rightAnchor="0">Let's go back to scene 1</Button>
-   <ImageView fitHeight="108.0" fitWidth="118.0" layoutX="8.0" layoutY="707.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="monkeyOne" fitHeight="108.0" fitWidth="118.0" layoutX="8.0" layoutY="707.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/monkey.jpg" />
       </image>
    </ImageView>
-   <ImageView fitHeight="92.0" fitWidth="169.0" layoutX="1176.0" layoutY="707.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="monkeyTwo" fitHeight="92.0" fitWidth="169.0" layoutX="1176.0" layoutY="707.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/monkey.jpg" />
       </image>
@@ -30,7 +30,7 @@
       </image>
    </ImageView>
    <Label layoutX="15.0" layoutY="60.0" text="Name :" />
-   <Label fx:id ="pl1anglabel" layoutX="15.0" layoutY="96.0" text="Angle :" />
+   <Label fx:id="pl1anglabel" layoutX="15.0" layoutY="96.0" text="Angle :" />
    <Label fx:id="pl1vellabel" layoutX="14.0" layoutY="135.0" text="Velocity :" />
    <Label fx:id="nameLabel1" layoutX="62.0" layoutY="61.0" text="Player1" />
    <Label layoutX="1151.0" layoutY="60.0" text="Name :" />

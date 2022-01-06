@@ -30,21 +30,23 @@ public class GameScreen {
     public Label pl1vellabel;
     public Label nameLabel1;
     public Label nameLabel2;
+    public ImageView monkeyOne;
+    public ImageView monkeyTwo;
 
     private int playerOneAngle;
     private int playerOneVelocity;
     private int playerTwoAngle;
     private int playerTwoVelocity;
     private List<Integer> list = new ArrayList<>();
-    private boolean arr[][];
+
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-   // Game gamer = new Game("Søren","Gucci",800,1300);
+    //Game gamer = new Game("Søren","Gucci",800,1300);
 
-
+    // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
 
 
 
@@ -77,9 +79,7 @@ public class GameScreen {
 
 
             for (int i = 0; i < list.size(); i++) {
-
-                    banana.setX(i);
-
+                banana.setX(i);
                 banana.setY(list.get(i));
                 banana.isSmooth();
                 simulateSlow();
@@ -103,10 +103,6 @@ public class GameScreen {
 
 
             for (int i = 0; i < list.size(); i++) {
-
-
-                    banana.setX(1200 - i);
-
                 banana.setX(1200 - i);
                 banana.setY(list.get(list.size() - 1 - i));
                 banana.isSmooth();
@@ -135,9 +131,6 @@ public class GameScreen {
             banana.isSmooth();
             x++;
         }
-
-
-
         return this.list;
     }
 
