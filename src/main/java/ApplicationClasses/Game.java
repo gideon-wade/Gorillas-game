@@ -20,4 +20,6 @@ public class Game {
         boolean arr[][] = new boolean[rows][columns];
     }
 
+
+
 }
