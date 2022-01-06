@@ -15,6 +15,6 @@ public class Banana {
     public int trajectory(int x) {
         return (int)(-(gravity * Math.pow(x, 2)) /
                 (2 * Math.pow(velocity, 2) * Math.pow(Math.cos(angle), 2))
-                + Math.tan(angle) * x);
+                + Math.abs(Math.tan(angle)) * x);
     }
 }
