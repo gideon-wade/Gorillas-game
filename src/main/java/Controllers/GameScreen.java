@@ -48,10 +48,14 @@ public class GameScreen {
     private List<Integer> list = new ArrayList<>();
     public boolean arr[][];
     public int[] monkeyOneArr, monkeyTwoArr;
-    int start_x;
-    int slut_x;
-    int start_y;
-    int slut_y;
+    int monkeyOne_start_x;
+    int monkeyOne_slut_x;
+    int monkeyOne_start_y;
+    int monkeyOne_slut_y;
+    int monkeyTwo_start_x;
+    int monkeyTwo_slut_x;
+    int monkeyTwo_start_y;
+    int monkeyTwo_slut_y;
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -60,15 +64,12 @@ public class GameScreen {
    // Game gamer = new Game("Søren","Gucci",800,1300);
 
    public void grid(int rows, int columns) {
-       this.arr = new boolean[rows][columns];
+       arr = new boolean[rows][columns];
    }
 
    public void hitbox() {
-       System.out.println("hitbox");
-        for(int i = start_y; i < slut_y; i++) {
-            for(int k = start_x; k < slut_x; k++) {
-                System.out.println("i = " + i);
-                System.out.println("k = " + k);
+        for(int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
+            for(int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
                 if(i >= 0 && k >= 0) {
                     arr[i][k] = true;
                 }
@@ -80,9 +81,11 @@ public class GameScreen {
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
+            System.out.println(playerOneAngle);
         } else {
             this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
             this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
+            System.out.println(playerTwoAngle);
         }
 
         Thread thread = new Thread(this::runThread);
@@ -98,34 +101,32 @@ public class GameScreen {
         monkeyOneArr[2] = (int) monkeyOne.getLayoutX();
         monkeyOneArr[3] = (int) monkeyOne.getLayoutY();
 
-        System.out.println("Monkey's y: " + monkeyOne.getY());
-
         monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
         monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
         monkeyTwoArr[2] = (int) monkeyTwo.getLayoutX();
         monkeyTwoArr[3] = (int) monkeyTwo.getLayoutY();
 
-        this.start_x = monkeyOneArr[2] - (monkeyOneArr[1]/2); // -59
-        this.slut_x = monkeyOneArr[2] + (monkeyOneArr[1]/2);  //  58
-        this.start_y = monkeyOneArr[3] - (monkeyOneArr[0]/2); // -54  =  707 - 108 / 2
-        this.slut_y = monkeyOneArr[3] + (monkeyOneArr[0]/2);  //  53
+        this.monkeyOne_start_x = monkeyOneArr[2] - (monkeyOneArr[1]/2);
+        this.monkeyOne_slut_x = monkeyOneArr[2] + (monkeyOneArr[1]/2);
+        this.monkeyOne_start_y = monkeyOneArr[3] - (monkeyOneArr[0]/2);
+        this.monkeyOne_slut_y = monkeyOneArr[3] + (monkeyOneArr[0]/2);
+
+        this.monkeyTwo_start_x = monkeyTwoArr[2] - (monkeyTwoArr[1]/2);
+        this.monkeyTwo_slut_x = monkeyTwoArr[2] + (monkeyTwoArr[1]/2);
+        this.monkeyTwo_start_y = monkeyTwoArr[3] - (monkeyTwoArr[0]/2);
+        this.monkeyTwo_slut_y = monkeyTwoArr[3] + (monkeyTwoArr[0]/2);
     }
 
     public void runThread() {
         makeMonkeys();
         hitbox();
         list = new ArrayList<>();
-        for(int i = 0; i < 800; i++) {
-            for(int k = 0; k < 1300; k++) {
-                if (arr[i][k]){
-                    System.out.print("T ");
-                    System.out.print(k);
-                } else {
-                    System.out.print("F ");
-                }
+        /*for(int i = 0; i < 1300; i++) {
+            for(int k = 0; k < 800; k++) {
+                System.out.print(arr[i][k]);
                 }
             System.out.println();
-            }
+            }*/
         if (gamer.player1.getTurn()) {
             banana.setX(1);
             banana.setY(100);
@@ -136,7 +137,7 @@ public class GameScreen {
 
             for (int i = 0; i < list.size(); i++) {
 
-                banana.setX(i);
+                    banana.setX(i);
 
                 banana.setY(list.get(i));
                 banana.isSmooth();
@@ -193,6 +194,8 @@ public class GameScreen {
             banana.isSmooth();
             x++;
         }
+
+
 
         return this.list;
     }
