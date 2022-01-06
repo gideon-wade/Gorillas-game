@@ -58,7 +58,7 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
-        setName();
+
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -96,10 +96,9 @@ public class GameScreen {
             }
 
             switchVisibility();
-
+            pl1ang.clear();
+            pl1vec.clear();
             gamer.player1.setTurn(false);
-
-
 
         } else {
             banana.setX(1200);
@@ -123,7 +122,8 @@ public class GameScreen {
             }
 
             switchVisibility();
-
+            pl2ang.clear();
+            pl2vec.clear();
             gamer.player1.setTurn(true);
 
 
@@ -150,20 +150,31 @@ public class GameScreen {
         return this.list;
     }
     public void switchVisibility() {
-        pl1ang.setVisible(!pl1ang.isVisible());
-        pl1vec.setVisible(!pl1vec.isVisible());
-        pl1anglabel.setVisible(!pl1anglabel.isVisible());
-        pl1vellabel.setVisible(!pl1vellabel.isVisible());
+        if (gamer.player1.getTurn()){
+            pl2ang.setVisible(true);
+            pl2vec.setVisible(true);
+            pl2anglabel.setVisible(true);
+            pl2vellabel.setVisible(true);
 
-        pl2ang.setVisible(!pl2ang.isVisible());
-        pl2vec.setVisible(!pl2vec.isVisible());
-        pl2anglabel.setVisible(!pl2anglabel.isVisible());
-        pl2vellabel.setVisible(!pl2vellabel.isVisible());
+            pl1ang.setVisible(false);
+            pl1vec.setVisible(false);
+            pl1anglabel.setVisible(false);
+            pl1vellabel.setVisible(false);
+        } else {
+            pl1ang.setVisible(true);
+            pl1vec.setVisible(true);
+            pl1anglabel.setVisible(true);
+            pl1vellabel.setVisible(true);
 
+            pl2ang.setVisible(false);
+            pl2vec.setVisible(false);
+            pl2anglabel.setVisible(false);
+            pl2vellabel.setVisible(false);
+        }
     }
-
+    /*
     public void setName() {
         nameLabel1.setText(MainScene.playerOneName);
         nameLabel2.setText(MainScene.playerTwoName);
-    }
+    }*/
 }

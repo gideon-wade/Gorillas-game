@@ -27,11 +27,12 @@ public class MainScene {
 
     private int length_i;
     private int height_i;
-    public static String playerOneName;
-    public static String playerTwoName;
+    public String playerOneName;
+    public String playerTwoName;
 
     public void goToGameScreen() throws IOException {
         SceneManager.changeScene("fxml/GameScreen.fxml");
+
         SceneManager.changeSize(height_i, length_i);
     }
 
