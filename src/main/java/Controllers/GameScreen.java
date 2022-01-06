@@ -64,8 +64,11 @@ public class GameScreen {
    }
 
    public void hitbox() {
+       System.out.println("hitbox");
         for(int i = start_y; i < slut_y; i++) {
             for(int k = start_x; k < slut_x; k++) {
+                System.out.println("i = " + i);
+                System.out.println("k = " + k);
                 if(i >= 0 && k >= 0) {
                     arr[i][k] = true;
                 }
@@ -77,11 +80,9 @@ public class GameScreen {
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
-            System.out.println(playerOneAngle);
         } else {
             this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
             this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
-            System.out.println(playerTwoAngle);
         }
 
         Thread thread = new Thread(this::runThread);
@@ -94,27 +95,34 @@ public class GameScreen {
 
         monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
         monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
-        monkeyOneArr[2] = (int) monkeyOne.getX();
-        monkeyOneArr[3] = (int) monkeyOne.getY();
+        monkeyOneArr[2] = (int) monkeyOne.getLayoutX();
+        monkeyOneArr[3] = (int) monkeyOne.getLayoutY();
+
+        System.out.println("Monkey's y: " + monkeyOne.getY());
 
         monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
         monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
-        monkeyTwoArr[2] = (int) monkeyTwo.getX();
-        monkeyTwoArr[3] = (int) monkeyTwo.getY();
+        monkeyTwoArr[2] = (int) monkeyTwo.getLayoutX();
+        monkeyTwoArr[3] = (int) monkeyTwo.getLayoutY();
 
-        this.start_x = monkeyOneArr[2] - (monkeyOneArr[1]/2);
-        this.slut_x = monkeyOneArr[2] + (monkeyOneArr[1]/2);
-        this.start_y = monkeyOneArr[3] - (monkeyOneArr[0]/2);
-        this.slut_y = monkeyOneArr[3] + (monkeyOneArr[0]/2);
+        this.start_x = monkeyOneArr[2] - (monkeyOneArr[1]/2); // -59
+        this.slut_x = monkeyOneArr[2] + (monkeyOneArr[1]/2);  //  58
+        this.start_y = monkeyOneArr[3] - (monkeyOneArr[0]/2); // -54  =  707 - 108 / 2
+        this.slut_y = monkeyOneArr[3] + (monkeyOneArr[0]/2);  //  53
     }
 
     public void runThread() {
         makeMonkeys();
         hitbox();
         list = new ArrayList<>();
-        for(int i = 0; i < 1300; i++) {
-            for(int k = 0; k < 800; k++) {
-                System.out.print(arr[i][k]);
+        for(int i = 0; i < 800; i++) {
+            for(int k = 0; k < 1300; k++) {
+                if (arr[i][k]){
+                    System.out.print("T ");
+                    System.out.print(k);
+                } else {
+                    System.out.print("F ");
+                }
                 }
             System.out.println();
             }
@@ -128,7 +136,7 @@ public class GameScreen {
 
             for (int i = 0; i < list.size(); i++) {
 
-                    banana.setX(i);
+                banana.setX(i);
 
                 banana.setY(list.get(i));
                 banana.isSmooth();
@@ -186,8 +194,6 @@ public class GameScreen {
             x++;
         }
 
-
-
         return this.list;
     }
 
@@ -221,7 +227,7 @@ public class GameScreen {
     }
 
     public void pl1Start(ActionEvent actionEvent) {
-        grid(gamer.getLength(), gamer.getHeight());
+        grid(gamer.getHeight(), gamer.getLength());
         nameLabel1.setText(gamer.player1.getName());
         nameLabel2.setText(gamer.player2.getName());
         gamer.player1.setTurn(true);
@@ -230,7 +236,7 @@ public class GameScreen {
     }
 
     public void pl2Start(ActionEvent actionEvent) {
-        grid(gamer.getLength(), gamer.getHeight());
+        grid(gamer.getHeight(), gamer.getLength());
         nameLabel1.setText(gamer.player1.getName());
         nameLabel2.setText(gamer.player2.getName());
         gamer.player1.setTurn(false);
