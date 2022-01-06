@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameScreen {
-    public Game game;
+    private static Game gamer;
     @FXML
     public Button btnBack;
     public TextField pl1ang;
@@ -42,7 +42,7 @@ public class GameScreen {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-    Game gamer = new Game("Søren","Gucci",800,1300);
+    //Game gamer = new Game("Søren","Gucci",800,1300);
 
 
 
@@ -58,6 +58,7 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
+        System.out.println(gamer.player1.getName());
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -67,6 +68,8 @@ public class GameScreen {
             this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
             System.out.println(playerTwoAngle);
         }
+        boolean arr[][] = new boolean[10][10];
+
         Thread thread = new Thread(this::runThread);
         thread.start();
     }
@@ -150,17 +153,20 @@ public class GameScreen {
         pl2vellabel.setVisible(!pl2vellabel.isVisible());
     }
 
-    /*public void setName() {
+    public void setName() {
         nameLabel1.setText(MainScene.playerOneName);
         nameLabel2.setText(MainScene.playerTwoName);
-    }*/
+    }
 
-    public void showCurve(List list){
+    public void showCurve(List list){ // Not needed for final project, but helps to get an insight
         String s = "";
 
         for (int i = 0; i < list.size(); i++) {
             s += " " + list.get(i);
         }
         System.out.println(s);
+    }
+    public static void setGame(Game game){
+        gamer = game;
     }
 }

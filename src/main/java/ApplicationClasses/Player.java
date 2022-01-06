@@ -27,4 +27,8 @@ public class Player {
     public Boolean getTurn() {
         return theirTurn;
     }
+
+    public String getName() {
+        return name;
+    }
 }

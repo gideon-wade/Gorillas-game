@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class MainScene {
 
+
     @FXML
     public Button btnChange;
     @FXML
@@ -25,6 +26,8 @@ public class MainScene {
     public TextField playerID2;
 
 
+    private static Game game;
+
     private int length_i;
     private int height_i;
     public String playerOneName;
@@ -32,8 +35,9 @@ public class MainScene {
 
     public void goToGameScreen() throws IOException {
         SceneManager.changeScene("fxml/GameScreen.fxml");
-
-        SceneManager.changeSize(height_i, length_i);
+        this.game = new Game(playerOneName, playerTwoName,
+                height_i, length_i);
+        GameScreen.setGame(game);
     }
 
     public void saveLength(ActionEvent event) throws IOException {
@@ -50,5 +54,9 @@ public class MainScene {
 
     public void saveName2(ActionEvent actionEvent) {
         this.playerTwoName = playerID2.getText();
+    }
+
+    public static Game getGame(){
+        return game;
     }
 }
