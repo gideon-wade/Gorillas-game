@@ -96,8 +96,7 @@ public class GameScreen {
             }
 
             switchVisibility();
-            pl1ang.clear();
-            pl1vec.clear();
+
             gamer.player1.setTurn(false);
 
         } else {
@@ -122,8 +121,7 @@ public class GameScreen {
             }
 
             switchVisibility();
-            pl2ang.clear();
-            pl2vec.clear();
+
             gamer.player1.setTurn(true);
 
 
@@ -160,6 +158,8 @@ public class GameScreen {
             pl1vec.setVisible(false);
             pl1anglabel.setVisible(false);
             pl1vellabel.setVisible(false);
+            pl1ang.clear();
+            pl1vec.clear();
         } else {
             pl1ang.setVisible(true);
             pl1vec.setVisible(true);
@@ -170,6 +170,8 @@ public class GameScreen {
             pl2vec.setVisible(false);
             pl2anglabel.setVisible(false);
             pl2vellabel.setVisible(false);
+            pl2ang.clear();
+            pl2vec.clear();
         }
     }
     /*
