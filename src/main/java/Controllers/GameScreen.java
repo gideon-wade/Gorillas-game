@@ -30,32 +30,31 @@ public class GameScreen {
     public Label pl1vellabel;
     public Label nameLabel1;
     public Label nameLabel2;
-    public Button pl1start;
-    public Button pl2start;
-    public Label pl2NameLabel;
-    public Label pl1NameLabel;
-    public Label whoWantsLabel;
-    public ImageView pafiImg;
-    public Button throwButton;
+    public ImageView monkeyOne;
+    public ImageView monkeyTwo;
 
     private int playerOneAngle;
     private int playerOneVelocity;
     private int playerTwoAngle;
     private int playerTwoVelocity;
     private List<Integer> list = new ArrayList<>();
-    private boolean arr[][];
+    int[] monkeyOneArr, monkeyTwoArr;
+
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-   // Game gamer = new Game("Søren","Gucci",800,1300);
+    //Game gamer = new Game("Søren","Gucci",800,1300);
+
+    // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
 
 
 
 
 
     public void doThrow(ActionEvent event) throws IOException {
+        System.out.println(gamer.player1.getName());
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -71,7 +70,19 @@ public class GameScreen {
         thread.start();
     }
 
+    public void makeMonkeys() {
+        monkeyOneArr = new int[2];
+        monkeyTwoArr = new int[2];
+
+        monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
+        monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
+        monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
+        monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
+    }
+
+
     public void runThread() {
+        makeMonkeys();
         list = new ArrayList<>();
         if (gamer.player1.getTurn()) {
             banana.setX(1);
@@ -83,9 +94,7 @@ public class GameScreen {
 
 
             for (int i = 0; i < list.size(); i++) {
-
-                    banana.setX(i);
-
+                banana.setX(i);
                 banana.setY(list.get(i));
                 banana.isSmooth();
                 simulateSlow();
@@ -109,10 +118,6 @@ public class GameScreen {
 
 
             for (int i = 0; i < list.size(); i++) {
-
-
-                    banana.setX(1200 - i);
-
                 banana.setX(1200 - i);
                 banana.setY(list.get(list.size() - 1 - i));
                 banana.isSmooth();
@@ -141,9 +146,6 @@ public class GameScreen {
             banana.isSmooth();
             x++;
         }
-
-
-
         return this.list;
     }
 
@@ -159,9 +161,9 @@ public class GameScreen {
         pl2vellabel.setVisible(!pl2vellabel.isVisible());
     }
     /*
-    public void setName(String playerOneName, String playerTwoName) {
-        nameLabel1.setText(playerOneName);
-        nameLabel2.setText(playerTwoName);
+    public void setName() {
+        nameLabel1.setText(MainScene.playerOneName);
+        nameLabel2.setText(MainScene.playerTwoName);
     }*/
 
     public void showCurve(List list){ // Not needed for final project, but helps to get an insight
@@ -174,41 +176,5 @@ public class GameScreen {
     }
     public static void setGame(Game game){
         gamer = game;
-    }
-
-    public void pl1Start(ActionEvent actionEvent) {
-        nameLabel1.setText(gamer.player1.getName());
-        nameLabel2.setText(gamer.player2.getName());
-        gamer.player1.setTurn(true);
-        gamer.player2.setTurn(false);
-        makeBoardVisible();
-    }
-
-    public void pl2Start(ActionEvent actionEvent) {
-        nameLabel1.setText(gamer.player1.getName());
-        nameLabel2.setText(gamer.player2.getName());
-        gamer.player1.setTurn(false);
-        gamer.player2.setTurn(true);
-
-        makeBoardVisible();
-    }
-
-    public void makeBoardVisible() {
-        whoWantsLabel.setVisible(false);
-        pl1start.setVisible(false);
-        pl2start.setVisible(false);
-        pafiImg.setVisible(true);
-        throwButton.setVisible(true);
-        if (gamer.player1.getTurn()){
-            pl1NameLabel.setVisible(true);
-            pl1anglabel.setVisible(true);
-            pl1vellabel.setVisible(true);
-            nameLabel1.setVisible(true);
-        } else {
-            pl2NameLabel.setVisible(true);
-            pl2anglabel.setVisible(true);
-            pl2vellabel.setVisible(true);
-            nameLabel2.setVisible(true);
-        }
     }
 }
