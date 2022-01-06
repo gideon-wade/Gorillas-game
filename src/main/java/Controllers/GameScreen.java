@@ -82,6 +82,8 @@ public class GameScreen {
             list = makeCurve(banan);
 
 
+
+
             for (int i = 0; i < list.size(); i++) {
 
                     banana.setX(i);
