@@ -36,33 +36,16 @@ public class MainScene {
     public String playerTwoName;
 
     public void goToGameScreen() throws IOException {
-        SceneManager.changeScene("fxml/GameScreen.fxml");
+        this.length_i = Integer.parseInt(length.getText());
+        this.height_i = Integer.parseInt(height.getText());
+        this.playerOneName = playerID1.getText();
+        this.playerTwoName = playerID2.getText();
         Game game = new Game(playerOneName, playerTwoName,
                 height_i, length_i);
         GameScreen.setGame(game);
         Game.grid(length_i,height_i);
+        SceneManager.changeScene("fxml/GameScreen.fxml");
     }
 
-
-
-    public void saveLength(ActionEvent event) throws IOException {
-        this.length_i = Integer.parseInt(length.getText());
-    }
-
-    public void saveHeight(ActionEvent event) throws IOException {
-        this.height_i = Integer.parseInt(height.getText());
-    }
-
-    public void saveName1(ActionEvent actionEvent) {
-        this.playerOneName = playerID1.getText();
-    }
-
-    public void saveName2(ActionEvent actionEvent) {
-        this.playerTwoName = playerID2.getText();
-    }
-
-    public static Game getGame(){
-        return game;
-    }
 
 }
