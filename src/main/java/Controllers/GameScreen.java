@@ -42,19 +42,11 @@ public class GameScreen {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-    //Game gamer = new Game("Søren","Gucci",800,1300);
+   // Game gamer = new Game("Søren","Gucci",800,1300);
 
 
 
-    // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
-    public static void grid(int rows, int columns) {
-        boolean arr[][] = new boolean[rows][columns];
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++){
-                arr[i][j] = false;
-            }
-        }
-    }
+
 
     public void doThrow(ActionEvent event) throws IOException {
         System.out.println(gamer.player1.getName());
@@ -85,7 +77,9 @@ public class GameScreen {
 
 
             for (int i = 0; i < list.size(); i++) {
-                banana.setX(i);
+
+                    banana.setX(i);
+
                 banana.setY(list.get(i));
                 banana.isSmooth();
                 simulateSlow();
@@ -109,6 +103,10 @@ public class GameScreen {
 
 
             for (int i = 0; i < list.size(); i++) {
+
+
+                    banana.setX(1200 - i);
+
                 banana.setX(1200 - i);
                 banana.setY(list.get(list.size() - 1 - i));
                 banana.isSmooth();
@@ -137,6 +135,9 @@ public class GameScreen {
             banana.isSmooth();
             x++;
         }
+
+
+
         return this.list;
     }
 

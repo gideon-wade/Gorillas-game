@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import java.awt.*;
 import java.io.IOException;
 
+
+
 public class MainScene {
 
 
@@ -38,8 +40,10 @@ public class MainScene {
         this.game = new Game(playerOneName, playerTwoName,
                 height_i, length_i);
         GameScreen.setGame(game);
-        GameScreen.grid(length_i,height_i);
+        Game.grid(length_i,height_i);
     }
+
+
 
     public void saveLength(ActionEvent event) throws IOException {
         this.length_i = Integer.parseInt(length.getText());
@@ -60,4 +64,5 @@ public class MainScene {
     public static Game getGame(){
         return game;
     }
+
 }
