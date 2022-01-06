@@ -75,6 +75,13 @@ public class GameScreen {
                 }
             }
         }
+       for(int i = monkeyTwo_start_y; i < monkeyTwo_slut_y; i++) {
+           for(int k = monkeyTwo_start_x; k < monkeyTwo_slut_x; k++) {
+               if(i >= 0 && k >= 0) {
+                   arr[i][k] = true;
+               }
+           }
+       }
     }
 
     public void doThrow(ActionEvent event) throws IOException {
