@@ -58,7 +58,6 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
-
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -100,17 +99,22 @@ public class GameScreen {
             gamer.player1.setTurn(false);
 
         } else {
+            System.out.println("Passed else");
             banana.setX(1200);
             banana.setY(100);
             banana.setVisible(true);
-
+            System.out.println("pl2vel: " + playerTwoVelocity);
+            System.out.println("pl2ang: " + playerTwoAngle);
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
+
             list = makeCurve(banan);
 
             String s = "";
+
             for (int i = 0; i < list.size(); i++) {
                 s += " " + list.get(i);
             }
+
             System.out.println(s);
 
             for (int i = 0; i < list.size(); i++) {
@@ -123,8 +127,6 @@ public class GameScreen {
             switchVisibility();
 
             gamer.player1.setTurn(true);
-
-
         }
         simulateSlow();
         banana.setVisible(false);
@@ -132,50 +134,34 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(3);
+            Thread.sleep(2);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
     public List<Integer> makeCurve(Banana banan){
         int x = 1;
-
-        while (banan.trajectory(x) > 0) {
+        while (banan.trajectory(x) > -1) {
             this.list.add(100 - banan.trajectory(x));
             banana.isSmooth();
             x++;
         }
         return this.list;
     }
+
     public void switchVisibility() {
-        if (gamer.player1.getTurn()){
-            pl2ang.setVisible(true);
-            pl2vec.setVisible(true);
-            pl2anglabel.setVisible(true);
-            pl2vellabel.setVisible(true);
+        pl1ang.setVisible(!pl1ang.isVisible());
+        pl1vec.setVisible(!pl1vec.isVisible());
+        pl1anglabel.setVisible(!pl1anglabel.isVisible());
+        pl1vellabel.setVisible(!pl1vellabel.isVisible());
 
-            pl1ang.setVisible(false);
-            pl1vec.setVisible(false);
-            pl1anglabel.setVisible(false);
-            pl1vellabel.setVisible(false);
-            pl1ang.clear();
-            pl1vec.clear();
-        } else {
-            pl1ang.setVisible(true);
-            pl1vec.setVisible(true);
-            pl1anglabel.setVisible(true);
-            pl1vellabel.setVisible(true);
-
-            pl2ang.setVisible(false);
-            pl2vec.setVisible(false);
-            pl2anglabel.setVisible(false);
-            pl2vellabel.setVisible(false);
-            pl2ang.clear();
-            pl2vec.clear();
-        }
+        pl2ang.setVisible(!pl2ang.isVisible());
+        pl2vec.setVisible(!pl2vec.isVisible());
+        pl2anglabel.setVisible(!pl2anglabel.isVisible());
+        pl2vellabel.setVisible(!pl2vellabel.isVisible());
     }
-    /*
-    public void setName() {
+
+    /*public void setName() {
         nameLabel1.setText(MainScene.playerOneName);
         nameLabel2.setText(MainScene.playerTwoName);
     }*/
