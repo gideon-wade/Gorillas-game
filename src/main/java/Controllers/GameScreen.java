@@ -68,24 +68,27 @@ public class GameScreen {
    }
 
    public void hitbox() {
-       if (!gamer.player1.getTurn()) {
-           for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
-               for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
-                   if (i >= 0 && k >= 0) {
-                       arr[i][k] = true;
-                   }
-               }
-           }
-       } else {
-           for (int i = monkeyTwo_start_y; i < monkeyTwo_slut_y; i++) {
-               for (int k = monkeyTwo_start_x; k < monkeyTwo_slut_x; k++) {
-                   if (i >= 0 && k >= 0) {
-                       arr[i][k] = true;
-                   }
-               }
-           }
-       }
-   }
+        if (gamer.player2.getTurn()) {
+            for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
+                for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
+                    if (i >= 0 && k >= 0) {
+                        arr[i][k] = true;
+                    }
+                }
+            }
+        } else{
+            for(int i = monkeyTwo_start_y; i < monkeyTwo_slut_y; i++) {
+                for(int k = monkeyTwo_start_x; k < monkeyTwo_slut_x; k++) {
+                    if(i >= 0 && k >= 0) {
+                        arr[i][k] = true;
+                    }
+                }
+            }
+        }
+        }
+
+
+
 
     public void doThrow(ActionEvent event) throws IOException {
         if (gamer.player1.getTurn()) {
@@ -130,6 +133,7 @@ public class GameScreen {
     public void runThread() {
         makeMonkeys();
         hitbox();
+
         list = new ArrayList<>();
         /*for(int i = 0; i < 1300; i++) {
             for(int k = 0; k < 800; k++) {
