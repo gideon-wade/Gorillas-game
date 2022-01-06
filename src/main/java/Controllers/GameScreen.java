@@ -37,6 +37,8 @@ public class GameScreen {
     public Label whoWantsLabel;
     public ImageView pafiImg;
     public Button throwButton;
+    public ImageView monkeyOne;
+    public ImageView monkeyTwo;
 
     private int playerOneAngle;
     private int playerOneVelocity;
@@ -44,6 +46,7 @@ public class GameScreen {
     private int playerTwoVelocity;
     private List<Integer> list = new ArrayList<>();
     private boolean arr[][];
+    private int[] monkeyOneArr, monkeyTwoArr;
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -71,6 +74,16 @@ public class GameScreen {
         thread.start();
     }
 
+    public void makeMonkeys() {
+        monkeyOneArr = new int[2];
+        monkeyTwoArr = new int[2];
+
+        monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
+        monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
+        monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
+        monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
+    }
+
     public void runThread() {
         list = new ArrayList<>();
         if (gamer.player1.getTurn()) {
@@ -83,7 +96,7 @@ public class GameScreen {
 
 
 
-
+        
             for (int i = 0; i < list.size(); i++) {
 
                     banana.setX(i);
