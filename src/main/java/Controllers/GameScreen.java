@@ -68,21 +68,24 @@ public class GameScreen {
    }
 
    public void hitbox() {
-        for(int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
-            for(int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
-                if(i >= 0 && k >= 0) {
-                    arr[i][k] = true;
-                }
-            }
-        }
-       for(int i = monkeyTwo_start_y; i < monkeyTwo_slut_y; i++) {
-           for(int k = monkeyTwo_start_x; k < monkeyTwo_slut_x; k++) {
-               if(i >= 0 && k >= 0) {
-                   arr[i][k] = true;
+       if (!gamer.player1.getTurn()) {
+           for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
+               for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
+                   if (i >= 0 && k >= 0) {
+                       arr[i][k] = true;
+                   }
+               }
+           }
+       } else {
+           for (int i = monkeyTwo_start_y; i < monkeyTwo_slut_y; i++) {
+               for (int k = monkeyTwo_start_x; k < monkeyTwo_slut_x; k++) {
+                   if (i >= 0 && k >= 0) {
+                       arr[i][k] = true;
+                   }
                }
            }
        }
-    }
+   }
 
     public void doThrow(ActionEvent event) throws IOException {
         if (gamer.player1.getTurn()) {
