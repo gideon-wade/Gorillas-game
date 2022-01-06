@@ -36,7 +36,7 @@ public class GameScreen {
     private int playerTwoAngle;
     private int playerTwoVelocity;
     private List<Integer> list = new ArrayList<>();
-
+    private boolean arr[][];
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -47,9 +47,8 @@ public class GameScreen {
 
 
     // A grid that is false everywhere on the scene, except the buildings and monkeys where it is true.
-    public void grid(int rows, int columns) {
+    public static void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
-
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++){
                 arr[i][j] = false;
@@ -152,11 +151,11 @@ public class GameScreen {
         pl2anglabel.setVisible(!pl2anglabel.isVisible());
         pl2vellabel.setVisible(!pl2vellabel.isVisible());
     }
-
+    /*
     public void setName() {
         nameLabel1.setText(MainScene.playerOneName);
         nameLabel2.setText(MainScene.playerTwoName);
-    }
+    }*/
 
     public void showCurve(List list){ // Not needed for final project, but helps to get an insight
         String s = "";

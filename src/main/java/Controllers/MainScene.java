@@ -38,6 +38,7 @@ public class MainScene {
         this.game = new Game(playerOneName, playerTwoName,
                 height_i, length_i);
         GameScreen.setGame(game);
+        GameScreen.grid(length_i,height_i);
     }
 
     public void saveLength(ActionEvent event) throws IOException {
