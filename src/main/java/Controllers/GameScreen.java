@@ -204,11 +204,15 @@ public class GameScreen {
             pl1anglabel.setVisible(true);
             pl1vellabel.setVisible(true);
             nameLabel1.setVisible(true);
+            pl1ang.setVisible(true);
+            pl1vec.setVisible(true);
         } else {
             pl2NameLabel.setVisible(true);
             pl2anglabel.setVisible(true);
             pl2vellabel.setVisible(true);
             nameLabel2.setVisible(true);
+            pl2ang.setVisible(true);
+            pl2vec.setVisible(true);
         }
     }
 }
