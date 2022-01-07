@@ -146,32 +146,34 @@ public class GameScreen {
         }
     }
 
-    public void runThread() {
-        makeMonkeys();
-        hitbox();
-        for (int i = 0; i < 800; i++) {
-            for (int j = 0; j < 1300; j++) {
-                if (arr[i][j]){
-                    //System.out.print("T ");
-                } else {
-                    //System.out.print("F ");
-                }
-            }
-            //System.out.println();
-        }
-
-        list = new ArrayList<>();
-        if (gamer.player1.getTurn()) {
+    public void restart() {
+        if(gamer.player1.getTurn()) {
             banana.setX(1);
             banana.setY(100);
             banana.setVisible(true);
+            monkeyOne.setVisible(true);
+        } else {
+            banana.setX(1200);
+            banana.setY(100);
+            banana.setVisible(true);
+            monkeyTwo.setVisible(true);
+        }
+    }
+
+
+    public void runThread() {
+        makeMonkeys();
+        hitbox();
+        restart();
+
+        list = new ArrayList<>();
+        if (gamer.player1.getTurn()) {
+
 
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
 
             for (int i = 0; i < list.size(); i++) {
-                // System.out.println("x: " + banana.getX());
-                // System.out.println("y: " + banana.getY());
                 banana.setX(i);
                 banana.setY(list.get(i));
                 banana.isSmooth();
@@ -183,10 +185,7 @@ public class GameScreen {
             gamer.player1.setTurn(false);
 
         } else {
-            banana.setX(1200);
-            banana.setY(100);
-            banana.setVisible(true);
-            monkeyTwo.setVisible(true);
+            restart();
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
 
             list = makeCurve(banan);
