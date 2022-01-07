@@ -63,6 +63,8 @@ public class GameScreen {
     private int point1 = 0;
     private int point2 = 0;
 
+    public boolean flag = false;
+
 
 
 
@@ -144,23 +146,40 @@ public class GameScreen {
     }
 
     public void bananaHit(ImageView monkey) {
+        flag = false;
         int indikator = 0;
-        for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
-            for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
-                if (j >= 0 && k >= 0 && j < 800 && k < 1300){
-                    if(arr[j][k]) {
-                        banana.setVisible(false);
-                        monkey.setVisible(false);
-                        banana.setY(400);
-                        indikator++;
+        if(gamer.player1.getTurn()) {
+            for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
+                for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+                    if (j >= 0 && k >= 0 && j < 800 && k < 1300){
+                        if(arr[j][k]) {
+                            banana.setVisible(false);
+                            monkey.setVisible(false);
+                            indikator++;
+                            flag = true;
+                        }
+                    }
+                }
+            }
+        } else {
+            for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
+                for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+                    if (j >= 0 && k >= 0 && j < 500 && k < 1000){
+                        if(arr[j][k]) {
+                            System.out.println("Hit");
+                            banana.setVisible(false);
+                            monkey.setVisible(false);
+                            indikator++;
+                        }
+
                     }
                 }
             }
         }
-        if(indikator > 0) {
-            point();
+       // if(indikator > 0) {
+           // point();
 
-        }
+      //  }
     }
 
     public void restart() {
@@ -194,6 +213,10 @@ public class GameScreen {
                 makeBanana();
                 simulateSlow();
                 bananaHit(monkeyTwo);
+
+                }
+            if(flag) {
+                point();
             }
             switchVisibility();
             gamer.player1.setTurn(false);
@@ -208,6 +231,9 @@ public class GameScreen {
                 makeBanana();
                 simulateSlow();
                 bananaHit(monkeyOne);
+            }
+            if(flag) {
+                point();
             }
             switchVisibility();
             gamer.player1.setTurn(true);
@@ -300,8 +326,14 @@ public class GameScreen {
             });
         } else {
             this.point2++;
-            score2.setText((String.valueOf(point2)));
-            System.out.println(String.valueOf(score2));
+            System.out.println(point2);
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    score2.setText(String.valueOf(point2));
+                    System.out.println("dillerdaller");
+                }
+            });
         }
     }
 }
