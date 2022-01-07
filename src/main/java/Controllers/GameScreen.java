@@ -3,6 +3,7 @@ package Controllers;
 
 import ApplicationClasses.Banana;
 import ApplicationClasses.Game;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -97,7 +98,6 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
-
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -110,13 +110,14 @@ public class GameScreen {
     }
 
     public void makeMonkeys() {
+
         monkeyOneArr = new int[4];
         monkeyTwoArr = new int[4];
 
         monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
         monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
-        monkeyOneArr[2] = (int) monkeyOne.getLayoutX();     // 8
-        monkeyOneArr[3] = (int) monkeyOne.getLayoutY();     // 707
+        monkeyOneArr[2] = (int) monkeyOne.getLayoutX();
+        monkeyOneArr[3] = (int) monkeyOne.getLayoutY();
 
         monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
         monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
@@ -136,12 +137,10 @@ public class GameScreen {
 
     public void makeBanana() {
         bananaArr = new int[4];
-
         bananaArr[0] = (int) banana.getFitHeight();
         bananaArr[1] = (int) banana.getFitWidth();
         bananaArr[2] = (int) banana.getLayoutX();
         bananaArr[3] = (int) banana.getLayoutY();
-        //System.out.println(bananaArr[2] + " " + bananaArr[3]);
     }
 
     public void bananaHit(ImageView monkey) {
@@ -150,19 +149,18 @@ public class GameScreen {
             for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
                 if (j >= 0 && k >= 0 && j < 800 && k < 1300){
                     if(arr[j][k]) {
-                        System.out.println("Hit");
                         banana.setVisible(false);
                         monkey.setVisible(false);
+                        banana.setY(400);
                         indikator++;
                     }
                 }
             }
         }
         if(indikator > 0) {
-            score1.setText("hej");
+            point();
 
         }
-
     }
 
     public void restart() {
@@ -179,7 +177,6 @@ public class GameScreen {
         }
     }
 
-
     public void runThread() {
         makeMonkeys();
         hitbox();
@@ -190,7 +187,6 @@ public class GameScreen {
 
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
-
             for (int i = 0; i < list.size(); i++) {
                 banana.setX(i);
                 banana.setY(list.get(i));
@@ -201,11 +197,10 @@ public class GameScreen {
             }
             switchVisibility();
             gamer.player1.setTurn(false);
-
+            restart();
         } else {
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
             list = makeCurve(banan);
-
             for (int i = 0; i < list.size(); i++) {
                 banana.setX(1200 - i);
                 banana.setY(list.get(list.size() - 1 - i));
@@ -248,7 +243,6 @@ public class GameScreen {
         pl2AngLabel.setVisible(!pl2AngLabel.isVisible());
         pl2VelLabel.setVisible(!pl2VelLabel.isVisible());
     }
-
 
     public static void setGame(Game game){
         gamer = game;
@@ -295,20 +289,19 @@ public class GameScreen {
     }
 
     public void point(){
-
         if (gamer.player1.getTurn()){
             this.point1++;
-            score1.setText(String.valueOf(point1));
-            score1.setText("hej");
-            System.out.println((String.valueOf(score1)));
-
-        } else if (gamer.player2.getTurn()) {
+            System.out.println(point1);
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    score1.setText(String.valueOf(point1));
+                }
+            });
+        } else {
             this.point2++;
             score2.setText((String.valueOf(point2)));
             System.out.println(String.valueOf(score2));
-
         }
     }
-
-
 }
