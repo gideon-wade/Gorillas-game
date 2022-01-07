@@ -23,11 +23,10 @@ public class GameScreen {
     public TextField pl2ang;
     public TextField pl2vec;
     public ImageView banana;
-    public Button Button;
-    public Label pl2anglabel;
-    public Label pl2vellabel;
-    public Label pl1anglabel;
-    public Label pl1vellabel;
+    public Label pl2AngLabel;
+    public Label pl2VelLabel;
+    public Label pl1AngLabel;
+    public Label pl1VelLabel;
     public Label nameLabel1;
     public Label nameLabel2;
     public Button pl1start;
@@ -62,8 +61,6 @@ public class GameScreen {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-   // Game gamer = new Game("Søren","Gucci",800,1300);
-
    public void grid(int rows, int columns) {
        arr = new boolean[rows][columns];
    }
@@ -88,18 +85,13 @@ public class GameScreen {
         }
     }
 
-
-
-
     public void doThrow(ActionEvent event) throws IOException {
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
-            System.out.println(playerOneAngle);
         } else {
             this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
             this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
-            System.out.println(playerTwoAngle);
         }
 
         Thread thread = new Thread(this::runThread);
@@ -147,12 +139,6 @@ public class GameScreen {
         hitbox();
 
         list = new ArrayList<>();
-        /*for(int i = 0; i < 1300; i++) {
-            for(int k = 0; k < 800; k++) {
-                System.out.print(arr[i][k]);
-                }
-            System.out.println();
-            }*/
         if (gamer.player1.getTurn()) {
             banana.setX(1);
             banana.setY(100);
@@ -162,9 +148,7 @@ public class GameScreen {
             list = makeCurve(banan);
 
             for (int i = 0; i < list.size(); i++) {
-
-                    banana.setX(i);
-
+                banana.setX(i);
                 banana.setY(list.get(i));
                 banana.isSmooth();
                 simulateSlow();
@@ -175,23 +159,13 @@ public class GameScreen {
             gamer.player1.setTurn(false);
 
         } else {
-            System.out.println("Passed else");
             banana.setX(1200);
             banana.setY(100);
             banana.setVisible(true);
-            System.out.println("pl2vel: " + playerTwoVelocity);
-            System.out.println("pl2ang: " + playerTwoAngle);
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
 
             list = makeCurve(banan);
-
-
-
             for (int i = 0; i < list.size(); i++) {
-
-
-                    banana.setX(1200 - i);
-
                 banana.setX(1200 - i);
                 banana.setY(list.get(list.size() - 1 - i));
                 banana.isSmooth();
@@ -217,7 +191,6 @@ public class GameScreen {
         int x = 1;
         while (banan.trajectory(x) > -1) {
             this.list.add(100 - banan.trajectory(x));
-            banana.isSmooth();
             x++;
         }
         return this.list;
@@ -226,28 +199,16 @@ public class GameScreen {
     public void switchVisibility() {
         pl1ang.setVisible(!pl1ang.isVisible());
         pl1vec.setVisible(!pl1vec.isVisible());
-        pl1anglabel.setVisible(!pl1anglabel.isVisible());
-        pl1vellabel.setVisible(!pl1vellabel.isVisible());
+        pl1AngLabel.setVisible(!pl1AngLabel.isVisible());
+        pl1VelLabel.setVisible(!pl1VelLabel.isVisible());
 
         pl2ang.setVisible(!pl2ang.isVisible());
         pl2vec.setVisible(!pl2vec.isVisible());
-        pl2anglabel.setVisible(!pl2anglabel.isVisible());
-        pl2vellabel.setVisible(!pl2vellabel.isVisible());
+        pl2AngLabel.setVisible(!pl2AngLabel.isVisible());
+        pl2VelLabel.setVisible(!pl2VelLabel.isVisible());
     }
-    /*
-    public void setName(String playerOneName, String playerTwoName) {
-        nameLabel1.setText(playerOneName);
-        nameLabel2.setText(playerTwoName);
-    }*/
 
-    public void showCurve(List list){ // Not needed for final project, but helps to get an insight
-        String s = "";
 
-        for (int i = 0; i < list.size(); i++) {
-            s += " " + list.get(i);
-        }
-        System.out.println(s);
-    }
     public static void setGame(Game game){
         gamer = game;
     }
@@ -267,7 +228,6 @@ public class GameScreen {
         nameLabel2.setText(gamer.player2.getName());
         gamer.player1.setTurn(false);
         gamer.player2.setTurn(true);
-
         makeBoardVisible();
     }
 
@@ -277,18 +237,18 @@ public class GameScreen {
         pl2start.setVisible(false);
         pafiImg.setVisible(true);
         throwButton.setVisible(true);
+        pl1NameLabel.setVisible(true);
+        pl2NameLabel.setVisible(true);
+        nameLabel1.setVisible(true);
+        nameLabel2.setVisible(true);
         if (gamer.player1.getTurn()){
-            pl1NameLabel.setVisible(true);
-            pl1anglabel.setVisible(true);
-            pl1vellabel.setVisible(true);
-            nameLabel1.setVisible(true);
+            pl1AngLabel.setVisible(true);
+            pl1VelLabel.setVisible(true);
             pl1ang.setVisible(true);
             pl1vec.setVisible(true);
         } else {
-            pl2NameLabel.setVisible(true);
-            pl2anglabel.setVisible(true);
-            pl2vellabel.setVisible(true);
-            nameLabel2.setVisible(true);
+            pl2AngLabel.setVisible(true);
+            pl2VelLabel.setVisible(true);
             pl2ang.setVisible(true);
             pl2vec.setVisible(true);
         }

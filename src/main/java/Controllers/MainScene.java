@@ -16,8 +16,6 @@ import java.io.IOException;
 
 
 public class MainScene {
-
-
     @FXML
     public Button btnChange;
     @FXML
@@ -27,8 +25,6 @@ public class MainScene {
     public TextField playerID1;
     public TextField playerID2;
 
-
-    private static Game game;
 
     private int length_i;
     private int height_i;
