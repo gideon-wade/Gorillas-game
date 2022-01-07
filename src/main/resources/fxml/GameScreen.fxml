@@ -60,12 +60,12 @@
          <Font size="18.0" />
       </font>
    </Label>
-   <Label layoutX="344.0" layoutY="25.0" text="0" textFill="#1400ff">
+   <Label fx:id="score1" layoutX="344.0" layoutY="25.0" text="0" textFill="#1400ff">
       <font>
          <Font size="18.0" />
       </font>
    </Label>
-   <Label layoutX="1043.0" layoutY="25.0" text="0" textFill="#1400ff">
+   <Label fx:id="score2" layoutX="1043.0" layoutY="25.0" text="0" textFill="#1400ff">
       <font>
          <Font size="18.0" />
       </font>
