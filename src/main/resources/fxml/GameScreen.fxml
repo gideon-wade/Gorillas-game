@@ -43,11 +43,6 @@
    <TextField fx:id="pl2ang" layoutX="1210.0" layoutY="92.0" prefHeight="17.0" prefWidth="89.0" visible="false" />
    <TextField fx:id="pl2vec" layoutX="1210.0" layoutY="131.0" prefHeight="17.0" prefWidth="89.0" visible="false" />
    <Button fx:id="throwButton" layoutX="601.0" layoutY="171.0" mnemonicParsing="false" onAction="#doThrow" prefHeight="59.0" prefWidth="118.0" text="Throw" visible="false" />
-   <ImageView fx:id="pafiImg" fitHeight="150.0" fitWidth="200.0" layoutX="604.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" visible="false">
-      <image>
-         <Image url="@images/pafi.jpg" />
-      </image>
-   </ImageView>
    <Label fx:id="whoWantsLabel" layoutX="495.0" layoutY="71.0" text="Who wants to start?">
       <font>
          <Font name="System Bold" size="35.0" />
@@ -65,6 +60,14 @@
          <Font size="18.0" />
       </font>
    </Label>
-   <Button fx:id="score1" layoutX="344.0" layoutY="26.0" mnemonicParsing="false" text="0" />
-   <Button fx:id="score2" layoutX="1044.0" layoutY="26.0" mnemonicParsing="false" text="0" />
+   <Label layoutX="344.0" layoutY="25.0" text="0" textFill="#1400ff">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label layoutX="1043.0" layoutY="25.0" text="0" textFill="#1400ff">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
 </AnchorPane>
