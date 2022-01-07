@@ -130,12 +130,11 @@ public class GameScreen {
         bananaArr[1] = (int) banana.getFitWidth();
         bananaArr[2] = (int) banana.getLayoutX();
         bananaArr[3] = (int) banana.getLayoutY();
+        System.out.println(bananaArr[2] + " " + bananaArr[3]);
     }
 
     public void runThread() {
         makeMonkeys();
-        makeBanana();
-
         hitbox();
 
         list = new ArrayList<>();
@@ -151,11 +150,17 @@ public class GameScreen {
                 banana.setX(i);
                 banana.setY(list.get(i));
                 banana.isSmooth();
+                makeBanana();
                 simulateSlow();
+                for (int j = bananaArr[3] - (bananaArr[0]/2); j < bananaArr[3] + (bananaArr[0]/2); j++) {
+                    for (int k = bananaArr[2] - (bananaArr[1]/2); k < bananaArr[2] + (bananaArr[1]/2); k++) {
+                        if(arr[j][k]) {
+                            System.out.println("Hit");
+                        }
+                    }
+                }
             }
-
             switchVisibility();
-
             gamer.player1.setTurn(false);
 
         } else {
