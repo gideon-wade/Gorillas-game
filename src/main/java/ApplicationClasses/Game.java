@@ -31,16 +31,4 @@ public class Game {
     public static void grid(int rows, int columns) {
         boolean arr[][] = new boolean[rows][columns];
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
