@@ -69,15 +69,15 @@ public class GameScreen {
         if (gamer.player2.getTurn()) {
             for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
                 for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
-                    if (i >= 0 && k >= 0) {
+                    if (i >= 0 && k >= 0 && i < 800 && k < 1300) {
                         arr[i][k] = true;
                     }
                 }
             }
-        } else{
+        } else {
             for(int i = monkeyTwo_start_y; i < monkeyTwo_slut_y; i++) {
                 for(int k = monkeyTwo_start_x; k < monkeyTwo_slut_x; k++) {
-                    if(i >= 0 && k >= 0) {
+                    if(i >= 0 && k >= 0 && i < 800 && k < 1300) {
                         arr[i][k] = true;
                     }
                 }
@@ -93,7 +93,6 @@ public class GameScreen {
             this.playerTwoAngle = Integer.parseInt(pl2ang.getText());
             this.playerTwoVelocity = Integer.parseInt(pl2vec.getText());
         }
-
         Thread thread = new Thread(this::runThread);
         thread.start();
     }
@@ -104,23 +103,23 @@ public class GameScreen {
 
         monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
         monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
-        monkeyOneArr[2] = (int) monkeyOne.getLayoutX();
-        monkeyOneArr[3] = (int) monkeyOne.getLayoutY();
+        monkeyOneArr[2] = (int) monkeyOne.getLayoutX();     // 8
+        monkeyOneArr[3] = (int) monkeyOne.getLayoutY();     // 707
 
         monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
         monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
         monkeyTwoArr[2] = (int) monkeyTwo.getLayoutX();
         monkeyTwoArr[3] = (int) monkeyTwo.getLayoutY();
 
-        this.monkeyOne_start_x = monkeyOneArr[2] - (monkeyOneArr[1]/2);
-        this.monkeyOne_slut_x = monkeyOneArr[2] + (monkeyOneArr[1]/2);
-        this.monkeyOne_start_y = monkeyOneArr[3] - (monkeyOneArr[0]/2);
-        this.monkeyOne_slut_y = monkeyOneArr[3] + (monkeyOneArr[0]/2);
+        this.monkeyOne_start_x = monkeyOneArr[2];
+        this.monkeyOne_slut_x = monkeyOneArr[2] + monkeyOneArr[1];
+        this.monkeyOne_start_y = monkeyOneArr[3];
+        this.monkeyOne_slut_y = monkeyOneArr[3] + monkeyOneArr[0];
 
-        this.monkeyTwo_start_x = monkeyTwoArr[2] - (monkeyTwoArr[1]/2);
-        this.monkeyTwo_slut_x = monkeyTwoArr[2] + (monkeyTwoArr[1]/2);
-        this.monkeyTwo_start_y = monkeyTwoArr[3] - (monkeyTwoArr[0]/2);
-        this.monkeyTwo_slut_y = monkeyTwoArr[3] + (monkeyTwoArr[0]/2);
+        this.monkeyTwo_start_x = monkeyTwoArr[2];
+        this.monkeyTwo_slut_x = monkeyTwoArr[2] + monkeyTwoArr[1];
+        this.monkeyTwo_start_y = monkeyTwoArr[3];
+        this.monkeyTwo_slut_y = monkeyOneArr[3] + monkeyTwoArr[0];
     }
 
     public void makeBanana() {
@@ -130,12 +129,24 @@ public class GameScreen {
         bananaArr[1] = (int) banana.getFitWidth();
         bananaArr[2] = (int) banana.getLayoutX();
         bananaArr[3] = (int) banana.getLayoutY();
-        System.out.println(bananaArr[2] + " " + bananaArr[3]);
+        //System.out.println(bananaArr[2] + " " + bananaArr[3]);
+
+
     }
 
     public void runThread() {
         makeMonkeys();
         hitbox();
+        for (int i = 0; i < 800; i++) {
+            for (int j = 0; j < 1300; j++) {
+                if (arr[i][j]){
+                    //System.out.print("T ");
+                } else {
+                    //System.out.print("F ");
+                }
+            }
+            //System.out.println();
+        }
 
         list = new ArrayList<>();
         if (gamer.player1.getTurn()) {
@@ -147,15 +158,23 @@ public class GameScreen {
             list = makeCurve(banan);
 
             for (int i = 0; i < list.size(); i++) {
+                // System.out.println("x: " + banana.getX());
+                // System.out.println("y: " + banana.getY());
                 banana.setX(i);
                 banana.setY(list.get(i));
                 banana.isSmooth();
                 makeBanana();
                 simulateSlow();
-                for (int j = bananaArr[3] - (bananaArr[0]/2); j < bananaArr[3] + (bananaArr[0]/2); j++) {
-                    for (int k = bananaArr[2] - (bananaArr[1]/2); k < bananaArr[2] + (bananaArr[1]/2); k++) {
-                        if(arr[j][k]) {
-                            System.out.println("Hit");
+                // 632 -> 682
+                // 32  -> 82
+                for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
+                    for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+                        if (j >= 0 && k >= 0 && j < 800 && k < 1300){
+                            if(arr[j][k]) {
+                                System.out.println("Hit");
+                                banana.setVisible(false);
+                                monkeyTwo.setVisible(false);
+                            }
                         }
                     }
                 }
@@ -174,7 +193,15 @@ public class GameScreen {
                 banana.setX(1200 - i);
                 banana.setY(list.get(list.size() - 1 - i));
                 banana.isSmooth();
+                makeBanana();
                 simulateSlow();
+                for (int j = bananaArr[3] - (bananaArr[0]/2); j < bananaArr[3] + (bananaArr[0]/2); j++) {
+                    for (int k = bananaArr[2] - (bananaArr[1]/2); k < bananaArr[2] + (bananaArr[1]/2); k++) {
+                        if(arr[j][k]) {
+                            System.out.println("Hit");
+                        }
+                    }
+                }
             }
 
             switchVisibility();
@@ -240,7 +267,6 @@ public class GameScreen {
         whoWantsLabel.setVisible(false);
         pl1start.setVisible(false);
         pl2start.setVisible(false);
-        pafiImg.setVisible(true);
         throwButton.setVisible(true);
         pl1NameLabel.setVisible(true);
         pl2NameLabel.setVisible(true);

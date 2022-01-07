@@ -20,22 +20,22 @@
    </Label>
    <Label layoutX="664.0" layoutY="471.0" text="Bredde:" />
    <Label layoutX="433.0" layoutY="471.0" text="Højde:" />
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="221.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="958.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1150.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="221.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="958.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1150.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
       </image>
