@@ -77,7 +77,7 @@ public class GameScreen {
     }
 
     public void hitbox() {
-        if (gamer.player2.getTurn()) {
+        if (!gamer.player1.getTurn()) {
             for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
                 for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
                     if (i >= 0 && k >= 0 && i < 800 && k < 1300) {
@@ -115,8 +115,8 @@ public class GameScreen {
 
         monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
         monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
-        monkeyOneArr[2] = (int) monkeyOne.getLayoutX();     // 8
-        monkeyOneArr[3] = (int) monkeyOne.getLayoutY();     // 707
+        monkeyOneArr[2] = (int) monkeyOne.getLayoutX();
+        monkeyOneArr[3] = (int) monkeyOne.getLayoutY();
 
         monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
         monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
@@ -141,18 +141,30 @@ public class GameScreen {
         bananaArr[1] = (int) banana.getFitWidth();
         bananaArr[2] = (int) banana.getLayoutX();
         bananaArr[3] = (int) banana.getLayoutY();
-        //System.out.println(bananaArr[2] + " " + bananaArr[3]);
     }
 
     public void bananaHit(ImageView monkey) {
         int indikator = 0;
-        for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
-            for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
-                if (j >= 0 && k >= 0 && j < 800 && k < 1300){
-                    if(arr[j][k]) {
-                        System.out.println("Hit");
-                        banana.setVisible(false);
-                        monkey.setVisible(false);
+        if(gamer.player1.getTurn()) {
+            for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
+                for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+                    if (j >= 0 && k >= 0 && j < 800 && k < 1300){
+                        if(arr[j][k]) {
+                            banana.setVisible(false);
+                            monkey.setVisible(false);
+                        }
+                    }
+                }
+            }
+        } else {
+            for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
+                for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+                    if (j >= 0 && k >= 0 && j < 500 && k < 1000){
+                        if(arr[j][k]) {
+                            System.out.println("Hit");
+                            banana.setVisible(false);
+                            monkey.setVisible(false);
+                        }
                         indikator++;
                     }
                 }
@@ -216,6 +228,7 @@ public class GameScreen {
             }
             switchVisibility();
             gamer.player1.setTurn(true);
+
         }
         simulateSlow();
         banana.setVisible(false);
