@@ -38,7 +38,8 @@ public class GameScreen {
     public Button throwButton;
     public ImageView monkeyOne;
     public ImageView monkeyTwo;
-    public ImageView banebox;
+    public Label score1;
+    public Label score2;
 
 
     private int playerOneAngle;
@@ -58,15 +59,18 @@ public class GameScreen {
     int monkeyTwo_slut_y;
     int[] bananaArr;
 
+    int point1 = 0;
+    int point2 = 0;
+
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-    public void grid(int rows, int columns) {
-        arr = new boolean[rows][columns];
-    }
+   public void grid(int rows, int columns) {
+       arr = new boolean[rows][columns];
+   }
 
-    public void hitbox() {
+   public void hitbox() {
         if (gamer.player2.getTurn()) {
             for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
                 for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
@@ -97,6 +101,7 @@ public class GameScreen {
 
         Thread thread = new Thread(this::runThread);
         thread.start();
+
     }
 
     public void makeMonkeys() {
@@ -153,6 +158,9 @@ public class GameScreen {
                 banana.isSmooth();
                 makeBanana();
                 simulateSlow();
+                System.out.println(i);
+                System.out.println(list.get(i));
+                point();
                 for (int j = bananaArr[3] - (bananaArr[0]/2); j < bananaArr[3] + (bananaArr[0]/2); j++) {
                     for (int k = bananaArr[2] - (bananaArr[1]/2); k < bananaArr[2] + (bananaArr[1]/2); k++) {
                         if(arr[j][k]) {
@@ -176,10 +184,9 @@ public class GameScreen {
                 banana.setY(list.get(list.size() - 1 - i));
                 banana.isSmooth();
                 simulateSlow();
+                point();
             }
-
             switchVisibility();
-
             gamer.player1.setTurn(true);
         }
         simulateSlow();
@@ -188,7 +195,7 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(3);
+            Thread.sleep(2);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -256,6 +263,18 @@ public class GameScreen {
             pl2VelLabel.setVisible(true);
             pl2ang.setVisible(true);
             pl2vec.setVisible(true);
+        }
+    }
+
+    public void point(){
+        if (arr[(int) banana.getY()][(int) banana.getX()] && gamer.player1.getTurn()){
+            point2++;
+            System.out.println(point2);
+            score2.setText(String.valueOf(point2));
+        } else if (arr[(int) banana.getY()][(int) banana.getX()] && gamer.player2.getTurn()) {
+            point1++;
+            System.out.println(point1);
+            score1.setText((String.valueOf(point1)));
         }
     }
 }
