@@ -97,6 +97,7 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
+
         if (gamer.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -158,9 +159,10 @@ public class GameScreen {
             }
         }
         if(indikator > 0) {
+            score1.setText("hej");
 
-            point();
         }
+
     }
 
     public void restart() {
@@ -294,16 +296,16 @@ public class GameScreen {
 
     public void point(){
 
-
         if (gamer.player1.getTurn()){
-            this.point2++;
-            score2.setText(String.valueOf(point2));
-            System.out.println((String.valueOf(point2)));
+            this.point1++;
+            score1.setText(String.valueOf(point1));
+            score1.setText("hej");
+            System.out.println((String.valueOf(score1)));
 
         } else if (gamer.player2.getTurn()) {
-            this.point1++;
-            score1.setText((String.valueOf(point1)));
-            System.out.println(String.valueOf(point1));
+            this.point2++;
+            score2.setText((String.valueOf(point2)));
+            System.out.println(String.valueOf(score2));
 
         }
     }
