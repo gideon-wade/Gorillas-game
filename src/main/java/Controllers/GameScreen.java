@@ -130,8 +130,20 @@ public class GameScreen {
         bananaArr[2] = (int) banana.getLayoutX();
         bananaArr[3] = (int) banana.getLayoutY();
         //System.out.println(bananaArr[2] + " " + bananaArr[3]);
+    }
 
-
+    public void bananaHit(ImageView monkey) {
+        for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
+            for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+                if (j >= 0 && k >= 0 && j < 800 && k < 1300){
+                    if(arr[j][k]) {
+                        System.out.println("Hit");
+                        banana.setVisible(false);
+                        monkey.setVisible(false);
+                    }
+                }
+            }
+        }
     }
 
     public void runThread() {
@@ -165,19 +177,7 @@ public class GameScreen {
                 banana.isSmooth();
                 makeBanana();
                 simulateSlow();
-                // 632 -> 682
-                // 32  -> 82
-                for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
-                    for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
-                        if (j >= 0 && k >= 0 && j < 800 && k < 1300){
-                            if(arr[j][k]) {
-                                System.out.println("Hit");
-                                banana.setVisible(false);
-                                monkeyTwo.setVisible(false);
-                            }
-                        }
-                    }
-                }
+                bananaHit(monkeyTwo);
             }
             switchVisibility();
             gamer.player1.setTurn(false);
@@ -186,6 +186,7 @@ public class GameScreen {
             banana.setX(1200);
             banana.setY(100);
             banana.setVisible(true);
+            monkeyTwo.setVisible(true);
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
 
             list = makeCurve(banan);
@@ -195,13 +196,7 @@ public class GameScreen {
                 banana.isSmooth();
                 makeBanana();
                 simulateSlow();
-                for (int j = bananaArr[3] - (bananaArr[0]/2); j < bananaArr[3] + (bananaArr[0]/2); j++) {
-                    for (int k = bananaArr[2] - (bananaArr[1]/2); k < bananaArr[2] + (bananaArr[1]/2); k++) {
-                        if(arr[j][k]) {
-                            System.out.println("Hit");
-                        }
-                    }
-                }
+                bananaHit(monkeyOne);
             }
 
             switchVisibility();
