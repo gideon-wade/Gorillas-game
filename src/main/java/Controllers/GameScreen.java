@@ -38,6 +38,8 @@ public class GameScreen {
     public Button throwButton;
     public ImageView monkeyOne;
     public ImageView monkeyTwo;
+    public Label score1;
+    public Label score2;
 
 
     private int playerOneAngle;
@@ -57,15 +59,24 @@ public class GameScreen {
     int monkeyTwo_slut_y;
     int[] bananaArr;
 
+    private int point1 = 0;
+    private int point2 = 0;
+
+
+
+
+
+
+
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-   public void grid(int rows, int columns) {
-       arr = new boolean[rows][columns];
-   }
+    public void grid(int rows, int columns) {
+        arr = new boolean[rows][columns];
+    }
 
-   public void hitbox() {
+    public void hitbox() {
         if (gamer.player2.getTurn()) {
             for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
                 for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
@@ -133,6 +144,7 @@ public class GameScreen {
     }
 
     public void bananaHit(ImageView monkey) {
+        int indikator = 0;
         for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
             for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
                 if (j >= 0 && k >= 0 && j < 800 && k < 1300){
@@ -140,9 +152,14 @@ public class GameScreen {
                         System.out.println("Hit");
                         banana.setVisible(false);
                         monkey.setVisible(false);
+                        indikator++;
                     }
                 }
             }
+        }
+        if(indikator > 0) {
+
+            point();
         }
     }
 
@@ -274,4 +291,22 @@ public class GameScreen {
             pl2vec.setVisible(true);
         }
     }
+
+    public void point(){
+
+
+        if (gamer.player1.getTurn()){
+            this.point2++;
+            score2.setText(String.valueOf(point2));
+            System.out.println((String.valueOf(point2)));
+
+        } else if (gamer.player2.getTurn()) {
+            this.point1++;
+            score1.setText((String.valueOf(point1)));
+            System.out.println(String.valueOf(point1));
+
+        }
+    }
+
+
 }
