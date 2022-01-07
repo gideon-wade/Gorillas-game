@@ -169,7 +169,6 @@ public class GameScreen {
         list = new ArrayList<>();
         if (gamer.player1.getTurn()) {
 
-
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
 
@@ -185,10 +184,9 @@ public class GameScreen {
             gamer.player1.setTurn(false);
 
         } else {
-            restart();
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
-
             list = makeCurve(banan);
+
             for (int i = 0; i < list.size(); i++) {
                 banana.setX(1200 - i);
                 banana.setY(list.get(list.size() - 1 - i));
@@ -197,9 +195,7 @@ public class GameScreen {
                 simulateSlow();
                 bananaHit(monkeyOne);
             }
-
             switchVisibility();
-
             gamer.player1.setTurn(true);
         }
         simulateSlow();
