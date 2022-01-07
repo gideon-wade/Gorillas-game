@@ -38,6 +38,7 @@ public class GameScreen {
     public Button throwButton;
     public ImageView monkeyOne;
     public ImageView monkeyTwo;
+    public ImageView banebox;
 
 
     private int playerOneAngle;
@@ -61,11 +62,11 @@ public class GameScreen {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-   public void grid(int rows, int columns) {
-       arr = new boolean[rows][columns];
-   }
+    public void grid(int rows, int columns) {
+        arr = new boolean[rows][columns];
+    }
 
-   public void hitbox() {
+    public void hitbox() {
         if (gamer.player2.getTurn()) {
             for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
                 for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
@@ -187,7 +188,7 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(2);
+            Thread.sleep(3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -240,7 +241,6 @@ public class GameScreen {
         whoWantsLabel.setVisible(false);
         pl1start.setVisible(false);
         pl2start.setVisible(false);
-        pafiImg.setVisible(true);
         throwButton.setVisible(true);
         pl1NameLabel.setVisible(true);
         pl2NameLabel.setVisible(true);
