@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameScreen {
-    private static Game gamer;
+    private static Game game;
     @FXML
     public Button btnBack;
     public TextField pl1ang;
@@ -50,15 +50,15 @@ public class GameScreen {
     private List<Integer> list = new ArrayList<>();
     public boolean arr[][];
     public int[] monkeyOneArr, monkeyTwoArr;
-    int monkeyOne_start_x;
-    int monkeyOne_slut_x;
-    int monkeyOne_start_y;
-    int monkeyOne_slut_y;
-    int monkeyTwo_start_x;
-    int monkeyTwo_slut_x;
-    int monkeyTwo_start_y;
-    int monkeyTwo_slut_y;
-    int[] bananaArr;
+    private int monkeyOne_start_x;
+    private int monkeyOne_slut_x;
+    private int monkeyOne_start_y;
+    private int monkeyOne_slut_y;
+    private int monkeyTwo_start_x;
+    private int monkeyTwo_slut_x;
+    private int monkeyTwo_start_y;
+    private int monkeyTwo_slut_y;
+    private int[] bananaArr;
 
     private int point1 = 0;
     private int point2 = 0;
@@ -68,12 +68,9 @@ public class GameScreen {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-    public void grid(int rows, int columns) {
-        arr = new boolean[rows][columns];
-    }
 
     public void hitbox() {
-        if (!gamer.player1.getTurn()) {
+        if (!game.player1.getTurn()) {
             for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
                 for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
                     if (i >= 0 && k >= 0 && i < 800 && k < 1300) {
@@ -93,7 +90,7 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
-        if (gamer.player1.getTurn()) {
+        if (game.player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
         } else {
@@ -140,10 +137,10 @@ public class GameScreen {
 
     public void bananaHit(ImageView monkey) {
         int indikator = 0;
-        if(gamer.player1.getTurn()) {
+        if(game.player1.getTurn()) {
             for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
                 for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
-                    if (j >= 0 && k >= 0 && j < 800 && k < 1300){
+                    if (j >= 0 && k >= 0 && j < 800 && k < 1300) {
                         if(arr[j][k]) {
                             banana.setVisible(false);
                             monkey.setVisible(false);
@@ -155,9 +152,8 @@ public class GameScreen {
         } else {
             for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
                 for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
-                    if (j >= 0 && k >= 0 && j < 500 && k < 1000){
+                    if (j >= 0 && k >= 0 && j < monkey.getY() - 200 && k < monkey.getX() - 200) {
                         if(arr[j][k]) {
-                            System.out.println("Hello");
                             banana.setVisible(false);
                             monkey.setVisible(false);
                             indikator++;
@@ -172,13 +168,13 @@ public class GameScreen {
     }
 
     public void restart() {
-        if(gamer.player1.getTurn()) {
-            banana.setX(1);
+        if(game.player1.getTurn()) {
+            banana.setX(monkeyOne.getX());
             banana.setY(100);
             banana.setVisible(true);
             monkeyOne.setVisible(true);
         } else {
-            banana.setX(1200);
+            banana.setX(monkeyTwo.getX());
             banana.setY(100);
             banana.setVisible(true);
             monkeyTwo.setVisible(true);
@@ -189,18 +185,8 @@ public class GameScreen {
         makeMonkeys();
         hitbox();
         restart();
-        for (int i = 0; i < 800; i++) {
-            for (int j = 0; j < 1300; j++) {
-                if(arr[i][j]){
-                    System.out.print("T ");
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
         list = new ArrayList<>();
-        if (gamer.player1.getTurn()) {
+        if (game.player1.getTurn()) {
 
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
@@ -213,7 +199,7 @@ public class GameScreen {
                 bananaHit(monkeyTwo);
             }
             switchVisibility();
-            gamer.player1.setTurn(false);
+            game.player1.setTurn(false);
             restart();
         } else {
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
@@ -227,7 +213,7 @@ public class GameScreen {
                 bananaHit(monkeyOne);
             }
             switchVisibility();
-            gamer.player1.setTurn(true);
+            game.player1.setTurn(true);
         }
         simulateSlow();
         banana.setVisible(false);
@@ -240,7 +226,7 @@ public class GameScreen {
             e.printStackTrace();
         }
     }
-    public List<Integer> makeCurve(Banana banan){
+    public List<Integer> makeCurve(Banana banan) {
         int x = 1;
         while (banan.trajectory(x) > -1) {
             this.list.add(100 - banan.trajectory(x));
@@ -261,25 +247,25 @@ public class GameScreen {
         pl2VelLabel.setVisible(!pl2VelLabel.isVisible());
     }
 
-    public static void setGame(Game game){
-        gamer = game;
+    public static void setGame(Game game) {
+        GameScreen.game = game;
     }
 
     public void pl1Start(ActionEvent actionEvent) {
-        grid(gamer.getHeight(), gamer.getLength());
-        nameLabel1.setText(gamer.player1.getName());
-        nameLabel2.setText(gamer.player2.getName());
-        gamer.player1.setTurn(true);
-        gamer.player2.setTurn(false);
+        arr = new boolean[game.getHeight()][game.getLength()];
+        nameLabel1.setText(game.player1.getName());
+        nameLabel2.setText(game.player2.getName());
+        game.player1.setTurn(true);
+        game.player2.setTurn(false);
         makeBoardVisible();
     }
 
     public void pl2Start(ActionEvent actionEvent) {
-        grid(gamer.getHeight(), gamer.getLength());
-        nameLabel1.setText(gamer.player1.getName());
-        nameLabel2.setText(gamer.player2.getName());
-        gamer.player1.setTurn(false);
-        gamer.player2.setTurn(true);
+        arr = new boolean[game.getHeight()][game.getLength()];
+        nameLabel1.setText(game.player1.getName());
+        nameLabel2.setText(game.player2.getName());
+        game.player1.setTurn(false);
+        game.player2.setTurn(true);
         makeBoardVisible();
     }
 
@@ -292,7 +278,7 @@ public class GameScreen {
         pl2NameLabel.setVisible(true);
         nameLabel1.setVisible(true);
         nameLabel2.setVisible(true);
-        if (gamer.player1.getTurn()){
+        if (game.player1.getTurn()){
             pl1AngLabel.setVisible(true);
             pl1VelLabel.setVisible(true);
             pl1ang.setVisible(true);
@@ -305,10 +291,10 @@ public class GameScreen {
         }
     }
 
-    public void point(){
-        if (gamer.player1.getTurn()){
+    public void point() {
+        if (game.player1.getTurn()) {
             this.point1++;
-            Platform.runLater(new Runnable(){
+            Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     score1.setText(String.valueOf(point1));
@@ -316,7 +302,7 @@ public class GameScreen {
             });
         } else {
             this.point2++;
-            Platform.runLater(new Runnable(){
+            Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     score2.setText(String.valueOf(point2));
