@@ -64,11 +64,6 @@ public class GameScreen {
     private int point2 = 0;
 
 
-
-
-
-
-
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
@@ -78,7 +73,7 @@ public class GameScreen {
     }
 
     public void hitbox() {
-        if (gamer.player2.getTurn()) {
+        if (!gamer.player1.getTurn()) {
             for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
                 for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
                     if (i >= 0 && k >= 0 && i < 800 && k < 1300) {
@@ -124,15 +119,15 @@ public class GameScreen {
         monkeyTwoArr[2] = (int) monkeyTwo.getLayoutX();
         monkeyTwoArr[3] = (int) monkeyTwo.getLayoutY();
 
-        this.monkeyOne_start_x = monkeyOneArr[2];
-        this.monkeyOne_slut_x = monkeyOneArr[2] + monkeyOneArr[1];
-        this.monkeyOne_start_y = monkeyOneArr[3];
-        this.monkeyOne_slut_y = monkeyOneArr[3] + monkeyOneArr[0];
+        this.monkeyOne_start_x = monkeyOneArr[2];                   // 8
+        this.monkeyOne_slut_x = monkeyOneArr[2] + monkeyOneArr[1];  // 126
+        this.monkeyOne_start_y = monkeyOneArr[3];                   // 707
+        this.monkeyOne_slut_y = monkeyOneArr[3] + monkeyOneArr[0];  // 799
 
         this.monkeyTwo_start_x = monkeyTwoArr[2];
         this.monkeyTwo_slut_x = monkeyTwoArr[2] + monkeyTwoArr[1];
         this.monkeyTwo_start_y = monkeyTwoArr[3];
-        this.monkeyTwo_slut_y = monkeyOneArr[3] + monkeyTwoArr[0];
+        this.monkeyTwo_slut_y = monkeyTwoArr[3] + monkeyTwoArr[0];
     }
 
     public void makeBanana() {
@@ -145,21 +140,34 @@ public class GameScreen {
 
     public void bananaHit(ImageView monkey) {
         int indikator = 0;
-        for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
-            for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
-                if (j >= 0 && k >= 0 && j < 800 && k < 1300){
-                    if(arr[j][k]) {
-                        banana.setVisible(false);
-                        monkey.setVisible(false);
-                        banana.setY(400);
-                        indikator++;
+        if(gamer.player1.getTurn()) {
+            for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
+                for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+                    if (j >= 0 && k >= 0 && j < 800 && k < 1300){
+                        if(arr[j][k]) {
+                            banana.setVisible(false);
+                            monkey.setVisible(false);
+                            indikator++;
+                        }
+                    }
+                }
+            }
+        } else {
+            for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
+                for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+                    if (j >= 0 && k >= 0 && j < 500 && k < 1000){
+                        if(arr[j][k]) {
+                            System.out.println("Hello");
+                            banana.setVisible(false);
+                            monkey.setVisible(false);
+                            indikator++;
+                        }
                     }
                 }
             }
         }
         if(indikator > 0) {
             point();
-
         }
     }
 
@@ -181,7 +189,16 @@ public class GameScreen {
         makeMonkeys();
         hitbox();
         restart();
-
+        for (int i = 0; i < 800; i++) {
+            for (int j = 0; j < 1300; j++) {
+                if(arr[i][j]){
+                    System.out.print("T ");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
         list = new ArrayList<>();
         if (gamer.player1.getTurn()) {
 
@@ -218,7 +235,7 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(2);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -291,7 +308,6 @@ public class GameScreen {
     public void point(){
         if (gamer.player1.getTurn()){
             this.point1++;
-            System.out.println(point1);
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
@@ -300,8 +316,12 @@ public class GameScreen {
             });
         } else {
             this.point2++;
-            score2.setText((String.valueOf(point2)));
-            System.out.println(String.valueOf(score2));
+            Platform.runLater(new Runnable(){
+                @Override
+                public void run() {
+                    score2.setText(String.valueOf(point2));
+                }
+            });
         }
     }
 }
