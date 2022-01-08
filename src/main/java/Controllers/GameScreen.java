@@ -13,7 +13,9 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameScreen {
     private static Game game;
@@ -47,18 +49,15 @@ public class GameScreen {
     private int playerOneVelocity;
     private int playerTwoAngle;
     private int playerTwoVelocity;
+
     private List<Integer> list = new ArrayList<>();
     public boolean arr[][];
-    public int[] monkeyOneArr, monkeyTwoArr;
-    private int monkeyOne_start_x;
-    private int monkeyOne_slut_x;
-    private int monkeyOne_start_y;
-    private int monkeyOne_slut_y;
-    private int monkeyTwo_start_x;
-    private int monkeyTwo_slut_x;
-    private int monkeyTwo_start_y;
-    private int monkeyTwo_slut_y;
     private int[] bananaArr;
+
+    Map<String, Integer> monkeyOneDimensions = new HashMap<String, Integer>();
+    Map<String, Integer> monkeyTwoDimensions = new HashMap<String, Integer>();
+
+
 
     private int point1 = 0;
     private int point2 = 0;
@@ -69,18 +68,18 @@ public class GameScreen {
     }
 
 
-    public void hitbox() {
+    public void hitBox() {
         if (!game.player1.getTurn()) {
-            for (int i = monkeyOne_start_y; i < monkeyOne_slut_y; i++) {
-                for (int k = monkeyOne_start_x; k < monkeyOne_slut_x; k++) {
+            for (int i = monkeyOneDimensions.get("start_y"); i < monkeyOneDimensions.get("end_y"); i++) {
+                for (int k = monkeyOneDimensions.get("start_x"); k < monkeyOneDimensions.get("end_x"); k++) {
                     if (i >= 0 && k >= 0 && i < 800 && k < 1300) {
                         arr[i][k] = true;
                     }
                 }
             }
         } else {
-            for(int i = monkeyTwo_start_y; i < monkeyTwo_slut_y; i++) {
-                for(int k = monkeyTwo_start_x; k < monkeyTwo_slut_x; k++) {
+            for (int i = monkeyTwoDimensions.get("start_y"); i < monkeyTwoDimensions.get("end_y"); i++) {
+                for (int k = monkeyTwoDimensions.get("start_x"); k < monkeyTwoDimensions.get("end_x"); k++) {
                     if(i >= 0 && k >= 0 && i < 800 && k < 1300) {
                         arr[i][k] = true;
                     }
@@ -102,29 +101,16 @@ public class GameScreen {
     }
 
     public void makeMonkeys() {
+        monkeyOneDimensions.put("start_x", (int) monkeyOne.getLayoutX());
+        monkeyOneDimensions.put("end_x", (int) monkeyOne.getLayoutX() + (int) monkeyOne.getFitWidth());
+        monkeyOneDimensions.put("start_y", (int) monkeyOne.getLayoutY());
+        monkeyOneDimensions.put("end_y", (int) monkeyOne.getLayoutY() + (int) monkeyOne.getFitHeight());
 
-        monkeyOneArr = new int[4];
-        monkeyTwoArr = new int[4];
+        monkeyTwoDimensions.put("start_x", (int) monkeyTwo.getLayoutX());
+        monkeyTwoDimensions.put("end_x", (int) monkeyTwo.getLayoutX() + (int) monkeyTwo.getFitWidth());
+        monkeyTwoDimensions.put("start_y", (int) monkeyTwo.getLayoutY());
+        monkeyTwoDimensions.put("end_y", (int) monkeyTwo.getLayoutY() + (int) monkeyTwo.getFitHeight());
 
-        monkeyOneArr[0] = (int) monkeyOne.getFitHeight();
-        monkeyOneArr[1] = (int) monkeyOne.getFitWidth();
-        monkeyOneArr[2] = (int) monkeyOne.getLayoutX();
-        monkeyOneArr[3] = (int) monkeyOne.getLayoutY();
-
-        monkeyTwoArr[0] = (int) monkeyTwo.getFitHeight();
-        monkeyTwoArr[1] = (int) monkeyTwo.getFitWidth();
-        monkeyTwoArr[2] = (int) monkeyTwo.getLayoutX();
-        monkeyTwoArr[3] = (int) monkeyTwo.getLayoutY();
-
-        this.monkeyOne_start_x = monkeyOneArr[2];                   // 8
-        this.monkeyOne_slut_x = monkeyOneArr[2] + monkeyOneArr[1];  // 126
-        this.monkeyOne_start_y = monkeyOneArr[3];                   // 707
-        this.monkeyOne_slut_y = monkeyOneArr[3] + monkeyOneArr[0];  // 799
-
-        this.monkeyTwo_start_x = monkeyTwoArr[2];
-        this.monkeyTwo_slut_x = monkeyTwoArr[2] + monkeyTwoArr[1];
-        this.monkeyTwo_start_y = monkeyTwoArr[3];
-        this.monkeyTwo_slut_y = monkeyTwoArr[3] + monkeyTwoArr[0];
     }
 
     public void makeBanana() {
@@ -183,7 +169,7 @@ public class GameScreen {
 
     public void runThread() {
         makeMonkeys();
-        hitbox();
+        hitBox();
         restart();
         list = new ArrayList<>();
         if (game.player1.getTurn()) {
