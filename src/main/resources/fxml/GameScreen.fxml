@@ -9,23 +9,23 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameScreen">
-   <ImageView fx:id="banebox" fitHeight="815.0" fitWidth="1300.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="banebox" fitHeight="815.0" fitWidth="1300.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/lightblue_background.jpg" />
       </image>
    </ImageView>
    <Button fx:id="btnBack" onAction="#goToMainScene" text="Let's go back to Main Screen" AnchorPane.rightAnchor="0">Let's go back to scene 1</Button>
-   <ImageView fx:id="monkeyOne" fitHeight="92.0" fitWidth="118.0" layoutX="8.0" layoutY="707.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="monkeyOne" fitHeight="92.0" fitWidth="118.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/monkey.jpg" />
       </image>
    </ImageView>
-   <ImageView fx:id="monkeyTwo" fitHeight="92.0" fitWidth="118.0" layoutX="1176.0" layoutY="707.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="monkeyTwo" fitHeight="92.0" fitWidth="118.0" layoutX="1182.0" layoutY="708.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/monkey.jpg" />
       </image>
    </ImageView>
-   <ImageView fx:id="banana" fitHeight="50.0" fitWidth="50.0" layoutX="57.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true" visible="false">
+   <ImageView fx:id="bananaImg" fitHeight="50.0" fitWidth="50.0" layoutX="57.0" layoutY="657.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
          <Image url="@images/banana_animation.gif" />
       </image>

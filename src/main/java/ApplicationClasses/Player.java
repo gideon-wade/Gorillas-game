@@ -1,24 +1,15 @@
 package ApplicationClasses;
 
 public class Player {
-    private int[] starting_position = new int[2];
     private String name;
     private Boolean theirTurn;
+    private Monkey monkey;
 
 
-    public Player(int positionX, int positionY, String name) {
-        starting_position[0] = positionX;
-        starting_position[1] = positionY;
+    public Player(String name) {
         this.name = name;
     }
-    /*
-    public int[] throwing(int velocity, double gravity, int angle) {
-        Banana banana = new Banana(velocity, gravity, angle);
-        int[]pos = banana.trajectory(400);
-        int x = pos[0];
-        int y = pos[1];
-        return pos;
-    }*/
+
     public void setTurn(Boolean turn){
         this.theirTurn = turn;
     }
@@ -28,5 +19,13 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public Monkey getMonkey() {
+        return monkey;
+    }
+
+    public void setMonkey(Monkey monkey) {
+        this.monkey = monkey;
     }
 }

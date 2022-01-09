@@ -1,8 +1,7 @@
 package Controllers;
 
 
-import ApplicationClasses.Banana;
-import ApplicationClasses.Game;
+import ApplicationClasses.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,47 +19,30 @@ import java.util.Map;
 public class GameScreen {
     private static Game game;
     @FXML
-    public Button btnBack;
-    public TextField pl1ang;
-    public TextField pl1vec;
-    public TextField pl2ang;
-    public TextField pl2vec;
-    public ImageView banana;
-    public Label pl2AngLabel;
-    public Label pl2VelLabel;
-    public Label pl1AngLabel;
-    public Label pl1VelLabel;
-    public Label nameLabel1;
-    public Label nameLabel2;
-    public Button pl1start;
-    public Button pl2start;
-    public Label pl2NameLabel;
-    public Label pl1NameLabel;
-    public Label whoWantsLabel;
-    public ImageView pafiImg;
-    public Button throwButton;
-    public ImageView monkeyOne;
-    public ImageView monkeyTwo;
-    public Label score1;
-    public Label score2;
+    public Button btnBack; public TextField pl1ang; public TextField pl1vec;
+    public TextField pl2ang; public TextField pl2vec; public ImageView bananaImg;
+    public Label pl2AngLabel; public Label pl2VelLabel; public Label pl1AngLabel;
+    public Label pl1VelLabel; public Label nameLabel1; public Label nameLabel2;
+    public Button pl1start; public Button pl2start;
+    public Label pl2NameLabel; public Label pl1NameLabel; public Label whoWantsLabel; public Button throwButton;
+    public ImageView monkeyOne; public ImageView monkeyTwo;
+    public Label score1; public Label score2;
 
 
-    private int playerOneAngle;
-    private int playerOneVelocity;
-    private int playerTwoAngle;
-    private int playerTwoVelocity;
+    private Player player1; private Player player2;
+    private World world;
+    private int playerOneAngle; private int playerOneVelocity;
+    private int playerTwoAngle; private int playerTwoVelocity;
 
     private List<Integer> list = new ArrayList<>();
     public boolean arr[][];
     private int[] bananaArr;
-
     Map<String, Integer> monkeyOneDimensions = new HashMap<String, Integer>();
     Map<String, Integer> monkeyTwoDimensions = new HashMap<String, Integer>();
-
-
-
     private int point1 = 0;
     private int point2 = 0;
+    private Monkey monkey1;
+    private Monkey monkey2;
 
 
     public void goToMainScene() throws IOException {
@@ -69,7 +51,7 @@ public class GameScreen {
 
 
     public void hitBox() {
-        if (!game.player1.getTurn()) {
+        if (!player1.getTurn()) {
             for (int i = monkeyOneDimensions.get("start_y"); i < monkeyOneDimensions.get("end_y"); i++) {
                 for (int k = monkeyOneDimensions.get("start_x"); k < monkeyOneDimensions.get("end_x"); k++) {
                     if (i >= 0 && k >= 0 && i < 800 && k < 1300) {
@@ -89,7 +71,7 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
-        if (game.player1.getTurn()) {
+        if (player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
         } else {
@@ -110,39 +92,46 @@ public class GameScreen {
         monkeyTwoDimensions.put("end_x", (int) monkeyTwo.getLayoutX() + (int) monkeyTwo.getFitWidth());
         monkeyTwoDimensions.put("start_y", (int) monkeyTwo.getLayoutY());
         monkeyTwoDimensions.put("end_y", (int) monkeyTwo.getLayoutY() + (int) monkeyTwo.getFitHeight());
-
     }
 
     public void makeBanana() {
         bananaArr = new int[4];
-        bananaArr[0] = (int) banana.getFitHeight();
-        bananaArr[1] = (int) banana.getFitWidth();
-        bananaArr[2] = (int) banana.getLayoutX();
-        bananaArr[3] = (int) banana.getLayoutY();
+        bananaArr[0] = (int) bananaImg.getFitHeight();
+        bananaArr[1] = (int) bananaImg.getFitWidth();
+        bananaArr[2] = (int) bananaImg.getLayoutX();
+        bananaArr[3] = (int) bananaImg.getLayoutY();
     }
 
     public void bananaHit(ImageView monkey) {
         int indikator = 0;
-        if(game.player1.getTurn()) {
-            for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
-                for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+        if(player1.getTurn()) {
+            for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
+                for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
                     if (j >= 0 && k >= 0 && j < 800 && k < 1300) {
                         if(arr[j][k]) {
-                            banana.setVisible(false);
+                            bananaImg.setVisible(false);
                             monkey.setVisible(false);
                             indikator++;
+                        }
+                        if (indikator > 0) {
+                            j = 800 - (int) bananaImg.getY() + bananaArr[0];
+                            k = (int) bananaImg.getX() + bananaArr[1];
                         }
                     }
                 }
             }
         } else {
-            for (int j = 800 - (int) banana.getY(); j < 800 - (int) banana.getY() + bananaArr[0]; j++) {
-                for (int k = (int) banana.getX(); k < (int) banana.getX() + bananaArr[1]; k++) {
+            for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
+                for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
                     if (j >= 0 && k >= 0 && j < monkey.getY() - 200 && k < monkey.getX() - 200) {
                         if(arr[j][k]) {
-                            banana.setVisible(false);
+                            bananaImg.setVisible(false);
                             monkey.setVisible(false);
                             indikator++;
+                        }
+                        if (indikator > 0) {
+                            j = 800 - (int) bananaImg.getY() + bananaArr[0];
+                            k = (int) bananaImg.getX() + bananaArr[1];
                         }
                     }
                 }
@@ -154,15 +143,15 @@ public class GameScreen {
     }
 
     public void restart() {
-        if(game.player1.getTurn()) {
-            banana.setX(monkeyOne.getX());
-            banana.setY(100);
-            banana.setVisible(true);
+        if(player1.getTurn()) {
+            bananaImg.setX(monkeyOne.getX());
+            bananaImg.setY(100);
+            bananaImg.setVisible(true);
             monkeyOne.setVisible(true);
         } else {
-            banana.setX(monkeyTwo.getX());
-            banana.setY(100);
-            banana.setVisible(true);
+            bananaImg.setX(monkeyTwo.getX());
+            bananaImg.setY(100);
+            bananaImg.setVisible(true);
             monkeyTwo.setVisible(true);
         }
     }
@@ -172,37 +161,37 @@ public class GameScreen {
         hitBox();
         restart();
         list = new ArrayList<>();
-        if (game.player1.getTurn()) {
+        if (player1.getTurn()) {
 
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
             for (int i = 0; i < list.size(); i++) {
-                banana.setX(i);
-                banana.setY(list.get(i));
-                banana.isSmooth();
+                bananaImg.setX(i);
+                bananaImg.setY(list.get(i));
+                bananaImg.isSmooth();
                 makeBanana();
                 simulateSlow();
                 bananaHit(monkeyTwo);
             }
             switchVisibility();
-            game.player1.setTurn(false);
+            player1.setTurn(false);
             restart();
         } else {
             Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
             list = makeCurve(banan);
             for (int i = 0; i < list.size(); i++) {
-                banana.setX(1200 - i);
-                banana.setY(list.get(list.size() - 1 - i));
-                banana.isSmooth();
+                bananaImg.setX(1200 - i);
+                bananaImg.setY(list.get(list.size() - 1 - i));
+                bananaImg.isSmooth();
                 makeBanana();
                 simulateSlow();
                 bananaHit(monkeyOne);
             }
             switchVisibility();
-            game.player1.setTurn(true);
+            player1.setTurn(true);
         }
         simulateSlow();
-        banana.setVisible(false);
+        bananaImg.setVisible(false);
     }
 
     public void simulateSlow() {
@@ -238,21 +227,31 @@ public class GameScreen {
     }
 
     public void pl1Start(ActionEvent actionEvent) {
-        arr = new boolean[game.getHeight()][game.getLength()];
-        nameLabel1.setText(game.player1.getName());
-        nameLabel2.setText(game.player2.getName());
-        game.player1.setTurn(true);
-        game.player2.setTurn(false);
+        initGameValues();
+        arr = new boolean[world.getHeight()][world.getWidth()];
+        nameLabel1.setText(player1.getName());
+        nameLabel2.setText(player2.getName());
+        player1.setTurn(true);
+        player2.setTurn(false);
         makeBoardVisible();
     }
 
     public void pl2Start(ActionEvent actionEvent) {
-        arr = new boolean[game.getHeight()][game.getLength()];
-        nameLabel1.setText(game.player1.getName());
-        nameLabel2.setText(game.player2.getName());
-        game.player1.setTurn(false);
-        game.player2.setTurn(true);
+        initGameValues();
+        arr = new boolean[world.getHeight()][world.getWidth()];
+        System.out.println();
+        nameLabel1.setText(player1.getName());
+        nameLabel2.setText(player2.getName());
+        player1.setTurn(false);
+        player2.setTurn(true);
         makeBoardVisible();
+    }
+    public void initGameValues(){
+        this.player1 = game.getPlayer1();
+        this.player2 = game.getPlayer2();
+        this.world = game.getWorld();
+        this.monkey1 = world.getMonkey1();
+        this.monkey2 = world.getMonkey2();
     }
 
     public void makeBoardVisible() {
@@ -264,7 +263,7 @@ public class GameScreen {
         pl2NameLabel.setVisible(true);
         nameLabel1.setVisible(true);
         nameLabel2.setVisible(true);
-        if (game.player1.getTurn()){
+        if (player1.getTurn()){
             pl1AngLabel.setVisible(true);
             pl1VelLabel.setVisible(true);
             pl1ang.setVisible(true);
@@ -278,7 +277,7 @@ public class GameScreen {
     }
 
     public void point() {
-        if (game.player1.getTurn()) {
+        if (player1.getTurn()) {
             this.point1++;
             Platform.runLater(new Runnable() {
                 @Override
