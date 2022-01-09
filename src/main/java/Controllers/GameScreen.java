@@ -142,6 +142,10 @@ public class GameScreen {
         }
     }
 
+    public void bananaHit() {
+
+    }
+
     public void restart() {
         if(player1.getTurn()) {
             bananaImg.setX(monkeyOne.getX());
@@ -162,7 +166,6 @@ public class GameScreen {
         restart();
         list = new ArrayList<>();
         if (player1.getTurn()) {
-
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
             for (int i = 0; i < list.size(); i++) {
