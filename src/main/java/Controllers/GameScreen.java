@@ -115,7 +115,7 @@ public class GameScreen {
                         monkey.setVisible(false);
                         flag = true;
                     }
-                } else if (!player1.getTurn() && j >= 0 && k >= 0 && j < 800 && k < 118) {
+                } else if (!player1.getTurn() && j >= 0 && k >= 0 && j < world.getHeight() && k < monkeyOneDimensions.get("end_x")) {
                     if(canHitGrid[j][k]) {
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
