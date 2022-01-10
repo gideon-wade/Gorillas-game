@@ -132,8 +132,8 @@ public class GameScreen {
 
 
     public boolean bananaExplosion(int y, int x) {
-        return y == 800 && (canHitGrid[y][x - world.getWidth() / 50]) ||
-                canHitGrid[y][world.getWidth() / 50 + x];
+        return y == 799 && (canHitGrid[y][x - world.getWidth() / 10]) ||
+                canHitGrid[y][world.getWidth() / 10 + x];
     }
 
 
