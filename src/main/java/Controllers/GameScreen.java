@@ -104,27 +104,25 @@ public class GameScreen {
     }
 
     public void bananaHit(ImageView monkey) {
-        flag = false;
-            for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
-                for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
-                    if (player1.getTurn()) {
-                        if (player1.getTurn() && j >= 0 && k >= 0 && j < 800 && k < 1300) {
-                            if(canHitGrid[j][k]) {
-                                bananaImg.setVisible(false);
-                                monkey.setVisible(false);
-                                flag = true;
-                            }
-                        } else if (!player1.getTurn() && j >= 0 && k >= 0 && j <
-                                monkey.getY() - 200 && k < monkey.getX() - 200) {
-                            if(canHitGrid[j][k]) {
-                                bananaImg.setVisible(false);
-                                monkey.setVisible(false);
-                                flag = true;
-                            }
+    flag = false;
+        for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
+            for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
+                if (player1.getTurn() && j >= 0 && k >= 0 && j < 800 && k < 1300) {
+                    if(canHitGrid[j][k]) {
+                        bananaImg.setVisible(false);
+                        monkey.setVisible(false);
+                        flag = true;
+                    } else if (!player1.getTurn() && j >= 0 && k >= 0 && j <
+                            monkey.getY() - 200 && k < monkey.getX() - 200) {
+                        if(canHitGrid[j][k]) {
+                            bananaImg.setVisible(false);
+                            monkey.setVisible(false);
+                            flag = true;
                         }
                     }
                 }
             }
+        }
     }
 
     public void restart() {
