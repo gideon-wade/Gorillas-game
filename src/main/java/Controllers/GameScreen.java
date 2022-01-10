@@ -44,6 +44,8 @@ public class GameScreen {
     private Monkey monkey1;
     private Monkey monkey2;
 
+    public boolean flag = false;
+
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
@@ -103,6 +105,7 @@ public class GameScreen {
     }
 
     public void bananaHit(ImageView monkey) {
+        flag = false;
         int indikator = 0;
         if(player1.getTurn()) {
             for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
@@ -112,6 +115,7 @@ public class GameScreen {
                             bananaImg.setVisible(false);
                             monkey.setVisible(false);
                             indikator++;
+                            flag = true;
                         }
                         if (indikator > 0) {
                             j = 800 - (int) bananaImg.getY() + bananaArr[0];
@@ -128,6 +132,7 @@ public class GameScreen {
                             bananaImg.setVisible(false);
                             monkey.setVisible(false);
                             indikator++;
+                            flag = true;
                         }
                         if (indikator > 0) {
                             j = 800 - (int) bananaImg.getY() + bananaArr[0];
@@ -137,9 +142,13 @@ public class GameScreen {
                 }
             }
         }
-        if(indikator > 0) {
-            point();
-        }
+       // if(indikator > 0) {
+          //  point();
+        //}
+    }
+
+    public void bananaHit() {
+
     }
 
     public void restart() {
@@ -162,7 +171,6 @@ public class GameScreen {
         restart();
         list = new ArrayList<>();
         if (player1.getTurn()) {
-
             Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banan);
             for (int i = 0; i < list.size(); i++) {
@@ -172,6 +180,9 @@ public class GameScreen {
                 makeBanana();
                 simulateSlow();
                 bananaHit(monkeyTwo);
+            }
+            if(flag){
+                point();
             }
             switchVisibility();
             player1.setTurn(false);
@@ -186,6 +197,9 @@ public class GameScreen {
                 makeBanana();
                 simulateSlow();
                 bananaHit(monkeyOne);
+            }
+            if(flag){
+                point();
             }
             switchVisibility();
             player1.setTurn(true);
@@ -276,10 +290,11 @@ public class GameScreen {
         }
     }
 
-    public void point() {
-        if (player1.getTurn()) {
+    public void point(){
+        if (player1.getTurn()){
             this.point1++;
-            Platform.runLater(new Runnable() {
+            System.out.println(point1);
+            Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
                     score1.setText(String.valueOf(point1));
@@ -287,10 +302,12 @@ public class GameScreen {
             });
         } else {
             this.point2++;
-            Platform.runLater(new Runnable() {
+            System.out.println(point2);
+            Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
                     score2.setText(String.valueOf(point2));
+                    System.out.println("dillerdaller");
                 }
             });
         }
