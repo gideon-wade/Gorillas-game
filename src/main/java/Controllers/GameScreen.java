@@ -35,7 +35,7 @@ public class GameScreen {
     private int playerTwoAngle; private int playerTwoVelocity;
 
     private List<Integer> list = new ArrayList<>();
-    public boolean arr[][];
+    public boolean canHitGrid[][];
     private int[] bananaArr;
     Map<String, Integer> monkeyOneDimensions = new HashMap<String, Integer>();
     Map<String, Integer> monkeyTwoDimensions = new HashMap<String, Integer>();
@@ -43,6 +43,8 @@ public class GameScreen {
     private int point2 = 0;
     private Monkey monkey1;
     private Monkey monkey2;
+
+    public boolean flag = false;
 
 
     public void goToMainScene() throws IOException {
@@ -55,7 +57,7 @@ public class GameScreen {
             for (int i = monkeyOneDimensions.get("start_y"); i < monkeyOneDimensions.get("end_y"); i++) {
                 for (int k = monkeyOneDimensions.get("start_x"); k < monkeyOneDimensions.get("end_x"); k++) {
                     if (i >= 0 && k >= 0 && i < 800 && k < 1300) {
-                        arr[i][k] = true;
+                        canHitGrid[i][k] = true;
                     }
                 }
             }
@@ -63,7 +65,7 @@ public class GameScreen {
             for (int i = monkeyTwoDimensions.get("start_y"); i < monkeyTwoDimensions.get("end_y"); i++) {
                 for (int k = monkeyTwoDimensions.get("start_x"); k < monkeyTwoDimensions.get("end_x"); k++) {
                     if(i >= 0 && k >= 0 && i < 800 && k < 1300) {
-                        arr[i][k] = true;
+                        canHitGrid[i][k] = true;
                     }
                 }
             }
@@ -103,19 +105,15 @@ public class GameScreen {
     }
 
     public void bananaHit(ImageView monkey) {
-        int indikator = 0;
+        flag = false;
         if(player1.getTurn()) {
             for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
                 for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
                     if (j >= 0 && k >= 0 && j < 800 && k < 1300) {
-                        if(arr[j][k]) {
+                        if(canHitGrid[j][k]) {
                             bananaImg.setVisible(false);
                             monkey.setVisible(false);
-                            indikator++;
-                        }
-                        if (indikator > 0) {
-                            j = 800 - (int) bananaImg.getY() + bananaArr[0];
-                            k = (int) bananaImg.getX() + bananaArr[1];
+                            flag = true;
                         }
                     }
                 }
@@ -124,26 +122,15 @@ public class GameScreen {
             for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
                 for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
                     if (j >= 0 && k >= 0 && j < monkey.getY() - 200 && k < monkey.getX() - 200) {
-                        if(arr[j][k]) {
+                        if(canHitGrid[j][k]) {
                             bananaImg.setVisible(false);
                             monkey.setVisible(false);
-                            indikator++;
-                        }
-                        if (indikator > 0) {
-                            j = 800 - (int) bananaImg.getY() + bananaArr[0];
-                            k = (int) bananaImg.getX() + bananaArr[1];
+                            flag = true;
                         }
                     }
                 }
             }
         }
-        if(indikator > 0) {
-            point();
-        }
-    }
-
-    public void bananaHit() {
-
     }
 
     public void restart() {
@@ -176,6 +163,7 @@ public class GameScreen {
                 simulateSlow();
                 bananaHit(monkeyTwo);
             }
+            if(flag) point();
             switchVisibility();
             player1.setTurn(false);
             restart();
@@ -190,6 +178,7 @@ public class GameScreen {
                 simulateSlow();
                 bananaHit(monkeyOne);
             }
+            if(flag) point();
             switchVisibility();
             player1.setTurn(true);
         }
@@ -231,7 +220,7 @@ public class GameScreen {
 
     public void pl1Start(ActionEvent actionEvent) {
         initGameValues();
-        arr = new boolean[world.getHeight()][world.getWidth()];
+        canHitGrid = new boolean[world.getHeight()][world.getWidth()];
         nameLabel1.setText(player1.getName());
         nameLabel2.setText(player2.getName());
         player1.setTurn(true);
@@ -241,7 +230,7 @@ public class GameScreen {
 
     public void pl2Start(ActionEvent actionEvent) {
         initGameValues();
-        arr = new boolean[world.getHeight()][world.getWidth()];
+        canHitGrid = new boolean[world.getHeight()][world.getWidth()];
         System.out.println();
         nameLabel1.setText(player1.getName());
         nameLabel2.setText(player2.getName());
@@ -255,6 +244,7 @@ public class GameScreen {
         this.world = game.getWorld();
         this.monkey1 = world.getMonkey1();
         this.monkey2 = world.getMonkey2();
+        this.canHitGrid = world.getCantHitGrid();
     }
 
     public void makeBoardVisible() {
@@ -279,10 +269,11 @@ public class GameScreen {
         }
     }
 
-    public void point() {
-        if (player1.getTurn()) {
+    public void point(){
+        if (player1.getTurn()){
             this.point1++;
-            Platform.runLater(new Runnable() {
+            System.out.println(point1);
+            Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
                     score1.setText(String.valueOf(point1));
@@ -290,10 +281,12 @@ public class GameScreen {
             });
         } else {
             this.point2++;
-            Platform.runLater(new Runnable() {
+            System.out.println(point2);
+            Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
                     score2.setText(String.valueOf(point2));
+                    System.out.println("dillerdaller");
                 }
             });
         }
