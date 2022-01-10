@@ -184,7 +184,7 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(3);
+            Thread.sleep(2);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
