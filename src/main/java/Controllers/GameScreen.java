@@ -27,6 +27,8 @@ public class GameScreen {
     public Label pl2NameLabel; public Label pl1NameLabel; public Label whoWantsLabel; public Button throwButton;
     public ImageView monkeyOne; public ImageView monkeyTwo;
     public Label score1; public Label score2;
+    public ImageView poof2;  public ImageView poof1;
+
 
 
     private Player player1; private Player player2;
@@ -113,12 +115,14 @@ public class GameScreen {
                     if(canHitGrid[j][k]) {
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
+                        poof2.setVisible(true);
                         flag = true;
                     }
                 } else if (!player1.getTurn() && j >= 0 && k >= 0 && j < world.getHeight() && k < monkeyOneDimensions.get("end_x")) {
                     if(canHitGrid[j][k]) {
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
+                        poof1.setVisible(true);
                         flag = true;
                     }
                 }
@@ -130,9 +134,11 @@ public class GameScreen {
         if(player1.getTurn()) {
             bananaImg.setX(monkeyOne.getX());
             monkeyOne.setVisible(true);
+            poof1.setVisible(false);
         } else {
             bananaImg.setX(monkeyTwo.getX());
             monkeyTwo.setVisible(true);
+            poof2.setVisible(false);
         }
         bananaImg.setY(100);
         bananaImg.setVisible(true);
@@ -178,7 +184,7 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(5);
+            Thread.sleep(3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
