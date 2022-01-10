@@ -44,13 +44,12 @@ public class GameScreen {
     private Monkey monkey1;
     private Monkey monkey2;
 
-    public boolean flag = false;
+    private boolean flag;
 
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
-
 
     public void hitBox() {
         if (!player1.getTurn()) {
@@ -153,8 +152,8 @@ public class GameScreen {
         restart();
         list = new ArrayList<>();
         if (player1.getTurn()) {
-            Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
-            list = makeCurve(banan);
+            Banana banana = new Banana(playerOneVelocity, 9.82, playerOneAngle);
+            list = makeCurve(banana);
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setX(i);
                 bananaImg.setY(list.get(i));
@@ -168,8 +167,9 @@ public class GameScreen {
             player1.setTurn(false);
             restart();
         } else {
-            Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
-            list = makeCurve(banan);
+            Banana banana = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
+            list = makeCurve(banana);
+
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setX(1200 - i);
                 bananaImg.setY(list.get(list.size() - 1 - i));
@@ -193,10 +193,10 @@ public class GameScreen {
             e.printStackTrace();
         }
     }
-    public List<Integer> makeCurve(Banana banan) {
+    public List<Integer> makeCurve(Banana banana) {
         int x = 1;
-        while (banan.trajectory(x) > -1) {
-            this.list.add(100 - banan.trajectory(x));
+        while (banana.trajectory(x) > -1) {
+            this.list.add(100 - banana.trajectory(x));
             x++;
         }
         return this.list;
@@ -220,9 +220,6 @@ public class GameScreen {
 
     public void pl1Start(ActionEvent actionEvent) {
         initGameValues();
-        canHitGrid = new boolean[world.getHeight()][world.getWidth()];
-        nameLabel1.setText(player1.getName());
-        nameLabel2.setText(player2.getName());
         player1.setTurn(true);
         player2.setTurn(false);
         makeBoardVisible();
@@ -230,10 +227,6 @@ public class GameScreen {
 
     public void pl2Start(ActionEvent actionEvent) {
         initGameValues();
-        canHitGrid = new boolean[world.getHeight()][world.getWidth()];
-        System.out.println();
-        nameLabel1.setText(player1.getName());
-        nameLabel2.setText(player2.getName());
         player1.setTurn(false);
         player2.setTurn(true);
         makeBoardVisible();
@@ -245,6 +238,8 @@ public class GameScreen {
         this.monkey1 = world.getMonkey1();
         this.monkey2 = world.getMonkey2();
         this.canHitGrid = world.getCantHitGrid();
+        nameLabel1.setText(player1.getName());
+        nameLabel2.setText(player2.getName());
     }
 
     public void makeBoardVisible() {
@@ -272,7 +267,6 @@ public class GameScreen {
     public void point(){
         if (player1.getTurn()){
             this.point1++;
-            System.out.println(point1);
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
@@ -281,7 +275,6 @@ public class GameScreen {
             });
         } else {
             this.point2++;
-            System.out.println(point2);
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
