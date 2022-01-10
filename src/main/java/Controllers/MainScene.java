@@ -34,10 +34,16 @@ public class MainScene {
     private Game game;
 
     public void goToGameScreen() throws IOException, IllegalInputException {
-        this.length_i = Integer.parseInt(length.getText());
+        this.length_i = 1300;
+        this.height_i = 800;
+        this.playerOneName = "Pafi";
+        this.playerTwoName = "Søren";
+
+        /*this.length_i = Integer.parseInt(length.getText());
         this.height_i = Integer.parseInt(height.getText());
         this.playerOneName = playerID1.getText();
         this.playerTwoName = playerID2.getText();
+        */
         if (height_i > 0 && length_i > 0 && height_i <= 800 && length_i <= 1300) {
             this.game = new Game(playerOneName, playerTwoName,
                     height_i, length_i);
