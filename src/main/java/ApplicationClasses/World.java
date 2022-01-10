@@ -28,7 +28,6 @@ public class World {
     public Monkey getMonkey2() {
         return monkey2;
     }
-
     public boolean[][] getCantHitGrid() {
         return canHitGrid;
     }
