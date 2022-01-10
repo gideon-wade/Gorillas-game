@@ -129,15 +129,13 @@ public class GameScreen {
     public void restart() {
         if(player1.getTurn()) {
             bananaImg.setX(monkeyOne.getX());
-            bananaImg.setY(100);
-            bananaImg.setVisible(true);
             monkeyOne.setVisible(true);
         } else {
             bananaImg.setX(monkeyTwo.getX());
-            bananaImg.setY(100);
-            bananaImg.setVisible(true);
             monkeyTwo.setVisible(true);
         }
+        bananaImg.setY(100);
+        bananaImg.setVisible(true);
     }
 
     public void runThread() {
@@ -156,14 +154,11 @@ public class GameScreen {
                 simulateSlow();
                 bananaHit(monkeyTwo);
             }
-            if(flag) point();
-            switchVisibility();
             player1.setTurn(false);
-            restart();
+
         } else {
             Banana banana = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
             list = makeCurve(banana);
-
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setX(1200 - i);
                 bananaImg.setY(list.get(list.size() - 1 - i));
@@ -172,11 +167,11 @@ public class GameScreen {
                 simulateSlow();
                 bananaHit(monkeyOne);
             }
-            if(flag) point();
-            switchVisibility();
             player1.setTurn(true);
-            restart();
         }
+        if(flag) point();
+        switchVisibility();
+        restart();
         simulateSlow();
         bananaImg.setVisible(false);
     }
