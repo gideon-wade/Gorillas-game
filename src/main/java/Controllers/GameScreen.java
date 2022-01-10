@@ -25,7 +25,7 @@ public class GameScreen {
     public Label pl1VelLabel; public Label nameLabel1; public Label nameLabel2;
     public Button pl1start; public Button pl2start;
     public Label pl2NameLabel; public Label pl1NameLabel; public Label whoWantsLabel; public Button throwButton;
-    public ImageView monkeyOne; public ImageView monkeyTwo;
+    public ImageView monkeyOneImg; public ImageView monkeyTwoImg;
     public Label score1; public Label score2;
     public ImageView poof2;  public ImageView poof1;
 
@@ -88,15 +88,15 @@ public class GameScreen {
     public void makeMonkeys() {
 
 
-        monkeyOneDimensions.put("start_x", (int) monkeyOne.getLayoutX());
-        monkeyOneDimensions.put("end_x", (int) monkeyOne.getLayoutX() + (int) monkeyOne.getFitWidth());
-        monkeyOneDimensions.put("start_y", (int) monkeyOne.getLayoutY());
-        monkeyOneDimensions.put("end_y", (int) monkeyOne.getLayoutY() + (int) monkeyOne.getFitHeight());
+        monkeyOneDimensions.put("start_x", (int) monkeyOneImg.getLayoutX());
+        monkeyOneDimensions.put("end_x", (int) monkeyOneImg.getLayoutX() + (int) monkeyOneImg.getFitWidth());
+        monkeyOneDimensions.put("start_y", (int) monkeyOneImg.getLayoutY());
+        monkeyOneDimensions.put("end_y", (int) monkeyOneImg.getLayoutY() + (int) monkeyOneImg.getFitHeight());
 
-        monkeyTwoDimensions.put("start_x", (int) monkeyTwo.getLayoutX());
-        monkeyTwoDimensions.put("end_x", (int) monkeyTwo.getLayoutX() + (int) monkeyTwo.getFitWidth());
-        monkeyTwoDimensions.put("start_y", (int) monkeyTwo.getLayoutY());
-        monkeyTwoDimensions.put("end_y", (int) monkeyTwo.getLayoutY() + (int) monkeyTwo.getFitHeight());
+        monkeyTwoDimensions.put("start_x", (int) monkeyTwoImg.getLayoutX());
+        monkeyTwoDimensions.put("end_x", (int) monkeyTwoImg.getLayoutX() + (int) monkeyTwoImg.getFitWidth());
+        monkeyTwoDimensions.put("start_y", (int) monkeyTwoImg.getLayoutY());
+        monkeyTwoDimensions.put("end_y", (int) monkeyTwoImg.getLayoutY() + (int) monkeyTwoImg.getFitHeight());
     }
 
     public void makeBanana() {
@@ -136,12 +136,12 @@ public class GameScreen {
 
     public void restart() {
         if(player1.getTurn()) {
-            bananaImg.setX(monkeyOne.getX());
-            monkeyOne.setVisible(true);
+            bananaImg.setX(monkeyOneImg.getX());
+            monkeyOneImg.setVisible(true);
             poof1.setVisible(false);
         } else {
-            bananaImg.setX(monkeyTwo.getX());
-            monkeyTwo.setVisible(true);
+            bananaImg.setX(monkeyTwoImg.getX());
+            monkeyTwoImg.setVisible(true);
             poof2.setVisible(false);
         }
         bananaImg.setY(100);
@@ -162,7 +162,7 @@ public class GameScreen {
                 bananaImg.isSmooth();
                 makeBanana();
                 simulateSlow();
-                bananaHit(monkeyTwo);
+                bananaHit(monkeyTwoImg);
             }
             player1.setTurn(false);
 
@@ -175,7 +175,7 @@ public class GameScreen {
                 bananaImg.isSmooth();
                 makeBanana();
                 simulateSlow();
-                bananaHit(monkeyOne);
+                bananaHit(monkeyOneImg);
             }
             player1.setTurn(true);
         }
@@ -186,9 +186,10 @@ public class GameScreen {
         bananaImg.setVisible(false);
     }
 
+
     public void simulateSlow() {
         try {
-            Thread.sleep(3);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -240,6 +241,7 @@ public class GameScreen {
         this.canHitGrid = world.getCantHitGrid();
         nameLabel1.setText(player1.getName());
         nameLabel2.setText(player2.getName());
+        //monkeyOneImg.setX();
     }
 
     public void makeBoardVisible() {
