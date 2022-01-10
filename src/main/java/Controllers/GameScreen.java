@@ -112,7 +112,7 @@ public class GameScreen {
         for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
             for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
                 if (player1.getTurn() && j >= 0 && k >= 200 && j < world.getHeight() && k < world.getWidth()) {
-                    if(canHitGrid[j][k] || j == 800 && (canHitGrid[j][world.getWidth()/50 - k]) ||
+                    if(canHitGrid[j][k] || j == 800 && (canHitGrid[j][k - world.getWidth()/50]) ||
                             canHitGrid[j][world.getWidth()/50 + k])
                             {
                         bananaImg.setVisible(false);
@@ -121,7 +121,7 @@ public class GameScreen {
                         flag = true;
                     }
                 } else if (!player1.getTurn() && j >= 0 && k >= 0 && j < world.getHeight() && k < monkeyOneDimensions.get("end_x")) {
-                    if(canHitGrid[j][k] || j == 800 && (canHitGrid[j][world.getWidth()/50 - k]) ||
+                    if(canHitGrid[j][k] || j == 800 && (canHitGrid[j][k - world.getWidth()/50]) ||
                             canHitGrid[j][world.getWidth()/50 + k]) {
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
