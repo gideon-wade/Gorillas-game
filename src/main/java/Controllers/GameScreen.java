@@ -35,7 +35,7 @@ public class GameScreen {
     private int playerTwoAngle; private int playerTwoVelocity;
 
     private List<Integer> list = new ArrayList<>();
-    public boolean arr[][];
+    public boolean canHitGrid[][];
     private int[] bananaArr;
     Map<String, Integer> monkeyOneDimensions = new HashMap<String, Integer>();
     Map<String, Integer> monkeyTwoDimensions = new HashMap<String, Integer>();
@@ -44,20 +44,19 @@ public class GameScreen {
     private Monkey monkey1;
     private Monkey monkey2;
 
-    public boolean flag = false;
+    private boolean flag;
 
 
     public void goToMainScene() throws IOException {
         SceneManager.changeScene("fxml/MainScene.fxml");
     }
 
-
     public void hitBox() {
         if (!player1.getTurn()) {
             for (int i = monkeyOneDimensions.get("start_y"); i < monkeyOneDimensions.get("end_y"); i++) {
                 for (int k = monkeyOneDimensions.get("start_x"); k < monkeyOneDimensions.get("end_x"); k++) {
                     if (i >= 0 && k >= 0 && i < 800 && k < 1300) {
-                        arr[i][k] = true;
+                        canHitGrid[i][k] = true;
                     }
                 }
             }
@@ -65,7 +64,7 @@ public class GameScreen {
             for (int i = monkeyTwoDimensions.get("start_y"); i < monkeyTwoDimensions.get("end_y"); i++) {
                 for (int k = monkeyTwoDimensions.get("start_x"); k < monkeyTwoDimensions.get("end_x"); k++) {
                     if(i >= 0 && k >= 0 && i < 800 && k < 1300) {
-                        arr[i][k] = true;
+                        canHitGrid[i][k] = true;
                     }
                 }
             }
@@ -106,49 +105,26 @@ public class GameScreen {
 
     public void bananaHit(ImageView monkey) {
         flag = false;
-        int indikator = 0;
-        if(player1.getTurn()) {
             for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
                 for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
-                    if (j >= 0 && k >= 0 && j < 800 && k < 1300) {
-                        if(arr[j][k]) {
-                            bananaImg.setVisible(false);
-                            monkey.setVisible(false);
-                            indikator++;
-                            flag = true;
-                        }
-                        if (indikator > 0) {
-                            j = 800 - (int) bananaImg.getY() + bananaArr[0];
-                            k = (int) bananaImg.getX() + bananaArr[1];
+                    if (player1.getTurn()) {
+                        if (player1.getTurn() && j >= 0 && k >= 0 && j < 800 && k < 1300) {
+                            if(canHitGrid[j][k]) {
+                                bananaImg.setVisible(false);
+                                monkey.setVisible(false);
+                                flag = true;
+                            }
+                        } else if (!player1.getTurn() && j >= 0 && k >= 0 && j <
+                                monkey.getY() - 200 && k < monkey.getX() - 200) {
+                            if(canHitGrid[j][k]) {
+                                bananaImg.setVisible(false);
+                                monkey.setVisible(false);
+                                flag = true;
+                            }
                         }
                     }
                 }
             }
-        } else {
-            for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
-                for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
-                    if (j >= 0 && k >= 0 && j < monkey.getY() - 200 && k < monkey.getX() - 200) {
-                        if(arr[j][k]) {
-                            bananaImg.setVisible(false);
-                            monkey.setVisible(false);
-                            indikator++;
-                            flag = true;
-                        }
-                        if (indikator > 0) {
-                            j = 800 - (int) bananaImg.getY() + bananaArr[0];
-                            k = (int) bananaImg.getX() + bananaArr[1];
-                        }
-                    }
-                }
-            }
-        }
-       // if(indikator > 0) {
-          //  point();
-        //}
-    }
-
-    public void bananaHit() {
-
     }
 
     public void restart() {
@@ -171,8 +147,8 @@ public class GameScreen {
         restart();
         list = new ArrayList<>();
         if (player1.getTurn()) {
-            Banana banan = new Banana(playerOneVelocity, 9.82, playerOneAngle);
-            list = makeCurve(banan);
+            Banana banana = new Banana(playerOneVelocity, 9.82, playerOneAngle);
+            list = makeCurve(banana);
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setX(i);
                 bananaImg.setY(list.get(i));
@@ -181,15 +157,14 @@ public class GameScreen {
                 simulateSlow();
                 bananaHit(monkeyTwo);
             }
-            if(flag){
-                point();
-            }
+            if(flag) point();
             switchVisibility();
             player1.setTurn(false);
             restart();
         } else {
-            Banana banan = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
-            list = makeCurve(banan);
+            Banana banana = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
+            list = makeCurve(banana);
+
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setX(1200 - i);
                 bananaImg.setY(list.get(list.size() - 1 - i));
@@ -198,9 +173,7 @@ public class GameScreen {
                 simulateSlow();
                 bananaHit(monkeyOne);
             }
-            if(flag){
-                point();
-            }
+            if(flag) point();
             switchVisibility();
             player1.setTurn(true);
         }
@@ -215,10 +188,10 @@ public class GameScreen {
             e.printStackTrace();
         }
     }
-    public List<Integer> makeCurve(Banana banan) {
+    public List<Integer> makeCurve(Banana banana) {
         int x = 1;
-        while (banan.trajectory(x) > -1) {
-            this.list.add(100 - banan.trajectory(x));
+        while (banana.trajectory(x) > -1) {
+            this.list.add(100 - banana.trajectory(x));
             x++;
         }
         return this.list;
@@ -242,9 +215,6 @@ public class GameScreen {
 
     public void pl1Start(ActionEvent actionEvent) {
         initGameValues();
-        arr = new boolean[world.getHeight()][world.getWidth()];
-        nameLabel1.setText(player1.getName());
-        nameLabel2.setText(player2.getName());
         player1.setTurn(true);
         player2.setTurn(false);
         makeBoardVisible();
@@ -252,10 +222,6 @@ public class GameScreen {
 
     public void pl2Start(ActionEvent actionEvent) {
         initGameValues();
-        arr = new boolean[world.getHeight()][world.getWidth()];
-        System.out.println();
-        nameLabel1.setText(player1.getName());
-        nameLabel2.setText(player2.getName());
         player1.setTurn(false);
         player2.setTurn(true);
         makeBoardVisible();
@@ -266,6 +232,9 @@ public class GameScreen {
         this.world = game.getWorld();
         this.monkey1 = world.getMonkey1();
         this.monkey2 = world.getMonkey2();
+        this.canHitGrid = world.getCantHitGrid();
+        nameLabel1.setText(player1.getName());
+        nameLabel2.setText(player2.getName());
     }
 
     public void makeBoardVisible() {
@@ -293,7 +262,6 @@ public class GameScreen {
     public void point(){
         if (player1.getTurn()){
             this.point1++;
-            System.out.println(point1);
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
@@ -302,7 +270,6 @@ public class GameScreen {
             });
         } else {
             this.point2++;
-            System.out.println(point2);
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
