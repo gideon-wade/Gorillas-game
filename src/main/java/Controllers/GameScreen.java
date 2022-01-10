@@ -111,18 +111,15 @@ public class GameScreen {
         flag = false;
         for (int j = 800 - (int) bananaImg.getY(); j < 800 - (int) bananaImg.getY() + bananaArr[0]; j++) {
             for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
-                if (player1.getTurn() && j >= 0 && k >= 200 && j < world.getHeight() && k < world.getWidth()) {
-                    if(canHitGrid[j][k] || j == 800 && (canHitGrid[j][k - world.getWidth()/50]) ||
-                            canHitGrid[j][world.getWidth()/50 + k])
-                            {
+                if (player1.getTurn() && j >= 0 && k >= 200 && j < world.getHeight() && k < monkeyTwoDimensions.get("end_x")) {
+                    if(canHitGrid[j][k] || bananaExplosion(j,k)) {
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
                         poof2.setVisible(true);
                         flag = true;
                     }
                 } else if (!player1.getTurn() && j >= 0 && k >= 0 && j < world.getHeight() && k < monkeyOneDimensions.get("end_x")) {
-                    if(canHitGrid[j][k] || j == 800 && (canHitGrid[j][k - world.getWidth()/50]) ||
-                            canHitGrid[j][world.getWidth()/50 + k]) {
+                    if(canHitGrid[j][k] || bananaExplosion(j, k)) {
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
                         poof1.setVisible(true);
@@ -131,6 +128,12 @@ public class GameScreen {
                 }
             }
         }
+    }
+
+
+    public boolean bananaExplosion(int y, int x) {
+        return y == 800 && (canHitGrid[y][x - world.getWidth() / 50]) ||
+                canHitGrid[y][world.getWidth() / 50 + x];
     }
 
 
@@ -189,7 +192,7 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(1);
+            Thread.sleep(3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
