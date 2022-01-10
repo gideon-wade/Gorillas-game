@@ -70,7 +70,10 @@
          <Font size="18.0" />
       </font>
    </Label>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="125.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="explosion" fitHeight="150.0" fitWidth="200.0" layoutX="9.0" layoutY="607.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <image>
+         <Image url="@images/96-964020_pixel-explosion-png-pixel-art-explosion-png.png" />
+      </image></ImageView>
    <ImageView fx:id="poof1" fitHeight="178.0" fitWidth="226.0" layoutX="-54.0" layoutY="643.0" visible="false">
       <image>
          <Image url="@images/pixel-poof.png" />

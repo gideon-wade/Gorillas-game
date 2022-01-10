@@ -28,7 +28,7 @@ public class GameScreen {
     public ImageView monkeyOneImg; public ImageView monkeyTwoImg;
     public Label score1; public Label score2;
     public ImageView poof2;  public ImageView poof1;
-
+    public ImageView explosion;
 
 
     private Player player1; private Player player2;
@@ -113,22 +113,33 @@ public class GameScreen {
             for (int k = (int) bananaImg.getX(); k < (int) bananaImg.getX() + bananaArr[1]; k++) {
                 if (player1.getTurn() && j >= 0 && k >= 200 && j < world.getHeight() && k < monkeyTwoDimensions.get("end_x")) {
                     if(canHitGrid[j][k] || bananaExplosion(j,k)) {
+
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
+                        explosion.setVisible(true);
                         poof2.setVisible(true);
+
+
                         flag = true;
                     }
                 } else if (!player1.getTurn() && j >= 0 && k >= 0 && j < world.getHeight() && k < monkeyOneDimensions.get("end_x")) {
                     if(canHitGrid[j][k] || bananaExplosion(j, k)) {
+
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
+                        explosion.setVisible(true);
                         poof1.setVisible(true);
                         flag = true;
+
+
                     }
+
                 }
             }
         }
     }
+
+
 
 
     public boolean bananaExplosion(int y, int x) {
@@ -142,10 +153,12 @@ public class GameScreen {
             bananaImg.setX(monkeyOneImg.getX());
             monkeyOneImg.setVisible(true);
             poof1.setVisible(false);
+            explosion.setVisible(false);
         } else {
             bananaImg.setX(monkeyTwoImg.getX());
             monkeyTwoImg.setVisible(true);
             poof2.setVisible(false);
+            explosion.setVisible(false);
         }
         bananaImg.setY(100);
         bananaImg.setVisible(true);
@@ -161,11 +174,14 @@ public class GameScreen {
             list = makeCurve(banana);
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setX(i);
+                explosion.setX(bananaImg.getX());
                 bananaImg.setY(list.get(i));
+                explosion.setY(list.get(i));
                 bananaImg.isSmooth();
                 makeBanana();
-                simulateSlow();
+
                 bananaHit(monkeyTwoImg);
+                simulateSlow(1);
             }
             player1.setTurn(false);
 
@@ -174,25 +190,31 @@ public class GameScreen {
             list = makeCurve(banana);
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setX(1200 - i);
+                explosion.setX(1200 - i);
                 bananaImg.setY(list.get(list.size() - 1 - i));
+                explosion.setY(list.get(list.size() - 1 - i));
                 bananaImg.isSmooth();
                 makeBanana();
-                simulateSlow();
                 bananaHit(monkeyOneImg);
+                simulateSlow(1);
             }
             player1.setTurn(true);
         }
-        if(flag) point();
+        if(flag) {
+            point();
+            explosion.setVisible(true);
+        }
+
         switchVisibility();
         restart();
-        simulateSlow();
+        simulateSlow(0);
         bananaImg.setVisible(false);
     }
 
 
-    public void simulateSlow() {
+    public void simulateSlow(int x) {
         try {
-            Thread.sleep(3);
+            Thread.sleep(x+3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
