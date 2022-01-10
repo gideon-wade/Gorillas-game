@@ -84,6 +84,8 @@ public class GameScreen {
     }
 
     public void makeMonkeys() {
+
+
         monkeyOneDimensions.put("start_x", (int) monkeyOne.getLayoutX());
         monkeyOneDimensions.put("end_x", (int) monkeyOne.getLayoutX() + (int) monkeyOne.getFitWidth());
         monkeyOneDimensions.put("start_y", (int) monkeyOne.getLayoutY());
@@ -113,7 +115,7 @@ public class GameScreen {
                         monkey.setVisible(false);
                         flag = true;
                     }
-                } else if (j >= 0 && k >= 0 && j < world.getHeight() && k < world.getWidth()) {
+                } else if (!player1.getTurn() && j >= 0 && k >= 0 && j < 800 && k < 118) {
                     if(canHitGrid[j][k]) {
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
@@ -173,6 +175,7 @@ public class GameScreen {
             if(flag) point();
             switchVisibility();
             player1.setTurn(true);
+            restart();
         }
         simulateSlow();
         bananaImg.setVisible(false);
@@ -180,7 +183,7 @@ public class GameScreen {
 
     public void simulateSlow() {
         try {
-            Thread.sleep(1);
+            Thread.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
