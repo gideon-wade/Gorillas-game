@@ -15,7 +15,6 @@ public class World {
         canHitGrid = new boolean[height][width];
     }
 
-
     public int getHeight() {
         return height;
     }

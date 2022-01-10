@@ -74,6 +74,7 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
+        throwButton.setVisible(false);
         if (player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -83,11 +84,10 @@ public class GameScreen {
         }
         Thread thread = new Thread(this::runThread);
         thread.start();
+        throwButton.setVisible(true);
     }
 
     public void makeMonkeys() {
-
-
         monkeyOneDimensions.put("start_x", (int) monkeyOneImg.getLayoutX());
         monkeyOneDimensions.put("end_x", (int) monkeyOneImg.getLayoutX() + (int) monkeyOneImg.getFitWidth());
         monkeyOneDimensions.put("start_y", (int) monkeyOneImg.getLayoutY());
@@ -133,7 +133,6 @@ public class GameScreen {
         }
     }
 
-
     public void restart() {
         if(player1.getTurn()) {
             bananaImg.setX(monkeyOneImg.getX());
@@ -144,7 +143,6 @@ public class GameScreen {
             monkeyTwoImg.setVisible(true);
             poof2.setVisible(false);
         }
-        bananaImg.setY(100);
         bananaImg.setVisible(true);
     }
 
@@ -157,7 +155,7 @@ public class GameScreen {
             Banana banana = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banana);
             for (int i = 0; i < list.size(); i++) {
-                bananaImg.setX(i);
+                bananaImg.setX(monkey1.getStart_x() + i);
                 bananaImg.setY(list.get(i));
                 bananaImg.isSmooth();
                 makeBanana();
@@ -165,7 +163,6 @@ public class GameScreen {
                 bananaHit(monkeyTwoImg);
             }
             player1.setTurn(false);
-
         } else {
             Banana banana = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
             list = makeCurve(banana);
@@ -185,7 +182,6 @@ public class GameScreen {
         simulateSlow();
         bananaImg.setVisible(false);
     }
-
 
     public void simulateSlow() {
         try {
@@ -241,7 +237,13 @@ public class GameScreen {
         this.canHitGrid = world.getCantHitGrid();
         nameLabel1.setText(player1.getName());
         nameLabel2.setText(player2.getName());
-        //monkeyOneImg.setX();
+        monkeyOneImg.setLayoutX(0);
+        monkeyOneImg.setLayoutY(world.getHeight() - monkeyTwoImg.getFitHeight());
+        monkeyTwoImg.setLayoutX(world.getWidth() - monkeyTwoImg.getFitWidth());
+        monkeyTwoImg.setLayoutY(world.getHeight() - monkeyTwoImg.getFitHeight());
+        monkeyOneImg.setVisible(true);
+        monkeyTwoImg.setVisible(true);
+        monkeyOneImg.isSmooth();
     }
 
     public void makeBoardVisible() {
