@@ -84,6 +84,8 @@ public class GameScreen {
     }
 
     public void makeMonkeys() {
+
+
         monkeyOneDimensions.put("start_x", (int) monkeyOne.getLayoutX());
         monkeyOneDimensions.put("end_x", (int) monkeyOne.getLayoutX() + (int) monkeyOne.getFitWidth());
         monkeyOneDimensions.put("start_y", (int) monkeyOne.getLayoutY());
@@ -113,7 +115,7 @@ public class GameScreen {
                         monkey.setVisible(false);
                         flag = true;
                     }
-                } else if (j >= 0 && k >= 0 && j < world.getHeight() && k < world.getWidth()) {
+                } else if (!player1.getTurn() && j >= 0 && k >= 0 && j < world.getHeight() && k < monkeyOneDimensions.get("end_x")) {
                     if(canHitGrid[j][k]) {
                         bananaImg.setVisible(false);
                         monkey.setVisible(false);
@@ -127,15 +129,13 @@ public class GameScreen {
     public void restart() {
         if(player1.getTurn()) {
             bananaImg.setX(monkeyOne.getX());
-            bananaImg.setY(100);
-            bananaImg.setVisible(true);
             monkeyOne.setVisible(true);
         } else {
             bananaImg.setX(monkeyTwo.getX());
-            bananaImg.setY(100);
-            bananaImg.setVisible(true);
             monkeyTwo.setVisible(true);
         }
+        bananaImg.setY(100);
+        bananaImg.setVisible(true);
     }
 
     public void runThread() {
@@ -154,14 +154,11 @@ public class GameScreen {
                 simulateSlow();
                 bananaHit(monkeyTwo);
             }
-            if(flag) point();
-            switchVisibility();
             player1.setTurn(false);
-            restart();
+
         } else {
             Banana banana = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
             list = makeCurve(banana);
-
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setX(1200 - i);
                 bananaImg.setY(list.get(list.size() - 1 - i));
@@ -170,17 +167,18 @@ public class GameScreen {
                 simulateSlow();
                 bananaHit(monkeyOne);
             }
-            if(flag) point();
-            switchVisibility();
             player1.setTurn(true);
         }
+        if(flag) point();
+        switchVisibility();
+        restart();
         simulateSlow();
         bananaImg.setVisible(false);
     }
 
     public void simulateSlow() {
         try {
-            Thread.sleep(1);
+            Thread.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
