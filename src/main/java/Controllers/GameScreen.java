@@ -135,8 +135,10 @@ public class GameScreen {
     }
 
     public boolean bananaExplosion(int y, int x) {
-        return y == world.getHeight() - 1 && (canHitGrid[y][x - world.getWidth() / 10]) ||
-                canHitGrid[y][(world.getWidth() / 10) + x];
+        if(world.getWidth() / 10 + x < world.getWidth()) {
+            return y == world.getHeight() - 1 && (canHitGrid[y][x - world.getWidth() / 10]) ||
+                canHitGrid[y][(world.getWidth() / 10) + x];}
+        return false;
     }
 
 
