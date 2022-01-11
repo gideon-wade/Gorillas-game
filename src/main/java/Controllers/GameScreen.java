@@ -135,8 +135,11 @@ public class GameScreen {
     }
 
     public boolean bananaExplosion(int y, int x) {
-        return y == world.getHeight() - 1 && (canHitGrid[y][x - world.getWidth() / 10]) ||
-                canHitGrid[y][(world.getWidth() / 10) + x];
+        if(world.getWidth() / 10 + x < world.getWidth()) {
+            return y == world.getHeight() - 1 && (canHitGrid[y][x - world.getWidth() / 10]) ||
+                    canHitGrid[y][(world.getWidth() / 10) + x];
+        }
+        return false;
     }
 
 
@@ -251,24 +254,19 @@ public class GameScreen {
         monkeyOneImg.setLayoutY(world.getHeight() - monkeyTwoImg.getFitHeight());
         monkeyTwoImg.setLayoutX(world.getWidth() - monkeyTwoImg.getFitWidth());
         monkeyTwoImg.setLayoutY(world.getHeight() - monkeyTwoImg.getFitHeight());
-        //Left bar
         barLeft.setLayoutX(monkey1.getStart_x());
         barLeft.setLayoutY(0);
         barLeft.setFitHeight(world.getHeight());
         barLeft.isSmooth();
-        //Upper bar
         barUpper.setLayoutX(0);
         barUpper.setLayoutY(0);
         barUpper.setFitWidth(world.getWidth());
-        //Lower bar
         barLower.setLayoutX(monkey1.getStart_x());
         barLower.setLayoutY(monkey1.getEnd_y());
         barLower.setFitWidth(world.getWidth());
-        //Right bar
         barRight.setLayoutX(monkey2.getEnd_x());
         barRight.setLayoutY(0);
         barRight.setFitHeight(world.getHeight());
-
 
         monkeyOneImg.setVisible(true);
         monkeyTwoImg.setVisible(true);
