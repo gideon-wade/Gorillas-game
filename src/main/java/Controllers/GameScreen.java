@@ -130,22 +130,19 @@ public class GameScreen {
                         explosion.setVisible(true);
                         poof1.setVisible(true);
                         flag = true;
-
-
                     }
-
                 }
             }
         }
     }
 
 
-
-
     public boolean bananaExplosion(int y, int x) {
-        return y == 799 && (canHitGrid[y][x - world.getWidth() / 10]) ||
-                canHitGrid[y][world.getWidth() / 10 + x];
-    }
+        if(world.getWidth() / 10 + x < world.getWidth()) {
+            return y == world.getHeight() - 1 && (canHitGrid[y][x - world.getWidth() / 10]) ||
+                canHitGrid[y][world.getWidth() / 10 + x]; }
+        return false;
+     }
 
 
     public void restart() {
@@ -210,7 +207,6 @@ public class GameScreen {
         simulateSlow(0);
         bananaImg.setVisible(false);
     }
-
 
     public void simulateSlow(int x) {
         try {
