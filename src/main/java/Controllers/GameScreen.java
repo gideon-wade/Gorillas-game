@@ -285,7 +285,7 @@ public class GameScreen {
     }
 
     public void noHit(){
-        if (bananaImg.getLayoutY() == world.getHeight()-1);
+        if (bananaImg.getLayoutY() <= world.getHeight());
         System.out.println("sovs");
         explosion.setVisible(true);
     }
