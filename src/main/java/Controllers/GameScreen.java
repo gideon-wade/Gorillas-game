@@ -29,6 +29,8 @@ public class GameScreen {
     public Label score1; public Label score2;
     public ImageView poof;
     public ImageView explosion;
+    public ImageView barLeft; public ImageView barLower;
+    public ImageView barUpper; public ImageView barRight;
 
 
     private Player player1; private Player player2;
@@ -249,9 +251,29 @@ public class GameScreen {
         monkeyOneImg.setLayoutY(world.getHeight() - monkeyTwoImg.getFitHeight());
         monkeyTwoImg.setLayoutX(world.getWidth() - monkeyTwoImg.getFitWidth());
         monkeyTwoImg.setLayoutY(world.getHeight() - monkeyTwoImg.getFitHeight());
+        //Left bar
+        barLeft.setLayoutX(monkey1.getStart_x());
+        barLeft.setLayoutY(0);
+        barLeft.setFitHeight(world.getHeight());
+        barLeft.isSmooth();
+        //Upper bar
+        barUpper.setLayoutX(0);
+        barUpper.setLayoutY(0);
+        barUpper.setFitWidth(world.getWidth());
+        //Lower bar
+        barLower.setLayoutX(monkey1.getStart_x());
+        barLower.setLayoutY(monkey1.getEnd_y());
+        barLower.setFitWidth(world.getWidth());
+        //Right bar
+        barRight.setLayoutX(monkey2.getEnd_x());
+        barRight.setLayoutY(0);
+        barRight.setFitHeight(world.getHeight());
+
+
         monkeyOneImg.setVisible(true);
         monkeyTwoImg.setVisible(true);
         monkeyOneImg.isSmooth();
+
     }
 
     public void makeBoardVisible() {
