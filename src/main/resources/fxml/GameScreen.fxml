@@ -9,12 +9,12 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameScreen">
-   <ImageView fx:id="banebox" fitHeight="815.0" fitWidth="1300.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="banebox" fitHeight="830.0" fitWidth="1310.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/lightblue_background.jpg" />
       </image>
    </ImageView>
-   <Button fx:id="btnBack" onAction="#goToMainScene" text="Let's go back to Main Screen" AnchorPane.rightAnchor="0">Let's go back to scene 1</Button>
+   <Button fx:id="btnBack" layoutX="1131.0" layoutY="10.0" onAction="#goToMainScene" text="Let's go back to Main Screen" AnchorPane.rightAnchor="10.0">Let's go back to scene 1</Button>
    <ImageView fx:id="monkeyOneImg" fitHeight="92.0" fitWidth="118.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
          <Image url="@images/monkey.jpg" />

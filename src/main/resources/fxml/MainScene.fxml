@@ -13,13 +13,13 @@
       <font>
          <Font size="20.0" />
       </font></Button>
-   <Label layoutX="487.0" layoutY="66.0" text="Main Scene">
+   <Label layoutX="363.0" layoutY="57.0" text="Gorillas Video Game">
       <font>
          <Font name="Franklin Gothic Heavy" size="64.0" />
       </font>
    </Label>
-   <Label layoutX="664.0" layoutY="471.0" text="Bredde:" />
-   <Label layoutX="433.0" layoutY="471.0" text="Højde:" />
+   <Label layoutX="670.0" layoutY="471.0" text="Width:" />
+   <Label layoutX="433.0" layoutY="471.0" text="Height:" />
    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
