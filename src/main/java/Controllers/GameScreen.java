@@ -144,10 +144,7 @@ public class GameScreen {
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setLayoutY(world.getHeight() - monkeyOneImg.getFitHeight() - list.get(i));
                 bananaImg.setLayoutX(monkey1.getEnd_x() + i);
-                //System.out.println(bananaImg.getLayoutY());
-                //bananaImg.setX(monkey1.getStart_x() - (monkey1.getEnd_x() / 2) + i);
                 explosion.setLayoutX(bananaImg.getLayoutX() - (explosion.getFitWidth()/2));
-                //bananaImg.setY(-bananaImg.getFitHeight() + list.get(i));
                 explosion.setLayoutY(bananaImg.getLayoutY() - (explosion.getFitHeight()/2));
                 bananaImg.isSmooth();
                 makeBanana();
@@ -220,7 +217,6 @@ public class GameScreen {
         while (banana.trajectory(x) > - monkeyOneImg.getFitHeight()) {
             this.list.add(banana.trajectory(x));
             x++;
-            //System.out.println(banana.trajectory(x));
         }
         return this.list;
     }

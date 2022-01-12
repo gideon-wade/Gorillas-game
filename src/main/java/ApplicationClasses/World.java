@@ -14,11 +14,6 @@ public class World {
         this.monkey2 = new Monkey(width - 118, width, height - 92, height);
         canHitGrid = new boolean[height][width];
         makeGround();
-        System.out.println(130 - (width / 10));
-        System.out.println(130 + (width / 10));
-        System.out.println(canHitGrid[799][(130 - (width / 10))]);
-        System.out.println(799 > height - 3 && ((canHitGrid[799][(130 - (width / 10))]) ||
-                (canHitGrid[799][(130 + (width / 10))])));
     }
 
     public int getHeight() {
@@ -38,14 +33,10 @@ public class World {
     }
 
     public void makeGround() {
-        String s = "";
         for (int i = height - 3; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 canHitGrid[i][j] = true;
-                s += canHitGrid[i][j] + " ";
             }
-            s += "\n";
         }
-        //System.out.println(s);
     }
 }
