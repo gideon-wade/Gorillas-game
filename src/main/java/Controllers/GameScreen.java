@@ -39,8 +39,6 @@ public class GameScreen {
     private List<Integer> list = new ArrayList<>();
     public boolean canHitGrid[][];
     private int[] bananaArr;
-    Map<String, Integer> monkeyOneDimensions = new HashMap<String, Integer>();
-    Map<String, Integer> monkeyTwoDimensions = new HashMap<String, Integer>();
     private int point1 = 0;
     private int point2 = 0;
     private Monkey monkey1;
@@ -124,6 +122,8 @@ public class GameScreen {
     }
 
     public void doThrow(ActionEvent event) throws IOException {
+        bananaImg.setVisible(true);
+        throwButton.setVisible(false);
         if (player1.getTurn()) {
             this.playerOneAngle = Integer.parseInt(pl1ang.getText());
             this.playerOneVelocity = Integer.parseInt(pl1vec.getText());
@@ -136,9 +136,7 @@ public class GameScreen {
     }
 
     public void runThread() {
-        makeMonkeys();
         hitBox();
-        restart();
         list = new ArrayList<>();
         if (player1.getTurn()) {
             Banana banana = new Banana(playerOneVelocity, 9.82, playerOneAngle);
@@ -146,10 +144,11 @@ public class GameScreen {
             for (int i = 0; i < list.size(); i++) {
                 bananaImg.setLayoutY(world.getHeight() - monkeyOneImg.getFitHeight() - list.get(i));
                 bananaImg.setLayoutX(monkey1.getEnd_x() + i);
+                //System.out.println(bananaImg.getLayoutY());
                 //bananaImg.setX(monkey1.getStart_x() - (monkey1.getEnd_x() / 2) + i);
-                explosion.setLayoutX(bananaImg.getLayoutX());
+                explosion.setLayoutX(bananaImg.getLayoutX() - (explosion.getFitWidth()/2));
                 //bananaImg.setY(-bananaImg.getFitHeight() + list.get(i));
-                explosion.setLayoutY(bananaImg.getLayoutY());
+                explosion.setLayoutY(bananaImg.getLayoutY() - (explosion.getFitHeight()/2));
                 bananaImg.isSmooth();
                 makeBanana();
                 simulateSlow(-1);
@@ -162,10 +161,11 @@ public class GameScreen {
             Banana banana = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
             list = makeCurve(banana);
             for (int i = 0; i < list.size(); i++) {
-                bananaImg.setLayoutY(world.getHeight() - monkeyTwoImg.getFitHeight() - (list.get(list.size() - 1 - i)));
+                bananaImg.setLayoutY(world.getHeight() - monkeyTwoImg.getFitHeight() - (list.get(i)));
+                //System.out.println(bananaImg.getLayoutY());
                 bananaImg.setLayoutX(world.getWidth() - monkeyTwoImg.getFitWidth() - i);
-                explosion.setLayoutX(bananaImg.getLayoutX());
-                explosion.setLayoutY(bananaImg.getLayoutY());
+                explosion.setLayoutX(bananaImg.getLayoutX() - (explosion.getFitWidth()/2));
+                explosion.setLayoutY(bananaImg.getLayoutY() - (explosion.getFitHeight()/2));
                 bananaImg.isSmooth();
                 makeBanana();
                 simulateSlow(-1);
@@ -179,18 +179,6 @@ public class GameScreen {
         restart();
         simulateSlow(0);
         bananaImg.setVisible(false);
-    }
-
-    public void makeMonkeys() {
-        monkeyOneDimensions.put("start_x", (int) monkeyOneImg.getLayoutX());
-        monkeyOneDimensions.put("end_x", (int) monkeyOneImg.getLayoutX() + (int) monkeyOneImg.getFitWidth());
-        monkeyOneDimensions.put("start_y", (int) monkeyOneImg.getLayoutY());
-        monkeyOneDimensions.put("end_y", (int) monkeyOneImg.getLayoutY() + (int) monkeyOneImg.getFitHeight());
-
-        monkeyTwoDimensions.put("start_x", (int) monkeyTwoImg.getLayoutX());
-        monkeyTwoDimensions.put("end_x", (int) monkeyTwoImg.getLayoutX() + (int) monkeyTwoImg.getFitWidth());
-        monkeyTwoDimensions.put("start_y", (int) monkeyTwoImg.getLayoutY());
-        monkeyTwoDimensions.put("end_y", (int) monkeyTwoImg.getLayoutY() + (int) monkeyTwoImg.getFitHeight());
     }
 
     public void hitBox() {
@@ -215,15 +203,16 @@ public class GameScreen {
 
     public void restart() {
         if(player1.getTurn()) {
-            bananaImg.setLayoutX(monkeyOneImg.getLayoutX());
+            bananaImg.setLayoutX(monkey1.getEnd_x());
         } else {
-            bananaImg.setLayoutX(monkeyTwoImg.getLayoutX());
+            bananaImg.setLayoutX(world.getWidth() - monkeyTwoImg.getFitWidth());
         }
         monkeyOneImg.setVisible(true);
         monkeyTwoImg.setVisible(true);
         poof.setVisible(false);
         bananaImg.setVisible(true);
         explosion.setVisible(false);
+        throwButton.setVisible(true);
     }
 
     public List<Integer> makeCurve(Banana banana) {
@@ -231,6 +220,7 @@ public class GameScreen {
         while (banana.trajectory(x) > - monkeyOneImg.getFitHeight()) {
             this.list.add(banana.trajectory(x));
             x++;
+            //System.out.println(banana.trajectory(x));
         }
         return this.list;
     }
@@ -261,25 +251,29 @@ public class GameScreen {
                         world.getHeight() && k < world.getWidth()) {
                     if(canHitGrid[j][k] || bananaExplosion(j, k)) {
                         bananaImg.setVisible(false);
-                        poof.setLayoutX(monkey2.getStart_x());
-                        poof.setLayoutY(world.getHeight() - poof.getFitHeight());
                         explosion.setVisible(true);
-                        monkey.setVisible(false);
-                        poof.setVisible(true);
-                        flag = true;
+                        if (bananaImg.getLayoutX() > monkey2.getStart_x() - 50) {
+                            poof.setLayoutX(monkey2.getStart_x());
+                            poof.setLayoutY(world.getHeight() - poof.getFitHeight());
+                            monkey.setVisible(false);
+                            poof.setVisible(true);
+                            flag = true;
+                        }
                     } else{
                         noHit();
                     }
                 } else if (!player1.getTurn() && j >= 0 && k >= 0 && j <
-                        world.getHeight() && k < monkeyOneDimensions.get("end_x")) {
+                        world.getHeight() && k < (world.getWidth()) - monkeyTwoImg.getFitWidth()) {
                     if(canHitGrid[j][k] || bananaExplosion(j, k)) {
                         bananaImg.setVisible(false);
-                        poof.setLayoutX(monkey1.getStart_x());
-                        poof.setLayoutY(world.getHeight() - poof.getFitHeight());
                         explosion.setVisible(true);
-                        monkey.setVisible(false);
-                        poof.setVisible(true);
-                        flag = true;
+                        if (bananaImg.getLayoutX() < monkey1.getEnd_x() + 50){
+                            poof.setLayoutX(monkey1.getStart_x());
+                            poof.setLayoutY(world.getHeight() - poof.getFitHeight());
+                            monkey.setVisible(false);
+                            poof.setVisible(true);
+                            flag = true;
+                        }
                     } else{
                         noHit();
                     }
@@ -295,9 +289,9 @@ public class GameScreen {
     }
 
     public boolean bananaExplosion(int y, int x) {
-        if(x + (world.getWidth() / 10) < world.getWidth() && x - (world.getWidth() / 10) > 0) {
-            return y <= world.getHeight() - 1 && (canHitGrid[y][x - (world.getWidth() / 10)]) ||
-                    canHitGrid[y][x + (world.getWidth() / 10)];
+        if((x + (world.getWidth() / 10)) < world.getWidth() && (x - (world.getWidth() / 10)) > 0) {
+            return y > world.getHeight() - 3 && ((canHitGrid[y][(x - (world.getWidth() / 10))]) ||
+                    (canHitGrid[y][(x + (world.getWidth() / 10))]));
         }
         return false;
     }
