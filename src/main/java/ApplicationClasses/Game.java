@@ -1,6 +1,7 @@
 package ApplicationClasses;
 
 import Controllers.MainScene;
+import Exceptions.IllegalInputException;
 
 public class Game {
     private Player player1;
@@ -8,7 +9,7 @@ public class Game {
     private World world;
 
 
-    public Game(String player1Name, String player2Name, int height, int length){
+    public Game(String player1Name, String player2Name, int height, int length) throws IllegalInputException {
         player1 = new Player(player1Name);
         player2 = new Player(player2Name);
         world = new World(height, length);
