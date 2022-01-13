@@ -128,13 +128,14 @@ public class GameScreen {
     }
 
     public void runThread() {
-        hitBox();
+        world.hitBox(player1);
         list = new ArrayList<>();
         if (player1.getTurn()) {
             Banana banana = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banana);
             for (int i = 0; i < list.size(); i++) {
-                bananaImg.setLayoutY(800 - monkeyOneImg.getFitHeight() - list.get(i));
+                bananaImg.setLayoutY(1000 - monkeyOneImg.getFitHeight() - list.get(i));
+                //System.out.println(bananaImg.getLayoutY());
                 bananaImg.setLayoutX(monkey1.getEnd_x() + i);
                 explosion.setLayoutX(bananaImg.getLayoutX() - (explosion.getFitWidth()/2));
                 explosion.setLayoutY(bananaImg.getLayoutY() - (explosion.getFitHeight()/2));
@@ -149,7 +150,7 @@ public class GameScreen {
             Banana banana = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
             list = makeCurve(banana);
             for (int i = 0; i < list.size(); i++) {
-                bananaImg.setLayoutY(800 - monkeyTwoImg.getFitHeight() - (list.get(i)));
+                bananaImg.setLayoutY(1000 - monkeyTwoImg.getFitHeight() - (list.get(i)));
                 bananaImg.setLayoutX(monkey2.getStart_x() - i);
                 explosion.setLayoutX(bananaImg.getLayoutX() - (explosion.getFitWidth()/2));
                 explosion.setLayoutY(bananaImg.getLayoutY() - (explosion.getFitHeight()/2));
@@ -168,26 +169,6 @@ public class GameScreen {
         bananaImg.setVisible(false);
     }
 
-    public void hitBox() {
-        if (!player1.getTurn()) {
-            for (int i = monkey1.getStart_y(); i < monkey1.getEnd_y(); i++) {
-                for (int k = monkey1.getStart_x(); k < monkey1.getEnd_x(); k++) {
-                    if (i >= 0 && k >= 0 && i < world.getHeight() && k < world.getWidth()) {
-                        canHitGrid[i][k] = true;
-                    }
-                }
-            }
-        } else {
-            for (int i = monkey2.getStart_y(); i < monkey2.getEnd_y(); i++) {
-                for (int k = monkey2.getStart_x(); k < monkey2.getEnd_x(); k++) {
-                    if(i >= 0 && k >= 0 && i < world.getHeight() && k < world.getWidth()) {
-                        canHitGrid[i][k] = true;
-                    }
-                }
-            }
-        }
-    }
-
     public void restart() {
         if(player1.getTurn()) {
             bananaImg.setLayoutX(monkey1.getEnd_x());
@@ -203,12 +184,15 @@ public class GameScreen {
     }
 
     public List<Integer> makeCurve(Banana banana) {
+        String s = "";
         int x = 1;
         while (banana.trajectory(x) > - monkeyOneImg.getFitHeight()
-                && (x < monkey2.getEnd_x() - monkey1.getStart_x())) {
+                && (x < monkey2.getStart_x() - monkey1.getStart_x())) {
             this.list.add(banana.trajectory(x));
+            s += list.get(x - 1) + " ";
             x++;
         }
+        System.out.println(s);
         return this.list;
     }
 
@@ -230,18 +214,18 @@ public class GameScreen {
     }
 
     public void bananaHit(ImageView monkey) {
-        explosion.setVisible(false);
+        //explosion.setVisible(false);
         flag = false;
         for (int j = (int) bananaImg.getLayoutY(); j < (int) bananaImg.getLayoutY() + bananaArr[0]; j++) {
             for (int k = (int) bananaImg.getLayoutX(); k < (int) bananaImg.getLayoutX() + bananaArr[1]; k++) {
                 if (player1.getTurn() && j >= 0 && k >= monkey1.getEnd_x() && j <
-                        800 && k < 1300) {
+                        1000 && k < 1700) {
                     if(canHitGrid[j][k]) {
                         bananaImg.setVisible(false);
                         explosion.setVisible(true);
-                        if (bananaImg.getLayoutX() > monkey2.getStart_x() - 50 && bananaExplosion(j, k)) {
+                        if (bananaImg.getLayoutX() > monkey2.getStart_x() - bananaImg.getFitHeight() && bananaExplosion(j, k)) {
                             poof.setLayoutX(monkey2.getStart_x());
-                            poof.setLayoutY(world.getHeight() - poof.getFitHeight());
+                            poof.setLayoutY(1000 - poof.getFitHeight());
                             monkey.setVisible(false);
                             poof.setVisible(true);
                             flag = true;
@@ -250,18 +234,18 @@ public class GameScreen {
                         noHit();
                     }
                 } else if (!player1.getTurn() && j >= 0 && k >= 0 && j <
-                        800 && k < (monkey2.getStart_x())) {
+                        1000 && k < (monkey2.getStart_x())) {
                     if(canHitGrid[j][k]) {
                         bananaImg.setVisible(false);
                         explosion.setVisible(true);
-                        if (bananaImg.getLayoutX() < monkey1.getEnd_x() + 50 && bananaExplosion(j, k)){
+                        if (bananaImg.getLayoutX() < monkey1.getEnd_x() + bananaImg.getFitHeight() && bananaExplosion(j, k)){
                             poof.setLayoutX(monkey1.getStart_x());
-                            poof.setLayoutY(world.getHeight() - poof.getFitHeight());
+                            poof.setLayoutY(1000 - poof.getFitHeight());
                             monkey.setVisible(false);
                             poof.setVisible(true);
                             flag = true;
                         }
-                    } else{
+                    } else {
                         noHit();
                     }
                 }
@@ -270,15 +254,17 @@ public class GameScreen {
     }
 
     public void noHit(){
-        if (bananaImg.getLayoutY() >= world.getHeight()) {
+        if (bananaImg.getLayoutY() >= 1000 - 1
+                || bananaImg.getLayoutX() < monkey1.getStart_x()
+                || bananaImg.getLayoutX() > monkey2.getEnd_x()) {
             explosion.setVisible(true);
         }
     }
 
     public boolean bananaExplosion(int y, int x) {
-        if((x + (1300 / 10)) < 1300 && (x - (1300 / 10)) > 0) {
-            return y > 800 - 3 && ((canHitGrid[y][(x - (1300 / 10))]) ||
-                    (canHitGrid[y][(x + (1300 / 10))]));
+        if((x + (1700 / 10)) < 1700 && (x - (1700 / 10)) > 0) {
+            return y > 1000 - 3 && ((canHitGrid[y][(x - (1700 / 10))]) ||
+                    (canHitGrid[y][(x + (1700 / 10))]));
         }
         return false;
     }

@@ -14,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Scene container = new Scene(new Pane(),1300,800);
+        Scene container = new Scene(new Pane(),1700,1000);
         SceneManager.setMainScene(container);
         primaryStage.setScene(container);
         SceneManager.changeScene("fxml/MainScene.fxml");
