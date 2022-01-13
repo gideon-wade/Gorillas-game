@@ -27,8 +27,7 @@ public class GameScreen {
     public Label score1; public Label score2;
     public ImageView poof;
     public ImageView explosion;
-    public ImageView barLeft; public ImageView barLower;
-    public ImageView barUpper; public ImageView barRight;
+    public ImageView barLeft; public ImageView barLower; public ImageView barRight;
 
 
     private Player player1; private Player player2;
@@ -83,18 +82,11 @@ public class GameScreen {
         monkeyTwoImg.setLayoutY(monkey2.getStart_y());
         barLeft.setLayoutX(monkey1.getStart_x());
         barLeft.setLayoutY(0);
-        //barLeft.setFitHeight(world.getHeight());
-        /*
-        barUpper.setLayoutX(monkey1.getStart_x());
-        barUpper.setLayoutY(0);
-        barUpper.setFitWidth(world.getWidth());
-         */
         barLower.setLayoutX(monkey1.getStart_x());
         barLower.setLayoutY(monkey1.getEnd_y());
         barLower.setFitWidth(world.getWidth());
         barRight.setLayoutX(monkey2.getEnd_x());
         barRight.setLayoutY(0);
-        //barRight.setFitHeight(world.getHeight());
         monkeyOneImg.setVisible(true);
         monkeyTwoImg.setVisible(true);
     }

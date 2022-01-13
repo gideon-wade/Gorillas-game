@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #5fCde4;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameScreen">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #5fCde4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameScreen">
    <Button fx:id="btnBack" layoutX="1131.0" layoutY="10.0" onAction="#goToMainScene" text="Let's go back to Main Screen" AnchorPane.rightAnchor="10.0">Let's go back to scene 1</Button>
    <ImageView fx:id="monkeyOneImg" fitHeight="92.0" fitWidth="118.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
@@ -80,11 +80,6 @@
       </image>
    </ImageView>
    <ImageView fx:id="barLower" fitHeight="30.0" fitWidth="1300.0" layoutY="800.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@images/bar_width.png" />
-      </image>
-   </ImageView>
-   <ImageView fx:id="barUpper" fitHeight="30.0" fitWidth="1300.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/bar_width.png" />
       </image>
