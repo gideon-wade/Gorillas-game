@@ -8,43 +8,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScene">
-    <Button fx:id="btnChange" layoutX="589.0" layoutY="544.0" onAction="#goToGameScreen" prefHeight="43.0" prefWidth="122.0" text="Start">
+<AnchorPane prefHeight="1000.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScene">
+    <Button fx:id="btnChange" layoutX="774.0" layoutY="543.0" onAction="#goToGameScreen" prefHeight="43.0" prefWidth="122.0" text="Start">
       <font>
          <Font size="20.0" />
       </font></Button>
-   <Label layoutX="363.0" layoutY="57.0" text="Gorillas Video Game">
+   <Label layoutX="550.0" layoutY="57.0" text="Gorillas Video Game">
       <font>
          <Font name="Franklin Gothic Heavy" size="64.0" />
       </font>
    </Label>
-   <Label layoutX="670.0" layoutY="471.0" text="Width:" />
-   <Label layoutX="433.0" layoutY="471.0" text="Height:" />
+   <Label layoutX="861.0" layoutY="471.0" text="Width:" />
+   <Label layoutX="596.0" layoutY="471.0" text="Height:" />
    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1150.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1550.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="850.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1150.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1550.0" layoutY="850.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@images/banana.gif" />
       </image>
    </ImageView>
-   <TextField fx:id="playerID1" layoutX="576.0" layoutY="193.0" />
-   <TextField fx:id="playerID2" layoutX="576.0" layoutY="242.0" />
-   <TextField fx:id="height" layoutX="484.0" layoutY="467.0" />
-   <TextField fx:id="length" layoutX="718.0" layoutY="467.0" />
-   <Label layoutX="506.0" layoutY="197.0" prefHeight="17.0" prefWidth="63.0" text="Player 1" />
-   <Label layoutX="506.0" layoutY="246.0" prefHeight="17.0" prefWidth="63.0" text="Player 2" />
+   <TextField fx:id="playerID1" layoutX="760.0" layoutY="193.0" />
+   <TextField fx:id="playerID2" layoutX="760.0" layoutY="234.0" />
+   <TextField fx:id="height" layoutX="640.0" layoutY="467.0" />
+   <TextField fx:id="length" layoutX="903.0" layoutY="467.0" />
+   <Label layoutX="714.0" layoutY="197.0" prefHeight="17.0" prefWidth="46.0" text="Player 1" />
+   <Label layoutX="714.0" layoutY="238.0" prefHeight="17.0" prefWidth="46.0" text="Player 2" />
 
 </AnchorPane>

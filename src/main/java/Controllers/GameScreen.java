@@ -184,15 +184,12 @@ public class GameScreen {
     }
 
     public List<Integer> makeCurve(Banana banana) {
-        String s = "";
-        int x = 1;
+        int x = 0;
         while (banana.trajectory(x) > - monkeyOneImg.getFitHeight()
-                && (x < monkey2.getStart_x() - monkey1.getStart_x())) {
+                && (x < (monkey2.getStart_x() - monkey1.getStart_x()) + bananaImg.getFitWidth())) {
             this.list.add(banana.trajectory(x));
-            s += list.get(x - 1) + " ";
             x++;
         }
-        System.out.println(s);
         return this.list;
     }
 
