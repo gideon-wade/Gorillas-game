@@ -44,7 +44,7 @@ public class MainScene {
         this.height_i = Integer.parseInt(height.getText());
         this.playerOneName = playerID1.getText();
         this.playerTwoName = playerID2.getText();
-        if (height_i > 0 && height_i <= 1000 && width_i > 0 && width_i <= 1700) {
+        if (height_i >= 600 && height_i <= 1000 && width_i >= 500 && width_i <= 1700) {
             this.game = new Game(playerOneName, playerTwoName,
                     height_i, width_i);
         } else {
