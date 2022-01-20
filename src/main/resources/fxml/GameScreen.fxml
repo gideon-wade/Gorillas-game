@@ -89,7 +89,7 @@
       <image>
          <Image url="@images/png-pixel-art-explosion.png" />
       </image></ImageView>
-   <ImageView fx:id="poof" fitHeight="143.0" fitWidth="180.0" layoutX="-18.0" layoutY="657.0" visible="false">
+   <ImageView fx:id="poof1" fitHeight="143.0" fitWidth="180.0" layoutX="-18.0" layoutY="657.0" visible="false">
       <image>
          <Image url="@images/pixel-poof.png" />
       </image>
@@ -119,7 +119,7 @@
          <Image url="@images/clouds_animation_top.gif" />
       </image>
    </ImageView>
-   <ImageView fx:id="poof1" fitHeight="143.0" fitWidth="180.0" layoutX="1139.0" layoutY="667.0" visible="false">
+   <ImageView fx:id="poof2" fitHeight="143.0" fitWidth="180.0" layoutX="1139.0" layoutY="667.0" visible="false">
       <image>
          <Image url="@images/pixel-poof.png" />
       </image>
