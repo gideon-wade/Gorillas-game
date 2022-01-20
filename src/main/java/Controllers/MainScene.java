@@ -28,8 +28,18 @@ public class MainScene {
     public String playerTwoName;
     private Game game;
     private Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+    private Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);
 
     public void goToGameScreen() throws IOException, IllegalInputException {
+        try {
+            Integer.parseInt(length.getText());
+            Integer.parseInt(length.getText());
+        } catch (NumberFormatException e) {
+            informationAlert.setContentText("Not a valid input");
+            informationAlert.showAndWait();
+        }
+
+
         this.width_i = Integer.parseInt(length.getText());
         this.height_i = Integer.parseInt(height.getText());
         this.playerOneName = playerID1.getText();
