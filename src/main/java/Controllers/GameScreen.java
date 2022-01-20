@@ -237,6 +237,7 @@ public class GameScreen {
     public void runThread() {
         world.hitBox(player1);
         list = new ArrayList<>();
+        flag = false;
         if (player1.getTurn()) {
             world.hitBox(player1);
             this.canHitGrid = world.getCanHitGrid();
@@ -272,6 +273,7 @@ public class GameScreen {
             player1.setTurn(true);
         }
         if(flag) point();
+        simulateSlow(2);
         switchVisibility();
         restart();
         simulateSlow(0);
@@ -328,7 +330,6 @@ public class GameScreen {
 
     public void bananaHit(ImageView monkey) {
         explosion.setVisible(false);
-        flag = false;
         // makes the thread stop
         //The for-for-loop iterates through every pixel in that our bananaImg contains
         for (int j = (int) bananaImg.getLayoutY(); j < (int) bananaImg.getLayoutY() + bananaImg.getFitHeight(); j++) {
@@ -339,7 +340,7 @@ public class GameScreen {
                         bananaImg.setVisible(false);
                         explosion.setVisible(true);
                         if (bananaImg.getLayoutX() + bananaImg.getFitWidth() >= monkey2.getStart_x() &&
-                                bananaImg.getLayoutX() + bananaImg.getFitWidth()<= monkey2.getEnd_x() || bananaExplosion(j, k)) {
+                                bananaImg.getLayoutX() + bananaImg.getFitWidth()<= monkey2.getEnd_x() && bananaExplosion(j, k)) {
                             monkey.setVisible(false);
                             poof2.setVisible(true);
                             flag = true;
@@ -353,7 +354,7 @@ public class GameScreen {
                         bananaImg.setVisible(false);
                         explosion.setVisible(true);
                         if (bananaImg.getLayoutX() + bananaImg.getFitWidth() >= monkey1.getStart_x() &&
-                                bananaImg.getLayoutX() + bananaImg.getFitWidth()<= monkey1.getEnd_x() || bananaExplosion(j, k)){
+                                bananaImg.getLayoutX() + bananaImg.getFitWidth()<= monkey1.getEnd_x() && bananaExplosion(j, k)){
                             monkey.setVisible(false);
                             poof1.setVisible(true);
                             flag = true;
@@ -399,7 +400,7 @@ public class GameScreen {
     /* the point() method adds a point to a players score and updates the label on the gamescreen
     if the method is run */
     public void point(){
-        if (player1.getTurn()){ // checks whose turn it is.
+        if (!player1.getTurn()){ // checks whose turn it is.
             this.point1++; // gives a point if the if-statement is true
             System.out.println("Hej");
             Platform.runLater(new Runnable(){
