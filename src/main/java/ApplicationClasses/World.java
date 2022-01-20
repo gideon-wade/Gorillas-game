@@ -2,6 +2,9 @@ package ApplicationClasses;
 
 import Exceptions.IllegalInputException;
 
+import static Controllers.GameScreen.maxHeight;
+import static Controllers.GameScreen.maxWidth;
+
 public class World {
     private int height;
     private int width;
@@ -19,45 +22,6 @@ public class World {
         canHitGrid = new boolean[1000][1700];
         makeGround();
         makeWorld();
-        System.out.println(monkey1.getStart_x());
-        System.out.println(monkey2.getEnd_x());
-    }
-
-    public int getHeight() {
-        return height;
-    }
-    public int getWidth() {
-        return width;
-    }
-    public Monkey getMonkey1() {
-        return monkey1;
-    }
-    public Monkey getMonkey2() {
-        return monkey2;
-    }
-    public boolean[][] getCantHitGrid() {
-        return canHitGrid;
-    }
-
-    public void makeGround() {
-        for (int i = 1000 - 1; i < 1000; i++) {
-            for (int j = 0; j < 1700; j++) {
-                canHitGrid[i][j] = true;
-            }
-        }
-    }
-
-    public void makeWorld(){
-        for (int i = 0; i < 1000; i++) {
-            for (int j = 0; j < 1700; j++) {
-                if (j < monkey1.getStart_x()) {
-                    canHitGrid[i][j] = true;
-                }
-                if (j > monkey2.getEnd_x()) {
-                    canHitGrid[i][j] = true;
-                }
-            }
-        }
     }
 
     public int calculatePosition(int x) throws IllegalInputException{
@@ -74,6 +38,50 @@ public class World {
             throw new IllegalInputException("Only takes values from 1 to 4");
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Monkey getMonkey1() {
+        return monkey1;
+    }
+
+    public Monkey getMonkey2() {
+        return monkey2;
+    }
+
+    public boolean[][] getCanHitGrid() {
+        return canHitGrid;
+    }
+
+    //The method inserts the floor as true values into our grid
+    public void makeGround() {
+        for (int i = maxHeight - 3; i < maxHeight; i++) {
+            for (int j = 0; j < maxWidth; j++) {
+                canHitGrid[i][j] = true;
+            }
+        }
+    }
+
+    //The method makes every pixel which is not part of the initialised game true
+    public void makeWorld(){
+        for (int i = 0; i < maxHeight; i++) {
+            for (int j = 0; j < maxWidth; j++) {
+                if (j < (maxWidth - width) / 2) {//if-statement making every pixel true on the left side of the game
+                    canHitGrid[i][j] = true;
+                }
+                if (j > (maxWidth - ((maxWidth - width) / 2))) {//if-statement making every pixel true on right side
+                    canHitGrid[i][j] = true;
+                }
+            }
+        }
+    }
+
+    //A method who inserts the monkeys hitboxes as true-values into our grid
     public void hitBox(Player player) {
         if (!player.getTurn()) {
             for (int i = monkey1.getStart_y(); i < monkey1.getEnd_y(); i++) {
@@ -94,3 +102,4 @@ public class World {
         }
     }
 }
+
