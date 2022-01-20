@@ -236,10 +236,10 @@ public class GameScreen {
 
     public void runThread() {
         world.hitBox(player1);
+        world.hitBox(player1);
         list = new ArrayList<>();
         flag = false;
         if (player1.getTurn()) {
-            world.hitBox(player1);
             this.canHitGrid = world.getCanHitGrid();
             Banana banana = new Banana(playerOneVelocity, 9.82, playerOneAngle);
             list = makeCurve(banana);
@@ -256,7 +256,6 @@ public class GameScreen {
             player1.setTurn(false);
 
         } else {
-            world.hitBox(player1);
             this.canHitGrid = world.getCanHitGrid();
             Banana banana = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
             list = makeCurve(banana);
@@ -273,7 +272,6 @@ public class GameScreen {
             player1.setTurn(true);
         }
         if(flag) point();
-        simulateSlow(2);
         switchVisibility();
         restart();
         simulateSlow(0);
@@ -402,7 +400,6 @@ public class GameScreen {
     public void point(){
         if (!player1.getTurn()){ // checks whose turn it is.
             this.point1++; // gives a point if the if-statement is true
-            System.out.println("Hej");
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
@@ -412,7 +409,6 @@ public class GameScreen {
             });
         } else { // this is exactly the same
             this.point2++;
-            System.out.println("Hej");
             Platform.runLater(new Runnable(){
                 @Override
                 public void run() {
