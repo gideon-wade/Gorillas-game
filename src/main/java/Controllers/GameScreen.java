@@ -209,8 +209,6 @@ public class GameScreen {
         Thread thread = new Thread(this::runThread);
         thread.start();
     }
-
-
     public void runThread() {
         world.hitBox(player1);
         world.hitBox(player1);
@@ -253,22 +251,6 @@ public class GameScreen {
         restart();
         simulateSlow(0);
         bananaImg.setVisible(false);
-    }
-    /* restart() restarts the position of the banana, as well as resetting the
-     * visibility of the elements to the original */
-    public void restart() {
-        if(player1.getTurn()) {
-            bananaImg.setLayoutX(monkey1.getEnd_x());
-        } else {
-            bananaImg.setLayoutX(world.getWidth() - monkeyTwoImg.getFitWidth());
-        }
-        monkeyOneImg.setVisible(true);
-        monkeyTwoImg.setVisible(true);
-        poof1.setVisible(false);
-        poof2.setVisible(false);
-        bananaImg.setVisible(true);
-        explosion.setVisible(false);
-        throwButton.setVisible(true);
     }
     /* makecurve generates the values of the curve, so they can be used to update the location of the banana
      * line 390 makes the wind go the correct direction for both players and line 391 makes the wind
@@ -349,21 +331,6 @@ public class GameScreen {
         }
         return false;
     }
-
-    /* switchVisibility() switches the visibilty of the action-boxes of each player */
-
-    public void switchVisibility() {
-        pl1ang.setVisible(!pl1ang.isVisible());
-        pl1vec.setVisible(!pl1vec.isVisible());
-        pl1AngLabel.setVisible(!pl1AngLabel.isVisible());
-        pl1VelLabel.setVisible(!pl1VelLabel.isVisible());
-
-        pl2ang.setVisible(!pl2ang.isVisible());
-        pl2vec.setVisible(!pl2vec.isVisible());
-        pl2AngLabel.setVisible(!pl2AngLabel.isVisible());
-        pl2VelLabel.setVisible(!pl2VelLabel.isVisible());
-    }
-
     /* the point() method adds a point to a players score and updates the label on the gamescreen
     if the method is run */
     public void point(){
@@ -385,5 +352,33 @@ public class GameScreen {
                 }
             });
         }
+    }
+    /* switchVisibility() switches the visibilty of the action-boxes of each player */
+    public void switchVisibility() {
+        pl1ang.setVisible(!pl1ang.isVisible());
+        pl1vec.setVisible(!pl1vec.isVisible());
+        pl1AngLabel.setVisible(!pl1AngLabel.isVisible());
+        pl1VelLabel.setVisible(!pl1VelLabel.isVisible());
+
+        pl2ang.setVisible(!pl2ang.isVisible());
+        pl2vec.setVisible(!pl2vec.isVisible());
+        pl2AngLabel.setVisible(!pl2AngLabel.isVisible());
+        pl2VelLabel.setVisible(!pl2VelLabel.isVisible());
+    }
+    /* restart() restarts the position of the banana, as well as resetting the
+     * visibility of the elements to the original */
+    public void restart() {
+        if(player1.getTurn()) {
+            bananaImg.setLayoutX(monkey1.getEnd_x());
+        } else {
+            bananaImg.setLayoutX(world.getWidth() - monkeyTwoImg.getFitWidth());
+        }
+        monkeyOneImg.setVisible(true);
+        monkeyTwoImg.setVisible(true);
+        poof1.setVisible(false);
+        poof2.setVisible(false);
+        bananaImg.setVisible(true);
+        explosion.setVisible(false);
+        throwButton.setVisible(true);
     }
 }
