@@ -46,5 +46,4 @@
    <TextField fx:id="length" layoutX="903.0" layoutY="467.0" />
    <Label layoutX="714.0" layoutY="197.0" prefHeight="17.0" prefWidth="46.0" text="Player 1" />
    <Label layoutX="714.0" layoutY="238.0" prefHeight="17.0" prefWidth="46.0" text="Player 2" />
-
 </AnchorPane>

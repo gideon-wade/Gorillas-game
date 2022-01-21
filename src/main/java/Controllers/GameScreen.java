@@ -18,7 +18,6 @@ import java.util.*;
 
 
 public class GameScreen {
-    private static Game game;
     @FXML
     public Button btnBack; public TextField pl1ang; public TextField pl1vec;
     public TextField pl2ang; public TextField pl2vec; public ImageView bananaImg;
@@ -37,27 +36,21 @@ public class GameScreen {
     public ImageView clouds1; public ImageView clouds2;
     public ImageView clouds3; public ImageView clouds4;
 
-
-    private Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);
-    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-
+    private static Game game;
     private Player player1; private Player player2;
     private World world;
-
     private boolean canHitGrid[][];
-
     private int playerOneAngle; private int playerOneVelocity;
     private int playerTwoAngle; private int playerTwoVelocity;
-
-    private List<Integer> list = new ArrayList<>();
+    private List<Integer> curve = new ArrayList<>();
     private int point1 = 0;
     private int point2 = 0;
     private Monkey monkey1;
     private Monkey monkey2;
+    private Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+    private Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);
     private boolean flag;
-
     public boolean stop = false;
-
     public static final int maxHeight = 1000;
     public static final int maxWidth = 1700;
 
@@ -92,26 +85,21 @@ public class GameScreen {
 
     /* initGameValues() initializes game values eg. assigning the variables with their desired values  */
     public void initGameValues(){
-
         this.player1 = game.getPlayer1();
         this.player2 = game.getPlayer2();
         this.world = game.getWorld();
         this.monkey1 = world.getMonkey1();
         this.monkey2 = world.getMonkey2();
-
         poof1.setLayoutX(monkey1.getStart_x() - 50);
         poof1.setLayoutY(monkey1.getStart_y() - 50);
-
         poof2.setLayoutX(monkey2.getStart_x() - 50);
         poof2.setLayoutY(monkey2.getStart_y() - 50);
-
         if (player1.getName().isEmpty()){
             nameLabel1.setText("Player 1");
         } else{ nameLabel1.setText(player1.getName());}
         if (player2.getName().isEmpty()){
             nameLabel2.setText("Player 2");
         } else{ nameLabel2.setText(player2.getName());}
-
         monkeyOneImg.setLayoutX(monkey1.getStart_x());
         monkeyOneImg.setLayoutY(monkey1.getStart_y());
         monkeyTwoImg.setLayoutX(monkey2.getStart_x());
@@ -132,7 +120,6 @@ public class GameScreen {
         if(world.getHeight() <= 700) clouds3.setVisible(true);
         if(world.getHeight() == 600) clouds4.setVisible(true);
     }
-
     /* makes all elements of the gamescreen visible. The if/else statement is checking which player goes first,
        and displaying their respectable elements */
     public void makeBoardVisible() {
@@ -156,20 +143,13 @@ public class GameScreen {
             pl2vec.setVisible(true);
         }
     }
-
-
-
-
-
     /* this actionevent executes when the throw button is pressed
      * firstly the randomAdder() generates a random number
      * secondly direction is executed, which displays and arrow and windspeed on the gamescreen.
      * then the banana is set to visible and the throwbutton is set to invisible.
      * The angle and velocity is then assigned to the variables depending on which turn it is.
      *  */
-
     public void doThrow(ActionEvent event) throws IOException, IllegalInputException {
-
         throwButton.setVisible(false);
         try {
             if(player1.getTurn()){
@@ -179,7 +159,6 @@ public class GameScreen {
                 Integer.parseInt(pl2vec.getText());
                 Integer.parseInt(pl2ang.getText());
             }
-
         } catch (NumberFormatException e) {
             informationAlert.setContentText("Not a valid input");
             informationAlert.showAndWait();
@@ -203,7 +182,6 @@ public class GameScreen {
                 errorAlert.showAndWait();
                 throw new IllegalInputException("Farten skal væres større end 0 og vinklen skal være mellem 0 og 90");
             }
-
         } else { // does the same as line 386, but for the other player
             if (pl2ang.getText().isEmpty() || pl2vec.getText().isEmpty()){
                 throwButton.setVisible(true);
@@ -227,7 +205,6 @@ public class GameScreen {
         pl2ang.setText("");
         pl1vec.setText("");
         pl2vec.setText("");
-
         bananaImg.setVisible(true);
         Thread thread = new Thread(this::runThread);
         thread.start();
@@ -237,14 +214,14 @@ public class GameScreen {
     public void runThread() {
         world.hitBox(player1);
         world.hitBox(player1);
-        list = new ArrayList<>();
+        curve = new ArrayList<>();
         flag = false;
         if (player1.getTurn()) {
             this.canHitGrid = world.getCanHitGrid();
             Banana banana = new Banana(playerOneVelocity, 9.82, playerOneAngle);
-            list = makeCurve(banana);
-            for (int i = 0; i < list.size(); i++) {
-                bananaImg.setLayoutY(1000 - monkeyOneImg.getFitHeight() - list.get(i));
+            curve = makeCurve(banana);
+            for (int i = 0; i < curve.size(); i++) {
+                bananaImg.setLayoutY(1000 - monkeyOneImg.getFitHeight() - curve.get(i));
                 bananaImg.setLayoutX(monkey1.getEnd_x() + i);
                 explosion.setLayoutX(bananaImg.getLayoutX() - (explosion.getFitWidth()/2));
                 explosion.setLayoutY(bananaImg.getLayoutY() - (explosion.getFitHeight()/2));
@@ -258,9 +235,9 @@ public class GameScreen {
         } else {
             this.canHitGrid = world.getCanHitGrid();
             Banana banana = new Banana(playerTwoVelocity, 9.82, playerTwoAngle);
-            list = makeCurve(banana);
-            for (int i = 0; i < list.size(); i++) { // this for-loop changes the location of the banana image
-                bananaImg.setLayoutY(1000 - monkeyTwoImg.getFitHeight() - (list.get(i)));
+            curve = makeCurve(banana);
+            for (int i = 0; i < curve.size(); i++) { // this for-loop changes the location of the banana image
+                bananaImg.setLayoutY(1000 - monkeyTwoImg.getFitHeight() - (curve.get(i)));
                 bananaImg.setLayoutX(monkey2.getStart_x() - i);
                 explosion.setLayoutX(bananaImg.getLayoutX() - (explosion.getFitWidth()/2));
                 explosion.setLayoutY(bananaImg.getLayoutY() - (explosion.getFitHeight()/2));
@@ -277,8 +254,6 @@ public class GameScreen {
         simulateSlow(0);
         bananaImg.setVisible(false);
     }
-
-
     /* restart() restarts the position of the banana, as well as resetting the
      * visibility of the elements to the original */
     public void restart() {
@@ -295,37 +270,31 @@ public class GameScreen {
         explosion.setVisible(false);
         throwButton.setVisible(true);
     }
-
     /* makecurve generates the values of the curve, so they can be used to update the location of the banana
      * line 390 makes the wind go the correct direction for both players and line 391 makes the wind
      * fluctuate (see RandomAdder() line 381) */
-
     public List<Integer> makeCurve(Banana banana) {
         int x = 0;
         while (banana.trajectory(x) > - monkeyOneImg.getFitHeight()
                 && (x < (monkey2.getStart_x() - monkey1.getStart_x()) + bananaImg.getFitWidth())) {
-            this.list.add(banana.trajectory(x));
+            this.curve.add(banana.trajectory(x));
             x++;
         }
-        return this.list;
+        return this.curve;
     }
-
     /* simulateSlow() is a method that can be called for slowing down the code */
     public void simulateSlow(int x) {
-
         try {
             Thread.sleep(x + 3);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
     /* the bananaHit method checks if the banana hit a monkey or building/Tree/Food
      * this is done with boolean grids. If the banana hits, the monkey will disappear
      * for a couple of milliseconds and an explosion and a poof will appear instead.
      * This counts for both players, depending on the if/else staments. If none of the
      * statements are true noHit() wil get executed. */
-
     public void bananaHit(ImageView monkey) {
         explosion.setVisible(false);
         // makes the thread stop

@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 
-
 public class MainScene {
     @FXML
     public Button btnChange;
@@ -38,8 +37,6 @@ public class MainScene {
             informationAlert.setContentText("Not a valid input");
             informationAlert.showAndWait();
         }
-
-
         this.width_i = Integer.parseInt(length.getText());
         this.height_i = Integer.parseInt(height.getText());
         this.playerOneName = playerID1.getText();
